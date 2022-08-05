@@ -2,7 +2,7 @@ import { Tab, Tabs, TabList } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 
-import { COLORS } from "assets/styles/colors";
+import { COLORS } from "assets";
 
 export const RegisterTabs = () => {
   return (

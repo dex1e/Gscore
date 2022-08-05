@@ -6,7 +6,7 @@ import styled, {
   keyframes,
 } from "styled-components";
 
-import { COLORS } from "assets/styles/colors";
+import { COLORS } from "assets";
 import { LoadingIcon } from "components/icons";
 
 type Variant = "primary" | "secondary" | "text";
@@ -16,6 +16,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text?: string;
   variant?: Variant;
   isLoading?: boolean;
+  isDisabled?: boolean;
   onClick?: () => void;
 }
 
@@ -26,6 +27,7 @@ export const Button: FC<ButtonProps> = ({
   variant = "primary",
   type = "button",
   isLoading,
+  isDisabled,
   ...props
 }) => {
   const buttonStyles = buttonTheme[variant];
@@ -36,6 +38,7 @@ export const Button: FC<ButtonProps> = ({
       className={className}
       $buttonStyles={buttonStyles}
       $isLoading={isLoading}
+      disabled={isDisabled}
       type={type}
       {...props}
     >
@@ -100,6 +103,10 @@ const buttonTheme = {
       color: ${COLORS.systemRed400};
     }
 
+    &:disabled {
+      color: ${COLORS.primary};
+    }
+
     svg {
       stroke: ${COLORS.primary};
     }
@@ -130,10 +137,6 @@ const Root = styled.button<{
   line-height: 18px;
   box-shadow: 0px 10px 28px rgba(252, 88, 66, 0.2);
 
-  &:disabled {
-    opacity: 0.6;
-  }
-
   ${({ $buttonStyles }) => $buttonStyles};
 
   ${({ $isLoading }) =>
@@ -143,4 +146,8 @@ const Root = styled.button<{
         animation: ${spin} 1.5s linear infinite;
       }
     `}
+
+  &:disabled {
+    opacity: 0.6;
+  }
 `;

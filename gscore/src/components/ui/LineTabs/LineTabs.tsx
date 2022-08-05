@@ -2,7 +2,7 @@ import { Tab, Tabs, TabList } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 
-import { COLORS } from "assets/styles/colors";
+import { COLORS } from "assets";
 
 export const LineTabs = () => {
   return (
@@ -17,7 +17,7 @@ export const LineTabs = () => {
 };
 
 const StyledTabs = styled(Tabs)`
-  width: 466px;
+  max-width: 100%;
   height: 32px;
   margin: 20px 0 0 50px;
   font-weight: 700;
@@ -28,14 +28,15 @@ const StyledTabs = styled(Tabs)`
 
 const StyledTabList = styled(TabList)`
   display: flex;
-  gap: 48px;
+  gap: 0;
   color: ${COLORS.neutral700};
-  /* padding-left: 24px; */
 `;
 
 const StyledTab = styled(Tab)`
-  position: relative;
   cursor: pointer;
+  position: relative;
+  text-align: center;
+  padding: 0 24px;
 
   &.isSelected {
     color: ${COLORS.primary};

@@ -1,17 +1,17 @@
 import * as React from "react";
 import { SVGProps } from "react";
 
-export const CheckIcon = (props: SVGProps<SVGSVGElement>) => (
+export const ArrowExternalLeftIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
-    width={22}
+    width={18}
     height={18}
-    viewBox="0 0 22 18"
+    viewBox="0 0 18 18"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
     <path
-      d="m1.16 10.406 5.623 5.623L20.84 1.97"
+      d="M17 17 1 1M1 16.085V1h15.085"
       stroke="#fff"
       strokeWidth={2}
       strokeLinecap="round"
