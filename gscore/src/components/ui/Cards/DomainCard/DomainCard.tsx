@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import styled from "styled-components";
 
 import { COLORS } from "assets";
-import { Copy } from "components/icons";
+import { CopyIcon } from "components/icons";
 import { Checkbox } from "components/ui/Checkbox";
 import { Status, StatusVariables } from "components/ui/Status";
 import { IDomainCard } from "utils/mock";
@@ -17,7 +17,7 @@ export const DomainCard: FC<domainCardProps> = ({ domainCard }) => {
     <Root>
       <Header>
         <Checkbox />
-        <Status status={StatusVariables.Active} />
+        <Status status={StatusVariables.ACTIVE} />
       </Header>
       <Content>
         <ContentItem>
@@ -82,7 +82,7 @@ const Code = styled.span`
   position: relative;
 `;
 
-const StyledCopy = styled(Copy)`
+const StyledCopy = styled(CopyIcon)`
   position: absolute;
   top: 18px;
   right: 24px;
@@ -102,5 +102,6 @@ const Url = styled.p`
 `;
 
 const DomainUrl = styled(Url)`
-  width: 248px;
+  /* width: 248px; */
+  white-space: nowrap;
 `;

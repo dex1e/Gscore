@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-import {
+import Accordions, {
   Button,
   Card,
   Checkbox,
   DomainCard,
+  Header,
   Input,
   LineTabs,
   RegisterTabs,
@@ -30,7 +31,7 @@ const UiKitPage = () => {
       <Input placeholder="Placeholder" />
       <Input placeholder="Placeholder" isDisabled />
       <Input placeholder="Placeholder" isSuccess />
-      <Input placeholder="Placeholder" error={"Error text"} />
+      <Input placeholder="Placeholder" error="Error text" />
 
       <CheckboxWrapper>
         <Checkbox />
@@ -46,6 +47,10 @@ const UiKitPage = () => {
         <Card card={card} />
         <DomainCard domainCard={domainCard} />
       </CardsWrapper>
+
+      <Accordions />
+
+      <Header />
     </Root>
   );
 };

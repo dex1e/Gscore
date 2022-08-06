@@ -31,18 +31,19 @@ export const Input: FC<InputProps> = ({
         {...props}
       />
 
-      {(isSuccess && <StyledSuccessIcon />) ||
-        (hasError && (
-          <>
-            <StyledErrorIcon />
-            <Text>{error}</Text>
-          </>
-        ))}
+      {isSuccess && !hasError && <StyledSuccessIcon />}
+      {hasError && (
+        <>
+          <StyledErrorIcon />
+          <Text>{error}</Text>
+        </>
+      )}
     </Root>
   );
 };
 
 const Root = styled.div`
+  min-width: 303px;
   max-width: 419px;
   position: relative;
 `;

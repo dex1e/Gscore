@@ -1,0 +1,1 @@
+export { VectorIcon } from "./VectorIcon";

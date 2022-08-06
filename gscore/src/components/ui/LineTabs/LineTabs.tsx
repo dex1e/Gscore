@@ -1,4 +1,4 @@
-import { Tab, Tabs, TabList } from "react-tabs";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 
@@ -12,6 +12,9 @@ export const LineTabs = () => {
         <StyledTab>Subscriptions</StyledTab>
         <StyledTab>Change password</StyledTab>
       </StyledTabList>
+      <TabPanel></TabPanel>
+      <TabPanel></TabPanel>
+      <TabPanel></TabPanel>
     </StyledTabs>
   );
 };

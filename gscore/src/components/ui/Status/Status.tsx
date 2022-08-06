@@ -9,9 +9,9 @@ interface StatusProps {
 }
 
 export enum StatusVariables {
-  Active = "Active",
-  Hold = "Hold",
-  Inactive = "Inactive",
+  ACTIVE = "Active",
+  HOLD = "Hold",
+  INACTIVE = "Inactive",
 }
 
 export const Status: FC<StatusProps> = ({ status }) => {
@@ -20,9 +20,9 @@ export const Status: FC<StatusProps> = ({ status }) => {
 
 const Root = styled.div<{ $status: StatusVariables }>`
   color: ${({ $status }) =>
-    ($status === StatusVariables.Active && COLORS.systemGreen300) ||
-    ($status === StatusVariables.Hold && COLORS.systemOrange300) ||
-    ($status === StatusVariables.Inactive && COLORS.systemRed300)};
+    ($status === StatusVariables.ACTIVE && COLORS.systemGreen300) ||
+    ($status === StatusVariables.HOLD && COLORS.systemOrange300) ||
+    ($status === StatusVariables.INACTIVE && COLORS.systemRed300)};
   font-weight: 700;
   font-size: 22px;
   line-height: 28px;

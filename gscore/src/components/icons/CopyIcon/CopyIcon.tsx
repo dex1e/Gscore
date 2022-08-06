@@ -1,7 +1,7 @@
 import * as React from "react";
 import { SVGProps } from "react";
 
-export const Copy = (props: SVGProps<SVGSVGElement>) => (
+export const CopyIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width={32}
     height={32}

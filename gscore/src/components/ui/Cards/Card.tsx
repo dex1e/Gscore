@@ -15,11 +15,12 @@ interface CardsProps {
 }
 
 export const Card: FC<CardsProps> = ({ card }) => {
+  const validEndDate = dayjs.unix(card.currentPeriodEnd).format("DD.MM.YYYY");
   return (
     <Root>
       <Header>
         <Title>{card.title}</Title>
-        <Status status={StatusVariables.Active} />
+        <Status status={StatusVariables.ACTIVE} />
       </Header>
       <Content>
         <Description>
@@ -27,9 +28,7 @@ export const Card: FC<CardsProps> = ({ card }) => {
             <LicenseItem>{card.licenseItem}</LicenseItem>
             <Price>{card.price}</Price>
           </License>
-          <Validity>
-            valid until {dayjs.unix(card.currentPeriodEnd).format("DD.MM.YYYY")}
-          </Validity>
+          <Validity>valid until {validEndDate}</Validity>
         </Description>
         <StyledButton variant="secondary" text="View" />
       </Content>

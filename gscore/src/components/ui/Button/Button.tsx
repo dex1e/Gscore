@@ -130,7 +130,8 @@ const Root = styled.button<{
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 105px;
+  min-width: 105px;
+  max-width: 200px;
   height: 58px;
   border-radius: 4px;
   font-weight: 700;
