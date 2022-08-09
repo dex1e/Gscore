@@ -3,8 +3,9 @@ import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 
 import { COLORS } from "assets";
+import { Z_INDEX } from "constant";
 
-export const LineTabs = () => {
+export const SettingsTabs = () => {
   return (
     <StyledTabs selectedTabClassName="isSelected">
       <StyledTabList>
@@ -20,18 +21,27 @@ export const LineTabs = () => {
 };
 
 const StyledTabs = styled(Tabs)`
-  max-width: 100%;
-  height: 32px;
-  margin: 20px 0 0 50px;
+  min-width: 100%;
   font-weight: 700;
   font-size: 18px;
   line-height: 20px;
-  border-bottom: 2px solid ${COLORS.neutral700};
+  position: relative;
+  /* max-width: 100%; */
+  /* min-height: 32px; */
+  /* border-bottom: 2px solid ${COLORS.neutral700}; */
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    width: 100%;
+    border-bottom: 2px solid ${COLORS.neutral700};
+  }
 `;
 
 const StyledTabList = styled(TabList)`
   display: flex;
-  gap: 0;
   color: ${COLORS.neutral700};
 `;
 
@@ -51,6 +61,7 @@ const StyledTab = styled(Tab)`
       left: 0;
       width: 100%;
       border-bottom: 2px solid ${COLORS.primary};
+      z-index: ${Z_INDEX.primary};
     }
   }
 `;

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { SVGProps } from "react";
 
-export const HeaderLogoIcon = (props: SVGProps<SVGSVGElement>) => (
+export const GscoreLogoIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width={171}
     height={42}

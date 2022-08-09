@@ -26,4 +26,5 @@ const Root = styled.div<{ $status: StatusVariables }>`
   font-weight: 700;
   font-size: 22px;
   line-height: 28px;
+  height: 22px;
 `;

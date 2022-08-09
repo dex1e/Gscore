@@ -14,8 +14,11 @@ import { ChevronRightIcon } from "components/icons";
 
 const AccordionMenu = () => {
   return (
-    <StyledAccordion allowZeroExpanded>
-      <StyledAccordionItem>
+    <Root allowZeroExpanded>
+      <StyledAccordionItem
+        activeClassName="active accordion__item"
+        className="accordion__item"
+      >
         <StyledAccordionItemHeading>
           <StyledAccordionItemButton>
             <Text>Open me</Text>
@@ -28,18 +31,28 @@ const AccordionMenu = () => {
           sagittis tincidunt phasellus elit etiam cursus orci in. Id sed montes.
         </StyledAccordionItemPanel>
       </StyledAccordionItem>
-    </StyledAccordion>
+    </Root>
   );
 };
 
-const StyledAccordion = styled(Accordion)`
-  width: 926px;
+const Root = styled(Accordion)`
+  max-width: 926px;
   min-height: 131px;
   /* neutral700 */
   /* :colors.secondarygray ; */
   /* padding:  }) => ($isOpened ? "48px 60px 56px" : "48px 60px")}; */
-
   transition: all 0.3s ease-in-out;
+
+  .accordion__item {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-radius: 12px;
+  }
+
+  .accordion__item.active {
+    background-color: red;
+  }
 `;
 
 const StyledAccordionItem = styled(AccordionItem)`
@@ -47,10 +60,6 @@ const StyledAccordionItem = styled(AccordionItem)`
   flex-direction: column;
   gap: 16px;
   border-radius: 12px;
-
-  &[aria-expanded="true"] {
-    background-color: blue;
-  }
 `;
 
 const StyledAccordionItemHeading = styled(AccordionItemHeading)``;

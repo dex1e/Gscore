@@ -4,6 +4,7 @@
   font-weight: 100;
   src: local("THICCBOI"), url("../fonts/thicccboi/THICCCBOI-Thin.woff2") format("woff2"),
     url("../fonts/thicccboi/THICCCBOI-Thin.ttf") format("ttf");
+    font-display: swap;
 }
 
 @font-face {
@@ -12,6 +13,7 @@
   font-weight: 200;
   src: local("THICCBOI"), url("../fonts/thicccboi/THICCCBOI-Light.woff2") format("woff2"),
     url("../fonts/thicccboi/THICCCBOI-Light.ttf") format("ttf");
+    font-display: swap;
 }
 
 @font-face {
@@ -20,6 +22,7 @@
   font-weight: 300;
   src: local("THICCBOI"), url("../fonts/thicccboi/THICCCBOI-Light.woff2") format("woff2"),
     url("../fonts/thicccboi/THICCCBOI-Light.ttf") format("ttf");
+    font-display: swap;
 }
 
 @font-face {
@@ -28,6 +31,7 @@
   font-weight: 400;
   src: local("THICCBOI"), url("../fonts/thicccboi/THICCCBOI-Regular.woff2") format("woff2"),
     url("../fonts/thicccboi/THICCCBOI-Regular.ttf") format("ttf");
+    font-display: swap;
 }
 
 @font-face {
@@ -36,6 +40,7 @@
   font-weight: 500;
   src: local("THICCBOI"), url("../fonts/thicccboi/THICCCBOI-Medium.woff2") format("woff2"),
     url("../fonts/thicccboi/THICCCBOI-Medium.ttf") format("ttf");
+    font-display: swap;
 }
 
 @font-face {
@@ -44,6 +49,7 @@
   font-weight: 600;
   src: local("THICCBOI"), url("../fonts/thicccboi/THICCCBOI-SemiBold.woff2") format("woff2"),
     url("../fonts/thicccboi/THICCCBOI-SemiBold.ttf") format("ttf");
+    font-display: swap;
 }
 
 @font-face {
@@ -52,6 +58,7 @@
   font-weight: 700;
   src: local("THICCBOI"), url("../fonts/thicccboi/THICCCBOI-Bold.woff2") format("woff2"),
     url("../fonts/thicccboi/THICCCBOI-Bold.ttf") format("ttf");
+    font-display: swap;
 }
 
 @font-face {
@@ -60,6 +67,7 @@
   font-weight: 800;
   src: local("THICCBOI"), url("../fonts/thicccboi/THICCCBOI-ExtraBold.woff2") format("woff2"),
     url("../fonts/thicccboi/THICCCBOI-ExtraBold.ttf") format("ttf");
+    font-display: swap;
 }
 
 @font-face {
@@ -68,4 +76,5 @@
   font-weight: 900;
   src: local("THICCBOI"), url("../fonts/thicccboi/THICCCBOI-Black.woff2") format("woff2"),
     url("../fonts/thicccboi/THICCCBOI-Black.ttf") format("ttf");
+    font-display: swap;
 }

@@ -28,13 +28,17 @@ const StyledTabs = styled(Tabs)`
 
 const StyledTabList = styled(TabList)`
   display: flex;
-  gap: 16px;
 `;
 
 const StyledTab = styled(Tab)`
   width: 195px;
   cursor: pointer;
   position: relative;
+  margin-right: 16px;
+
+  &:last-child {
+    margin-right: 0;
+  }
 
   &::after {
     content: "";

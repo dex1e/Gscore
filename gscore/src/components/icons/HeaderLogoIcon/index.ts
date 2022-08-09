@@ -1,1 +1,0 @@
-export { HeaderLogoIcon } from "./HeaderLogoIcon";

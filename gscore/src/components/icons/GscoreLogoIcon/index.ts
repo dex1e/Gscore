@@ -1,0 +1,1 @@
+export { GscoreLogoIcon } from "./GscoreLogoIcon";

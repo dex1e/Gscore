@@ -1,7 +1,11 @@
+export { MenuIcon } from "./MenuIcon";
 export { CopyIcon } from "./CopyIcon";
 export { LessIcon } from "./LessIcon";
-export { HeaderLogoIcon } from "./HeaderLogoIcon";
+export { GscoreLogoIcon } from "./GscoreLogoIcon";
 export { ChevronRightIcon } from "./ChevronRightIcon";
 export { CloseIcon } from "./CloseIcon";
 export { CheckIcon } from "./CheckIcon";
 export { LoadingIcon } from "./LoadingIcon";
+export { FacebookIcon } from "./FacebookIcon";
+export { LinkedinIcon } from "./LinkedinIcon";
+export { TwitterIcon } from "./TwitterIcon";

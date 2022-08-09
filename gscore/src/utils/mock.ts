@@ -22,6 +22,6 @@ export const card: ICard = {
 export const domainCard: IDomainCard = {
   licenseTitle: "License code",
   domainTitle: "Domain",
-  licenseUrl: "sl=ru&tl=en&texte=%D0sfsfsfsfsfs",
+  licenseUrl: "sl=ru&tl=en&texte=%D0sfsfsfsf%D0sfsfsfsf%D0sfsfsfsfsfs",
   domainUrl: "https://translate.google.com/?=SAASSAASAS",
 };
