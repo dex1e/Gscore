@@ -6,5 +6,4 @@ export { SettingsTabs } from "./Tabs/SettingsTabs";
 export { RegisterTabs } from "./Tabs/RegisterTabs";
 export { Status } from "./Status";
 export { SubscriptionCard } from "./Cards";
-
 export { default } from "./AccordionMenu";

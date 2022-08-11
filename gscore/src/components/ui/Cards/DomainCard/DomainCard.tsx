@@ -45,7 +45,7 @@ export const DomainCard: FC<domainCardProps> = ({ domainCard }) => {
         </DomainItem>
 
         <StatusItem>
-          <Media greaterThanOrEqual="laptopL">
+          <Media greaterThanOrEqual="laptop">
             <StatusText>Status</StatusText>
             <StyledStatus status={StatusVariables.INACTIVE} />
           </Media>
@@ -64,12 +64,21 @@ const Root = styled.div`
   color: ${COLORS.neutral500};
   width: 100%;
 
-  @media ${DEVICE.laptopL} {
-    padding: 0;
+  @media ${DEVICE.laptop} {
     flex-direction: row;
     /* align-items: center; */
-    padding: 24px 96px 31px 32px;
+    padding: 24px 15px 31px 10px;
+
+    @media ${DEVICE.laptopL} {
+      padding: 24px 96px 31px 32px;
+    }
   }
+
+  /* @media ${DEVICE.laptopL} {
+    padding: 0;
+    flex-direction: row;
+    padding: 24px 96px 31px 32px;
+  } */
 `;
 
 const Header = styled.header`
@@ -77,7 +86,7 @@ const Header = styled.header`
   height: 28px;
   width: 28px;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     padding-top: 50px;
   }
 `;
@@ -85,7 +94,7 @@ const Header = styled.header`
 const StyledCheckbox = styled(Checkbox)`
   /* margin-right: 20px; */
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     /* margin-right: 48px; */
   }
 `;
@@ -93,7 +102,7 @@ const StyledCheckbox = styled(Checkbox)`
 const StyledStatus = styled(Status)`
   margin-left: 20px;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     margin: 0;
     padding-top: 32px;
   }
@@ -105,7 +114,7 @@ const Content = styled.div`
   padding-top: 24px;
   width: 100%;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     padding-top: 0;
     flex-direction: row;
     margin-left: 48px;
@@ -117,12 +126,12 @@ const ContentItem = styled.div`
   flex-direction: column;
   width: 100%;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
   }
 `;
 
 const LicenseItem = styled(ContentItem)`
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     max-width: 296px;
   }
 `;
@@ -160,7 +169,7 @@ const DomainItem = styled(ContentItem)`
   width: 100%;
   max-width: 620px;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     margin: 0 0 0 28px;
   }
 `;

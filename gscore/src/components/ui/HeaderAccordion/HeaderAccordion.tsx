@@ -45,7 +45,7 @@ const HeaderAccordion = () => {
 const Root = styled(Accordion)`
   width: 100%;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     padding-left: 32px;
   }
 `;
@@ -55,7 +55,7 @@ const StyledAccordionItem = styled(AccordionItem)`
   font-size: 16px;
   line-height: 18px;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     position: relative;
     /* display: flex;
     flex-direction: column; */
@@ -64,7 +64,7 @@ const StyledAccordionItem = styled(AccordionItem)`
 `;
 
 const StyledAccordionItemHeading = styled(AccordionItemHeading)`
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     max-width: 70px;
   }
 `;
@@ -89,7 +89,7 @@ const StyledChevronBottomIcon = styled(ChevronRightIcon)`
   transform: rotate(90deg);
   transition: all 0.3s ease-in-out;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     right: 0;
   }
 `;
@@ -98,7 +98,7 @@ const StyledAccordionItemPanel = styled(AccordionItemPanel)`
   color: ${COLORS.neutral500};
   margin-top: 31px;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     position: absolute;
     top: 24px;
     right: 0;
@@ -113,7 +113,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
   }
 `;
 

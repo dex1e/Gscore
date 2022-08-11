@@ -57,7 +57,7 @@ const Root = styled.div`
   position: relative;
   padding-bottom: 24px;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     padding-bottom: 42px;
   }
   /* flex: 0 0 auto; */
@@ -85,7 +85,7 @@ const Text = styled.p`
 const Copyright = styled.div`
   padding-top: 32px;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     display: flex;
     justify-content: space-between;
     padding-top: 44px;
@@ -96,7 +96,7 @@ const CopyrightText = styled.p`
   /* padding-top: 32px; */
   text-align: center;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     text-align: start;
   }
 `;
@@ -111,7 +111,7 @@ const Icons = styled.div`
   justify-content: center;
   padding-top: 24px;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     padding-top: 0;
   }
 `;

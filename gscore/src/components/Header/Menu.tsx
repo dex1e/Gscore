@@ -61,7 +61,7 @@ const Root = styled.div<{ $menuActive: boolean }>`
       transform: translateX(-100%);
     `}
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     display: none;
   }
 `;

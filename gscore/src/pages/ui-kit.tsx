@@ -2,6 +2,7 @@ import { createMedia } from "@artsy/fresnel";
 import styled from "styled-components";
 
 // import { Menu } from "components/Header/Menu";
+import { BuySubscriptionCard } from "components";
 import AccordionMenu, {
   Button,
   SubscriptionCard,
@@ -48,13 +49,18 @@ const UiKitPage = () => {
         <RegisterTabs />
       </STabs> */}
 
-      {/* <CardsWrapper>
-        <SubscriptionCard card={card} />
+      <CardsWrapper>
+        {/* <SubscriptionCard card={card} /> */}
         <DomainCard domainCard={domainCard} />
-      </CardsWrapper> */}
+      </CardsWrapper>
 
       {/* <AccordionMenu /> */}
       {/* <HeaderAccordion /> */}
+
+      {/* <WrapperBuy>
+        <BuySubscriptionCard />
+        <BuySubscriptionCard isActive />
+      </WrapperBuy> */}
     </Root>
   );
 };
@@ -91,6 +97,11 @@ const CardsWrapper = styled.div`
   flex-direction: column;
   gap: 30px;
   margin-top: 50px;
+`;
+
+const WrapperBuy = styled.div`
+  display: flex;
+  margin: 100px;
 `;
 
 export default UiKitPage;

@@ -22,7 +22,7 @@ const Root = styled.div`
   width: 100%;
   margin: 48px 0 0 0;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     display: flex;
     margin: 0;
   }
@@ -34,7 +34,7 @@ const MySubscriptions = styled.a`
   font-size: 16px;
   line-height: 18px;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     width: 153px;
     height: fit-content;
     white-space: nowrap;
@@ -48,13 +48,13 @@ const StyledDivider = styled(Divider)`
     margin-bottom: 0;
   }
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     display: none;
   }
 `;
 
 // const StyledHeaderAccordion = styled(HeaderAccordion)`
-//   @media ${DEVICE.laptopL} {
+//   @media ${DEVICE.laptop} {
 //     padding-left: 32px;
 //   }
 // `;

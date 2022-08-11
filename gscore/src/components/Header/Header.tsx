@@ -32,7 +32,7 @@ export const Header = () => {
                 <MenuIcon />
               </BurgerButton>
             </Media>
-            <Media greaterThanOrEqual="laptopL">
+            <Media greaterThanOrEqual="laptop">
               <MenuList />
             </Media>
           </Nav>

@@ -131,8 +131,9 @@ const Root = styled.button<{
   justify-content: center;
   align-items: center;
   min-width: 105px;
-  max-width: 200px;
-  height: 58px;
+  max-width: 308px;
+  min-height: 58px;
+  max-height: 72px;
   border-radius: 4px;
   font-weight: 700;
   line-height: 18px;

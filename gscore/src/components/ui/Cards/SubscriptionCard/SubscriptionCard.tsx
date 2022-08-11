@@ -52,7 +52,7 @@ const Root = styled.div`
   background: ${COLORS.neutral700};
   padding: 32px 0;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     padding: 48px 0;
     height: 334px;
     width: 100%;
@@ -69,7 +69,7 @@ const Header = styled.header`
   padding: 0 24px 24px 16px;
   border-bottom: 1px solid ${COLORS.neutral500};
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     padding: 0 64px 32px 32px;
   }
 `;
@@ -86,7 +86,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     padding: 32px 0 0 32px;
   }
 `;
@@ -99,7 +99,7 @@ const Description = styled.div`
   font-size: 18px;
   line-height: 30px;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     font-size: 24px;
     line-height: 26px;
   }
@@ -115,7 +115,7 @@ const LicenseName = styled.span`
   max-width: 212px;
   width: 100%;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     max-width: 428px;
   }
 `;
@@ -124,7 +124,7 @@ const Price = styled.span`
   /* padding-right: 50px; */
   padding-left: 8px;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     padding-left: 32px;
   }
 `;
@@ -141,7 +141,7 @@ const StyledButton = styled(Button)`
   width: 120px;
   margin-top: 24px;
 
-  @media ${DEVICE.laptopL} {
+  @media ${DEVICE.laptop} {
     margin-top: 32px;
   }
 `;
