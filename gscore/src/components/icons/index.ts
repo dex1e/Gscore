@@ -1,3 +1,5 @@
+export { LogoutIcon } from "./LogoutIcon";
+export { SettingsIcon } from "./SettingsIcon";
 export { MenuIcon } from "./MenuIcon";
 export { CopyIcon } from "./CopyIcon";
 export { LessIcon } from "./LessIcon";

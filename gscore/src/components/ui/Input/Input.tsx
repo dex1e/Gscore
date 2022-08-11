@@ -43,8 +43,9 @@ export const Input: FC<InputProps> = ({
 };
 
 const Root = styled.div`
-  min-width: 303px;
-  max-width: 419px;
+  width: 100%;
+  min-width: 296px;
+  max-width: 620px;
   position: relative;
 `;
 

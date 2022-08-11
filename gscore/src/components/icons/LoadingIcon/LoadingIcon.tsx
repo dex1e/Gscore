@@ -12,7 +12,7 @@ export const LoadingIcon = (props: SVGProps<SVGSVGElement>) => (
   >
     <path
       d="M17 9a8 8 0 1 1-2.343-5.657"
-      stroke={props.stroke}
+      stroke="#fff"
       strokeWidth={2}
       strokeLinecap="round"
     />

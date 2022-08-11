@@ -1,15 +1,17 @@
+import { createMedia } from "@artsy/fresnel";
 import styled from "styled-components";
 
 // import { Menu } from "components/Header/Menu";
-import Accordions, {
-  // Button,
+import AccordionMenu, {
+  Button,
   SubscriptionCard,
   // Checkbox,
   DomainCard,
-  // Input,
-  // SettingsTabs,
-  // RegisterTabs,
+  Input,
+  SettingsTabs,
+  RegisterTabs,
 } from "components/ui";
+import HeaderAccordion from "components/ui/HeaderAccordion";
 import { MainLayout } from "Layout/MainLayout";
 import { card } from "utils";
 import { domainCard } from "utils/mock";
@@ -18,40 +20,41 @@ const UiKitPage = () => {
   return (
     <Root>
       {/* <Buttons>
-        <Button variant="primary" text="Default" />
-        <Button variant="primary" text="Default" isDisabled />
-        <Button variant="secondary" text="Default" />
-        <Button variant="secondary" text="Default" isDisabled />
-        <Somebutton>
-          <Button variant="text" text="Default" />
-          <Button variant="text" text="Default" isDisabled />
-          <Button isLoading />
-          <Button variant="secondary" isLoading />
-          <Button variant="text" isLoading />
-        </Somebutton>
-      </Buttons> */}
-      {/* 
-      <Input placeholder="Placeholder" />
-      <Input placeholder="Placeholder" isDisabled />
-      <Input placeholder="Placeholder" isSuccess />
-      <Input placeholder="Placeholder" error="Error text" /> */}
+            <Button variant="primary" text="Default" />
+            <Button variant="primary" text="Default" isDisabled />
+            <Button variant="secondary" text="Default" />
+            <Button variant="secondary" text="Default" isDisabled />
+            <Somebutton>
+              <Button variant="text" text="Default" />
+              <Button variant="text" text="Default" isDisabled />
+              <Button isLoading />
+              <Button variant="secondary" isLoading />
+              <Button variant="text" isLoading />
+            </Somebutton>
+          </Buttons> */}
+
+      {/* <Input placeholder="Placeholder" />
+          <Input placeholder="Placeholder" isDisabled />
+          <Input placeholder="Placeholder" isSuccess />
+          <Input placeholder="Placeholder" error="Error text" /> */}
 
       {/* <CheckboxWrapper>
-        <Checkbox />
-        <Checkbox isDisabled />
-      </CheckboxWrapper> */}
+            <Checkbox />
+            <Checkbox isDisabled />
+          </CheckboxWrapper> */}
 
       {/* <STabs>
         <SettingsTabs />
         <RegisterTabs />
       </STabs> */}
 
-      <CardsWrapper>
+      {/* <CardsWrapper>
         <SubscriptionCard card={card} />
         <DomainCard domainCard={domainCard} />
-      </CardsWrapper>
+      </CardsWrapper> */}
 
-      {/* <Accordions /> */}
+      {/* <AccordionMenu /> */}
+      {/* <HeaderAccordion /> */}
     </Root>
   );
 };

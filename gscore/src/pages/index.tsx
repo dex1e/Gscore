@@ -2,12 +2,10 @@ import type { NextPage } from "next";
 import styled from "styled-components";
 
 const Home: NextPage = () => {
-  return <Root></Root>;
+  return <Root>Hello</Root>;
 };
 const Root = styled.div`
-  margin: 50px;
-  display: flex;
-  gap: 15px;
+  color: white;
 `;
 
 export default Home;

@@ -1,10 +1,15 @@
-import { FC } from "react";
+import { FC, MouseEvent } from "react";
 
 import styled, { css } from "styled-components";
 
 import { COLORS } from "assets";
 import { CloseIcon, GscoreLogoIcon } from "components/icons";
-import { Z_INDEX } from "constant";
+import AccordionMenu from "components/ui";
+import HeaderAccordion from "components/ui/HeaderAccordion";
+import { DEVICE, Z_INDEX } from "constant";
+import { Divider } from "utils";
+
+import { MenuList } from "./MenuList";
 
 interface MenuProps {
   menuActive: boolean;
@@ -12,19 +17,25 @@ interface MenuProps {
 }
 
 export const Menu: FC<MenuProps> = ({ menuActive, onCloseMenu }) => {
-  const handleStopPropagation = (e: any) => {
+  const handleStopPropagation = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
 
   return (
     <Root $menuActive={menuActive} onClick={onCloseMenu}>
-      {/* {menuActive && <BackgroundBlur $menuActive={menuActive} />} */}
+      {menuActive && <BackgroundBlur $menuActive={menuActive} />}
       <MenuContent onClick={handleStopPropagation} $menuActive={menuActive}>
         <MenuHeader>
           <StyledCloseIcon onClick={onCloseMenu} />
           <StyledHeaderLogoIcon />
         </MenuHeader>
-        <MenuText $menuActive={menuActive}>My subscriptions</MenuText>
+
+        <MenuList />
+        {/* <MySubscriptions href="#">My subscriptions</MySubscriptions>
+
+        <StyledDivider />
+        <HeaderAccordion />
+        <StyledDivider /> */}
       </MenuContent>
     </Root>
   );
@@ -32,17 +43,16 @@ export const Menu: FC<MenuProps> = ({ menuActive, onCloseMenu }) => {
 
 const Root = styled.div<{ $menuActive: boolean }>`
   width: 260px;
-  height: 100vh;
-  position: absolute;
-  top: 44px;
+  min-height: calc(100% + 20px);
+  position: fixed;
+  top: -20px;
   right: -260px;
-  /* right: ${({ $menuActive }) => ($menuActive ? "0" : "-260px")}; */
-  background: #272727;
-  -webkit-font-smoothing: antialiased;
-
+  background: ${COLORS.secondaryGray};
   transform: translateX(0);
-  opacity: 0;
   transition: all 0.2s;
+  opacity: 0;
+  z-index: ${Z_INDEX.main};
+  -webkit-font-smoothing: antialiased;
 
   ${({ $menuActive }) =>
     $menuActive &&
@@ -50,14 +60,20 @@ const Root = styled.div<{ $menuActive: boolean }>`
       opacity: 1;
       transform: translateX(-100%);
     `}
+
+  @media ${DEVICE.laptopL} {
+    display: none;
+  }
 `;
 
 const BackgroundBlur = styled.div<{ $menuActive: boolean }>`
   width: 100vw;
-  height: 100vh;
-  backdrop-filter: blur(2px);
+  height: 100%;
+  opacity: 0.6;
+  background: ${COLORS.secondaryGray};
   position: fixed;
-  /* right: 260px; */
+  /* top: -20px; */
+  right: 260px;
   z-index: ${Z_INDEX.upper};
 
   /* ${({ $menuActive }) =>
@@ -72,7 +88,8 @@ const MenuContent = styled.div<{ $menuActive: boolean }>`
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* gap: 48px; */
+  padding: 28px 24px 0 21px;
+  /* z-index: ${Z_INDEX.main}; */
   /* right: 0; */
   /* transition: transform 0.4s; */
   /* align-items: center; */
@@ -80,12 +97,11 @@ const MenuContent = styled.div<{ $menuActive: boolean }>`
   /* position: absolute;
   right: 30%;
   top: 0; */
-  z-index: ${Z_INDEX.main};
 `;
 
 const MenuHeader = styled.header`
   display: flex;
-  gap: 35px;
+  align-items: center;
 `;
 
 const StyledCloseIcon = styled(CloseIcon)`
@@ -95,11 +111,23 @@ const StyledCloseIcon = styled(CloseIcon)`
 const StyledHeaderLogoIcon = styled(GscoreLogoIcon)`
   width: 130px;
   height: 32px;
+  margin-left: 32px;
 `;
 
-const MenuText = styled.h2<{ $menuActive: boolean }>`
+const MySubscriptions = styled.a<{ $menuActive: boolean }>`
   color: ${COLORS.neutral100};
   font-weight: 500;
   font-size: 16px;
   line-height: 18px;
+  margin: 48px 0 0 0;
 `;
+
+const StyledDivider = styled(Divider)`
+  margin: 20px 0;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+// const StyledAccordionMenu = styled(AccordionMenu)``;

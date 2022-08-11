@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {
   Accordion,
@@ -19,12 +19,12 @@ const AccordionMenu = () => {
         activeClassName="active accordion__item"
         className="accordion__item"
       >
-        <StyledAccordionItemHeading>
+        <AccordionItemHeading>
           <StyledAccordionItemButton>
-            <Text>Open me</Text>
+            Open me
             <StyledChevronRightIcon />
           </StyledAccordionItemButton>
-        </StyledAccordionItemHeading>
+        </AccordionItemHeading>
         <StyledAccordionItemPanel>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit id venenatis
           pretium risus euismod dictum egestas orci netus feugiat ut egestas ut
@@ -38,20 +38,20 @@ const AccordionMenu = () => {
 const Root = styled(Accordion)`
   max-width: 926px;
   min-height: 131px;
-  /* neutral700 */
-  /* :colors.secondarygray ; */
-  /* padding:  }) => ($isOpened ? "48px 60px 56px" : "48px 60px")}; */
-  transition: all 0.3s ease-in-out;
 
   .accordion__item {
     display: flex;
     flex-direction: column;
     gap: 16px;
     border-radius: 12px;
+    background: ${COLORS.secondaryGray};
+    padding: 48px 60px;
+    transition: all 0.3s ease-in-out;
   }
 
   .accordion__item.active {
-    background-color: red;
+    background: ${COLORS.neutral700};
+    padding: 48px 60px 56px;
   }
 `;
 
@@ -61,8 +61,6 @@ const StyledAccordionItem = styled(AccordionItem)`
   gap: 16px;
   border-radius: 12px;
 `;
-
-const StyledAccordionItemHeading = styled(AccordionItemHeading)``;
 
 const StyledAccordionItemButton = styled(AccordionItemButton)`
   width: 100%;
@@ -79,8 +77,6 @@ const StyledAccordionItemButton = styled(AccordionItemButton)`
   }
 `;
 
-const Text = styled.p``;
-
 const StyledChevronRightIcon = styled(ChevronRightIcon)`
   position: absolute;
   right: 0;
@@ -92,8 +88,6 @@ const StyledAccordionItemPanel = styled(AccordionItemPanel)`
   font-size: 18px;
   line-height: 30px;
   color: ${COLORS.neutral300};
-  /* padding: 48px 60px 56px; */
-  /* background: green; */
 `;
 
 export default AccordionMenu;

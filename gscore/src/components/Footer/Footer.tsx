@@ -7,37 +7,70 @@ import {
   LinkedinIcon,
   TwitterIcon,
 } from "components/icons";
+import { DEVICE } from "constant";
+import { Divider } from "utils";
 
 export const Footer = () => {
   return (
     <Root>
-      <StyledGscoreLogoIcon />
-      <Text>Ut enim ad minim veniam quis nostrud exercitation ea commodo</Text>
-      <Copyright>
-        Copyright &copy; 2022 GScore | All Rights Reserved | &nbsp;
-        <Info href="#">Cookies</Info> | &nbsp;
-        <Info href="#">Privacy Policy</Info>
-      </Copyright>
-      <Icons>
-        <Contact href="#">
-          <FacebookIcon />
-        </Contact>
-        <Contact href="#">
-          <TwitterIcon />
-        </Contact>
-        <Contact href="#">
-          <LinkedinIcon />
-        </Contact>
-      </Icons>
+      <div className="container">
+        <Inner>
+          <Divider />
+
+          <Content>
+            <StyledGscoreLogoIcon />
+            <Text>
+              Ut enim ad minim veniam quis nostrud exercitation ea commodo
+            </Text>
+          </Content>
+
+          <Divider />
+
+          <Copyright>
+            <CopyrightText>
+              Copyright &copy; 2022 GScore | All Rights Reserved |&nbsp;
+              <Info href="#">Cookies</Info>&nbsp;|&nbsp;
+              <Info href="#">Privacy Policy</Info>
+            </CopyrightText>
+
+            <Icons>
+              <Contact href="#">
+                <FacebookIcon />
+              </Contact>
+
+              <Contact href="#">
+                <TwitterIcon />
+              </Contact>
+
+              <Contact href="#">
+                <LinkedinIcon />
+              </Contact>
+            </Icons>
+          </Copyright>
+        </Inner>
+      </div>
     </Root>
   );
 };
 
 const Root = styled.div`
+  position: relative;
+  padding-bottom: 24px;
+
+  @media ${DEVICE.laptopL} {
+    padding-bottom: 42px;
+  }
+  /* flex: 0 0 auto; */
+`;
+
+const Inner = styled.div`
   color: ${COLORS.neutral400};
   font-weight: 400;
   font-size: 18px;
   line-height: 30px;
+`;
+const Content = styled.div`
+  padding: 40px 0;
 `;
 
 const StyledGscoreLogoIcon = styled(GscoreLogoIcon)`
@@ -45,9 +78,28 @@ const StyledGscoreLogoIcon = styled(GscoreLogoIcon)`
   height: 32px;
 `;
 
-const Text = styled.p``;
+const Text = styled.p`
+  padding-top: 24px;
+`;
 
-const Copyright = styled.p``;
+const Copyright = styled.div`
+  padding-top: 32px;
+
+  @media ${DEVICE.laptopL} {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 44px;
+  }
+`;
+
+const CopyrightText = styled.p`
+  /* padding-top: 32px; */
+  text-align: center;
+
+  @media ${DEVICE.laptopL} {
+    text-align: start;
+  }
+`;
 
 const Info = styled.a`
   color: ${COLORS.neutral100};
@@ -56,6 +108,12 @@ const Info = styled.a`
 
 const Icons = styled.div`
   display: flex;
+  justify-content: center;
+  padding-top: 24px;
+
+  @media ${DEVICE.laptopL} {
+    padding-top: 0;
+  }
 `;
 
 const Contact = styled.a`

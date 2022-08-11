@@ -1,0 +1,1 @@
+export { LogoutIcon } from "./LogoutIcon";

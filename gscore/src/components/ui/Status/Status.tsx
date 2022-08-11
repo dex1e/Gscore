@@ -6,6 +6,7 @@ import { COLORS } from "assets";
 
 interface StatusProps {
   status: StatusVariables;
+  className?: string;
 }
 
 export enum StatusVariables {
@@ -14,8 +15,12 @@ export enum StatusVariables {
   INACTIVE = "Inactive",
 }
 
-export const Status: FC<StatusProps> = ({ status }) => {
-  return <Root $status={status}>{status}</Root>;
+export const Status: FC<StatusProps> = ({ status, className }) => {
+  return (
+    <Root $status={status} className={className}>
+      {status}
+    </Root>
+  );
 };
 
 const Root = styled.div<{ $status: StatusVariables }>`

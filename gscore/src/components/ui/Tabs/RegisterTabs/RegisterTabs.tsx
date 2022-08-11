@@ -24,6 +24,7 @@ const StyledTabs = styled(Tabs)`
   font-size: 20px;
   line-height: 22px;
   color: ${COLORS.neutral100};
+  text-align: center;
 `;
 
 const StyledTabList = styled(TabList)`

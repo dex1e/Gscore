@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 
+import { createMedia } from "@artsy/fresnel";
 import styled from "styled-components";
 
 import { GscoreLogoIcon, MenuIcon } from "components/icons";
+import { DEVICE } from "constant";
 
+import { Media } from "../../media";
 import { Menu } from "./Menu";
+import { MenuList } from "./MenuList";
 
 export const Header = () => {
   const [menuActive, setMenuActive] = useState(false);
@@ -21,14 +25,19 @@ export const Header = () => {
     <Root>
       <div className="container">
         <Inner>
-          <StyledHeaderLogoIcon />
+          <StyledGscoreLogoIcon />
           <Nav>
-            <BurgerButton onClick={handleMenuCLick}>
-              <MenuIcon />
-            </BurgerButton>
+            <Media at="mobileM">
+              <BurgerButton onClick={handleMenuCLick}>
+                <MenuIcon />
+              </BurgerButton>
+            </Media>
+            <Media greaterThanOrEqual="laptopL">
+              <MenuList />
+            </Media>
           </Nav>
-          <Menu menuActive={menuActive} onCloseMenu={handleCloseMenu} />
         </Inner>
+        <Menu menuActive={menuActive} onCloseMenu={handleCloseMenu} />
       </div>
     </Root>
   );
@@ -36,23 +45,24 @@ export const Header = () => {
 
 const Root = styled.div`
   position: relative;
+  padding-top: 20px;
 `;
 
 const Inner = styled.div`
   width: 100%;
-  height: 44px;
+  height: 42px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
-const StyledHeaderLogoIcon = styled(GscoreLogoIcon)``;
+const StyledGscoreLogoIcon = styled(GscoreLogoIcon)`
+  cursor: pointer;
+`;
 
 const Nav = styled.nav`
-  /* width: 50%; */
-  /* height: 44px; */
-  margin-right: 26px;
+  height: 24px;
   display: flex;
-  align-items: center;
 `;
 
 const BurgerButton = styled.button`

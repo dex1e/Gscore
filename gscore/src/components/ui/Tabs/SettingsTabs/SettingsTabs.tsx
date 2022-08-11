@@ -26,6 +26,7 @@ const StyledTabs = styled(Tabs)`
   font-size: 18px;
   line-height: 20px;
   position: relative;
+  text-align: center;
   /* max-width: 100%; */
   /* min-height: 32px; */
   /* border-bottom: 2px solid ${COLORS.neutral700}; */

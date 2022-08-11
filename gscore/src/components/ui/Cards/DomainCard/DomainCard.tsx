@@ -4,8 +4,10 @@ import styled from "styled-components";
 
 import { COLORS } from "assets";
 import { CopyIcon } from "components/icons";
-import { Checkbox, Input, Status } from "components/ui";
-import { StatusVariables } from "components/ui/Status";
+import { Checkbox, Input } from "components/ui";
+import { Status, StatusVariables } from "components/ui/Status";
+import { DEVICE } from "constant";
+import { Media } from "media";
 import { IDomainCard } from "utils/mock";
 
 interface domainCardProps {
@@ -21,57 +23,107 @@ export const DomainCard: FC<domainCardProps> = ({ domainCard }) => {
     <Root>
       <Header>
         <StyledCheckbox />
-        <Status status={StatusVariables.ACTIVE} />
+        <Media at="mobileM">
+          <StyledStatus status={StatusVariables.ACTIVE} />
+        </Media>
       </Header>
+
       <Content>
-        <ContentItem>
-          <Title>{domainCard.licenseTitle}</Title>
+        <LicenseItem>
+          <Title>{domainCard?.licenseTitle}</Title>
           <Code>
-            <LicenseInput value={domainCard.licenseUrl} readOnly disabled />
+            <LicenseInput value={domainCard?.licenseUrl} readOnly />
             <CopyButton onClick={handleCopyToClipboard}>
               <CopyIcon />
             </CopyButton>
           </Code>
-        </ContentItem>
-        <ContentItem>
-          <Title>{domainCard.domainTitle}</Title>
+        </LicenseItem>
+
+        <DomainItem>
+          <Title>{domainCard?.domainTitle}</Title>
           <DomainInput />
-        </ContentItem>
+        </DomainItem>
+
+        <StatusItem>
+          <Media greaterThanOrEqual="laptopL">
+            <StatusText>Status</StatusText>
+            <StyledStatus status={StatusVariables.INACTIVE} />
+          </Media>
+        </StatusItem>
       </Content>
     </Root>
   );
 };
 
 const Root = styled.div`
-  width: 343px;
-  height: 338px;
   background: ${COLORS.secondaryGray};
   border-radius: 12px;
   padding: 34px 20px 32px;
+  display: flex;
+  flex-direction: column;
+  color: ${COLORS.neutral500};
+  width: 100%;
+
+  @media ${DEVICE.laptopL} {
+    padding: 0;
+    flex-direction: row;
+    /* align-items: center; */
+    padding: 24px 96px 31px 32px;
+  }
 `;
 
 const Header = styled.header`
   display: flex;
+  height: 28px;
+  width: 28px;
+
+  @media ${DEVICE.laptopL} {
+    padding-top: 50px;
+  }
 `;
 
 const StyledCheckbox = styled(Checkbox)`
-  margin-right: 20px;
+  /* margin-right: 20px; */
+
+  @media ${DEVICE.laptopL} {
+    /* margin-right: 48px; */
+  }
+`;
+
+const StyledStatus = styled(Status)`
+  margin-left: 20px;
+
+  @media ${DEVICE.laptopL} {
+    margin: 0;
+    padding-top: 32px;
+  }
 `;
 
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 24px;
-  color: ${COLORS.neutral500};
+  width: 100%;
+
+  @media ${DEVICE.laptopL} {
+    padding-top: 0;
+    flex-direction: row;
+    margin-left: 48px;
+  }
 `;
 
 const ContentItem = styled.div`
   display: flex;
   flex-direction: column;
-  padding-bottom: 24px;
+  width: 100%;
 
-  &:last-child {
-    padding-bottom: 0;
+  @media ${DEVICE.laptopL} {
+  }
+`;
+
+const LicenseItem = styled(ContentItem)`
+  @media ${DEVICE.laptopL} {
+    max-width: 296px;
   }
 `;
 
@@ -83,14 +135,7 @@ const Title = styled.h2`
 `;
 
 const Code = styled.div`
-  width: 303px;
-  height: 68px;
-  box-shadow: 0px 2px 12px rgba(20, 20, 43, 0.06);
-  border-radius: 6px;
-  background: ${COLORS.neutral700};
-  /* padding: 25px 97px 25px 24px; */
   position: relative;
-  /* overflow: hidden; */
 `;
 
 const CopyButton = styled.button`
@@ -100,15 +145,24 @@ const CopyButton = styled.button`
   cursor: pointer;
 `;
 
-const LicenseInput = styled.input`
-  /* width: 182px; */
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 18px;
+const LicenseInput = styled(Input)`
   overflow: hidden;
   text-overflow: ellipsis;
   pointer-events: none;
   padding: 25px 97px 25px 24px;
+  background: ${COLORS.neutral700};
+  color: ${COLORS.neutral500};
+  border: none;
+`;
+
+const DomainItem = styled(ContentItem)`
+  margin-top: 24px;
+  width: 100%;
+  max-width: 620px;
+
+  @media ${DEVICE.laptopL} {
+    margin: 0 0 0 28px;
+  }
 `;
 
 const DomainInput = styled(Input)`
@@ -118,13 +172,14 @@ const DomainInput = styled(Input)`
   color: ${COLORS.neutral500};
   overflow: hidden;
   text-overflow: ellipsis;
+  width: 100%;
 `;
 
-// const inputStyles = styled.input`
-//   /* font-weight: 400;
-//   font-size: 16px;
-//   line-height: 18px; */
-//   overflow: hidden;
-//   text-overflow: ellipsis;
-//   pointer-events: none;
-// `;
+const StatusItem = styled.div`
+  margin-left: 56px;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+`;
+
+const StatusText = styled.p``;

@@ -65,7 +65,7 @@ const buttonTheme = {
       color: ${COLORS.neutral100};
     }
 
-    svg {
+    path {
       stroke: ${COLORS.neutral100};
     }
   `,
@@ -88,7 +88,7 @@ const buttonTheme = {
       color: ${COLORS.primary};
     }
 
-    svg {
+    path {
       stroke: ${COLORS.primary};
     }
   `,
@@ -107,7 +107,7 @@ const buttonTheme = {
       color: ${COLORS.primary};
     }
 
-    svg {
+    path {
       stroke: ${COLORS.primary};
     }
   `,
