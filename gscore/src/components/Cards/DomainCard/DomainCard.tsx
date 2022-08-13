@@ -1,13 +1,11 @@
 import React, { FC } from "react";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
 import { CopyIcon } from "components/icons";
-import { Button, Checkbox, Input } from "components/ui";
-import { Status, StatusVariables } from "components/ui/Status";
-import { Media } from "media";
-import { IDomainCard } from "types";
+import { Button, Checkbox, Input, Status } from "components/ui";
+import { EStatus, IDomainCard } from "types";
 
 interface domainCardProps {
   domainCard: IDomainCard;
@@ -15,30 +13,36 @@ interface domainCardProps {
 
 export const DomainCard: FC<domainCardProps> = ({ domainCard }) => {
   const handleCopyToClipboard = () => {
-    navigator.clipboard.writeText(domainCard.licenseUrl);
+    navigator?.clipboard?.writeText(domainCard?.licenseUrl);
   };
 
-  const status = StatusVariables.INACTIVE;
+  const isStatusInactive = domainCard?.status === EStatus?.INACTIVE;
 
-  const isStatusInactive = domainCard.status === StatusVariables.INACTIVE;
+  const readOnlyInput =
+    domainCard?.status === EStatus?.ACTIVE ||
+    domainCard?.status === EStatus?.HOLD;
 
   return (
-    <Root>
-      <Header>
-        <StyledCheckbox />
+    <Root $isStatusInactive={isStatusInactive}>
+      <StyledCheckbox $isStatusInactive={isStatusInactive} />
 
-        <StyledMediaMobileS between={["mobileS", "laptop"]}>
-          <StyledStatus
-            status={domainCard.status}
+      <StatusGridWrapper $isStatusInactive={isStatusInactive}>
+        <StatusWrapper $isStatusInactive={isStatusInactive}>
+          <StatusTitle $isStatusInactive={isStatusInactive}>Status</StatusTitle>
+          <Status status={domainCard?.status} />
+        </StatusWrapper>
+
+        {isStatusInactive && (
+          <StyledButtonStatus
+            text="Activate"
+            variant="secondary"
             $isStatusInactive={isStatusInactive}
           />
-
-          {/* {status && <Button text="Activate" variant="secondary" />} */}
-        </StyledMediaMobileS>
-      </Header>
+        )}
+      </StatusGridWrapper>
 
       <Content>
-        <LicenseItem>
+        <LicenseGridWrapper>
           <Title>{domainCard?.licenseTitle}</Title>
           <Code>
             <LicenseInput value={domainCard?.licenseUrl} readOnly />
@@ -46,69 +50,146 @@ export const DomainCard: FC<domainCardProps> = ({ domainCard }) => {
               <CopyIcon />
             </CopyButton>
           </Code>
-        </LicenseItem>
+        </LicenseGridWrapper>
 
-        <DomainItem>
+        <DomainGridWrapper>
           <Title>{domainCard?.domainTitle}</Title>
-          <DomainInput />
-        </DomainItem>
-
-        <Media greaterThanOrEqual="laptop">
-          <StatusText>Status</StatusText>
-          <Status status={domainCard.status} />
-        </Media>
+          <DomainInput readOnly={readOnlyInput} />
+        </DomainGridWrapper>
       </Content>
     </Root>
   );
 };
 
-const Root = styled.div`
+const Root = styled.div<{ $isStatusInactive?: boolean }>`
+  padding: 34px 20px 32px;
   max-width: 393px;
   width: 100%;
   background: ${COLORS.secondaryGray};
-  border-radius: 12px;
-  padding: 34px 20px 32px;
-  display: flex;
-  flex-direction: column;
   color: ${COLORS.neutral500};
+  border-radius: 12px;
+
+  display: grid;
+  grid-template-rows: 28px 1fr;
+  grid-template-columns: 48px 1fr;
+  grid-template-areas:
+    "checkbox status"
+    "content content";
+  row-gap: 24px;
+
+  ${({ $isStatusInactive }) =>
+    $isStatusInactive &&
+    css`
+      padding: 20px 20px 32px;
+      grid-template-areas:
+        "checkbox status"
+        "content content";
+      grid-template-columns: 48px 1fr;
+      grid-template-rows: 58px 1fr;
+      row-gap: 8px;
+    `}
 
   @media ${DEVICE.laptop} {
     max-width: 100%;
-    flex-direction: row;
-    padding: 24px 15px 31px 10px;
-  }
+    padding: 24px 30px 31px 10px;
+    grid-template-areas: "checkbox content status";
+    grid-template-rows: 1fr;
+    grid-template-columns: 76px 1fr min-content;
 
-  @media ${DEVICE.laptopL} {
-    padding: 20px 96px 20px 32px;
+    ${({ $isStatusInactive }) =>
+      $isStatusInactive &&
+      css`
+        grid-template-areas: "checkbox content status";
+        grid-template-rows: 1fr;
+        grid-template-columns: 50px 1fr 248px;
+      `}
+
+    @media ${DEVICE.laptopL} {
+      padding: 24px 79px 31px 32px;
+
+      ${({ $isStatusInactive }) =>
+        $isStatusInactive &&
+        css`
+          grid-template-areas: "checkbox content status";
+          grid-template-rows: 1fr;
+          grid-template-columns: 76px 1fr 248px;
+        `}
+    }
   }
 `;
 
-const Header = styled.header`
-  display: flex;
-  padding-bottom: 24px;
+const StyledCheckbox = styled(Checkbox)<{ $isStatusInactive?: boolean }>`
+  grid-area: checkbox;
+
+  ${({ $isStatusInactive }) =>
+    $isStatusInactive &&
+    css`
+      align-self: center;
+    `}
 
   @media ${DEVICE.laptop} {
-    padding: 50px 0 0 0;
+    margin-top: 50px;
+
+    ${({ $isStatusInactive }) =>
+      $isStatusInactive &&
+      css`
+        align-self: flex-start;
+      `}
   }
 `;
 
-const StyledCheckbox = styled(Checkbox)`
-  margin-right: 20px;
+const StatusGridWrapper = styled.div<{ $isStatusInactive?: boolean }>`
+  grid-area: status;
+
+  ${({ $isStatusInactive }) =>
+    $isStatusInactive &&
+    css`
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      @media ${DEVICE.laptop} {
+        flex-direction: row-reverse;
+        align-items: flex-start;
+      }
+    `}
+`;
+
+const StatusWrapper = styled.div<{ $isStatusInactive?: boolean }>`
+  ${({ $isStatusInactive }) =>
+    $isStatusInactive &&
+    css`
+      @media ${DEVICE.laptop} {
+        display: flex;
+        flex-direction: column;
+      }
+    `}
+`;
+
+const StatusTitle = styled.div<{ $isStatusInactive?: boolean }>`
+  display: none;
+  grid-area: title;
 
   @media ${DEVICE.laptop} {
-    margin-right: 48px;
+    display: block;
+    padding-bottom: 32px;
   }
 `;
 
-const StyledMediaMobileS = styled(Media)`
-  /* display: flex; */
-`;
+const StyledButtonStatus = styled(Button)<{ $isStatusInactive?: boolean }>`
+  min-width: 111px;
 
-const StyledStatus = styled(Status)<{ $isStatusInactive?: boolean }>`
-  /* padding-right: 63px; */
+  ${({ $isStatusInactive }) =>
+    $isStatusInactive &&
+    css`
+      @media ${DEVICE.laptop} {
+        margin-top: 35px;
+      }
+    `}
 `;
 
 const Content = styled.div`
+  grid-area: content;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -116,21 +197,18 @@ const Content = styled.div`
   @media ${DEVICE.laptop} {
     padding-top: 0;
     flex-direction: row;
+    padding-right: 56px;
   }
 `;
 
-const ContentItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-const LicenseItem = styled(ContentItem)`
-  margin-bottom: 24px;
+const LicenseGridWrapper = styled.div`
+  padding-bottom: 24px;
 
   @media ${DEVICE.laptop} {
-    max-width: 296px;
-    margin-right: 28px;
+    padding-bottom: 0;
+    padding-right: 28px;
+    max-width: 324px;
+    width: 100%;
   }
 `;
 
@@ -173,12 +251,10 @@ const LicenseInput = styled(Input)`
   border: none;
 `;
 
-const DomainItem = styled(ContentItem)`
-  width: 100%;
-  max-width: 620px;
-
+const DomainGridWrapper = styled.div`
   @media ${DEVICE.laptop} {
-    margin-right: 56px;
+    width: 100%;
+    max-width: 620px;
   }
 `;
 
@@ -190,8 +266,4 @@ const DomainInput = styled(Input)`
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
-`;
-
-const StatusText = styled.p`
-  padding-bottom: 32px;
 `;

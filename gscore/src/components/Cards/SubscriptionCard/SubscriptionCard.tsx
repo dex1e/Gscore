@@ -4,11 +4,10 @@ import dayjs from "dayjs";
 import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
-import { ICard } from "types";
+import { EStatus, ICard } from "types";
 
 import { Button } from "../../ui/Button";
 import { Status } from "../../ui/Status";
-import { StatusVariables } from "../../ui/Status";
 
 interface SubscriptionCardProps {
   card: ICard;
@@ -21,7 +20,7 @@ export const SubscriptionCard: FC<SubscriptionCardProps> = ({ card }) => {
     <Root>
       <Header>
         <SubscriptionName>{card?.title}</SubscriptionName>
-        <Status status={StatusVariables.ACTIVE} />
+        <Status status={EStatus.ACTIVE} />
       </Header>
 
       <Content>

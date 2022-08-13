@@ -1,4 +1,8 @@
-import { StatusVariables } from "components/ui/Status";
+export enum EStatus {
+  ACTIVE = "ACTIVE",
+  HOLD = "HOLD",
+  INACTIVE = "INACTIVE",
+}
 
 export interface ICard {
   title: string;
@@ -12,5 +16,10 @@ export interface IDomainCard {
   domainTitle: string;
   licenseUrl: string;
   domainUrl: string;
-  status: StatusVariables;
+  status: EStatus;
+}
+
+export interface IStatuses {
+  label: string;
+  color: string;
 }
