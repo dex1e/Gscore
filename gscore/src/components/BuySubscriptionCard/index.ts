@@ -1,1 +1,0 @@
-export { BuySubscriptionCard } from "./BuySubscriptionCard";

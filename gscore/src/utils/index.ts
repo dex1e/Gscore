@@ -1,2 +1,2 @@
-export { Divider } from "./variables";
+export { domainCard } from "./mock";
 export { card } from "./mock";

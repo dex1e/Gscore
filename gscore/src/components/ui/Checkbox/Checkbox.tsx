@@ -14,7 +14,7 @@ export const Checkbox: FC<CheckboxProps> = ({ className, isDisabled }) => {
   const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <Root>
+    <Root className={className}>
       <CheckboxInput
         type="checkbox"
         disabled={isDisabled}
@@ -23,18 +23,17 @@ export const Checkbox: FC<CheckboxProps> = ({ className, isDisabled }) => {
         }}
       />
 
-      <Check
-        $isDisabled={isDisabled}
-        $isChecked={isChecked}
-        className={className}
-      >
+      <Check $isDisabled={isDisabled} $isChecked={isChecked}>
         {isChecked && <StyledCheckIcon />}
       </Check>
     </Root>
   );
 };
 
-const Root = styled.label``;
+const Root = styled.label`
+  width: 28px;
+  height: 28px;
+`;
 
 const CheckboxInput = styled.input`
   position: absolute;
@@ -42,7 +41,6 @@ const CheckboxInput = styled.input`
 `;
 
 const Check = styled.span<{ $isDisabled?: boolean; $isChecked?: boolean }>`
-  /* position: absolute; */
   width: 28px;
   height: 28px;
   background: ${COLORS.neutral100};

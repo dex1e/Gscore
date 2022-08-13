@@ -1,7 +1,14 @@
 body {
   font-family: "THICCCBOI", "Times New Roman", "Georgia", "Verdena", serif;
   font-size: 16px;
-  background: black;
+  background: #181818;
+}
+a,
+button,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 a, button {
@@ -11,12 +18,15 @@ a, button {
 }
 
 .container {
-max-width: 375px;
+max-width: 1440px;
 margin: 0 auto;
 padding: 0 16px;
 
+@media (min-width: 768px) {
+  padding: 0 50px;
+}
+
 @media (min-width: 1024px) {
-max-width: 1440px;
 padding: 0 86px;
  }
 }

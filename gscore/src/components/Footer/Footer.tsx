@@ -1,22 +1,20 @@
 import styled from "styled-components";
 
-import { COLORS } from "assets";
+import { COLORS, DEVICE } from "assets";
 import {
   FacebookIcon,
   GscoreLogoIcon,
   LinkedinIcon,
   TwitterIcon,
 } from "components/icons";
-import { DEVICE } from "constant";
-import { Divider } from "utils";
+import { Divider } from "components/ui";
 
 export const Footer = () => {
   return (
     <Root>
+      <Divider />
       <div className="container">
         <Inner>
-          <Divider />
-
           <Content>
             <StyledGscoreLogoIcon />
             <Text>
@@ -60,7 +58,6 @@ const Root = styled.div`
   @media ${DEVICE.laptop} {
     padding-bottom: 42px;
   }
-  /* flex: 0 0 auto; */
 `;
 
 const Inner = styled.div`
@@ -80,6 +77,11 @@ const StyledGscoreLogoIcon = styled(GscoreLogoIcon)`
 
 const Text = styled.p`
   padding-top: 24px;
+  width: 100%;
+
+  @media ${DEVICE.laptop} {
+    max-width: 323px;
+  }
 `;
 
 const Copyright = styled.div`
@@ -93,7 +95,6 @@ const Copyright = styled.div`
 `;
 
 const CopyrightText = styled.p`
-  /* padding-top: 32px; */
   text-align: center;
 
   @media ${DEVICE.laptop} {
@@ -104,6 +105,15 @@ const CopyrightText = styled.p`
 const Info = styled.a`
   color: ${COLORS.neutral100};
   text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+    color: ${COLORS.secondaryRed};
+  }
+
+  &:focus {
+    box-shadow: 0px 0px 10px 0px ${COLORS.primary};
+  }
 `;
 
 const Icons = styled.div`
@@ -117,10 +127,19 @@ const Icons = styled.div`
 `;
 
 const Contact = styled.a`
-  cursor: pointer;
   margin-right: 16px;
 
   &:last-child {
     margin-right: 0;
+  }
+
+  &:hover {
+    path {
+      fill: ${COLORS.secondaryRed};
+    }
+  }
+
+  &:focus {
+    box-shadow: 0px 0px 10px 0px ${COLORS.primary};
   }
 `;

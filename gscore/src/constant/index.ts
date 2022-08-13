@@ -1,2 +1,1 @@
-export { Z_INDEX } from "./Z_Index";
-export { SIZE, DEVICE } from "./mediaqueries";
+export { Z_INDEX } from "./z_Index";

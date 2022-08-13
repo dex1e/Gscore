@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import { createMedia } from "@artsy/fresnel";
 import styled from "styled-components";
 
+import { COLORS } from "assets";
 import { GscoreLogoIcon, MenuIcon } from "components/icons";
-import { DEVICE } from "constant";
+import { Media } from "media";
 
-import { Media } from "../../media";
 import { Menu } from "./Menu";
 import { MenuList } from "./MenuList";
 
@@ -26,13 +25,15 @@ export const Header = () => {
       <div className="container">
         <Inner>
           <StyledGscoreLogoIcon />
+
           <Nav>
-            <Media at="mobileM">
+            <Media at="mobileS">
               <BurgerButton onClick={handleMenuCLick}>
                 <MenuIcon />
               </BurgerButton>
             </Media>
-            <Media greaterThanOrEqual="laptop">
+
+            <Media greaterThanOrEqual="tablet">
               <MenuList />
             </Media>
           </Nav>
@@ -68,9 +69,14 @@ const Nav = styled.nav`
 const BurgerButton = styled.button`
   width: 24px;
   height: 24px;
-  cursor: pointer;
-  /* margin-left: 20px; */
-  /* position: relative; */
-  /* display: flex;
-  flex-direction: column; */
+
+  &:hover {
+    path {
+      stroke: ${COLORS.secondaryRed};
+    }
+  }
+
+  &:focus {
+    box-shadow: 0px 0px 10px 0px ${COLORS.primary};
+  }
 `;

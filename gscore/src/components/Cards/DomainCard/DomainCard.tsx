@@ -2,13 +2,12 @@ import React, { FC } from "react";
 
 import styled from "styled-components";
 
-import { COLORS } from "assets";
+import { COLORS, DEVICE } from "assets";
 import { CopyIcon } from "components/icons";
-import { Checkbox, Input } from "components/ui";
+import { Button, Checkbox, Input } from "components/ui";
 import { Status, StatusVariables } from "components/ui/Status";
-import { DEVICE } from "constant";
 import { Media } from "media";
-import { IDomainCard } from "utils/mock";
+import { IDomainCard } from "types";
 
 interface domainCardProps {
   domainCard: IDomainCard;
@@ -19,13 +18,18 @@ export const DomainCard: FC<domainCardProps> = ({ domainCard }) => {
     navigator.clipboard.writeText(domainCard.licenseUrl);
   };
 
+  const status = StatusVariables.INACTIVE;
+
   return (
     <Root>
       <Header>
         <StyledCheckbox />
-        <Media at="mobileM">
+
+        <StyledMediaMobileS between={["mobileS", "laptop"]}>
           <StyledStatus status={StatusVariables.ACTIVE} />
-        </Media>
+
+          {/* {status && <Button text="Activate" variant="secondary" />} */}
+        </StyledMediaMobileS>
       </Header>
 
       <Content>
@@ -44,80 +48,69 @@ export const DomainCard: FC<domainCardProps> = ({ domainCard }) => {
           <DomainInput />
         </DomainItem>
 
-        <StatusItem>
-          <Media greaterThanOrEqual="laptop">
-            <StatusText>Status</StatusText>
-            <StyledStatus status={StatusVariables.INACTIVE} />
-          </Media>
-        </StatusItem>
+        <Media greaterThanOrEqual="laptop">
+          <StatusText>Status</StatusText>
+          <Status status={StatusVariables.ACTIVE} />
+        </Media>
       </Content>
     </Root>
   );
 };
 
 const Root = styled.div`
+  max-width: 393px;
+  width: 100%;
   background: ${COLORS.secondaryGray};
   border-radius: 12px;
   padding: 34px 20px 32px;
   display: flex;
   flex-direction: column;
   color: ${COLORS.neutral500};
-  width: 100%;
 
   @media ${DEVICE.laptop} {
+    max-width: 100%;
     flex-direction: row;
-    /* align-items: center; */
     padding: 24px 15px 31px 10px;
-
-    @media ${DEVICE.laptopL} {
-      padding: 24px 96px 31px 32px;
-    }
   }
 
-  /* @media ${DEVICE.laptopL} {
-    padding: 0;
-    flex-direction: row;
-    padding: 24px 96px 31px 32px;
-  } */
+  @media ${DEVICE.laptopL} {
+    padding: 20px 96px 20px 32px;
+  }
 `;
 
 const Header = styled.header`
   display: flex;
-  height: 28px;
-  width: 28px;
+  padding-bottom: 24px;
 
   @media ${DEVICE.laptop} {
-    padding-top: 50px;
+    padding: 50px 0 0 0;
   }
 `;
 
 const StyledCheckbox = styled(Checkbox)`
-  /* margin-right: 20px; */
+  margin-right: 20px;
 
   @media ${DEVICE.laptop} {
-    /* margin-right: 48px; */
+    margin-right: 48px;
   }
 `;
 
-const StyledStatus = styled(Status)`
-  margin-left: 20px;
+const StyledMediaMobileS = styled(Media)`
+  /* display: flex; */
+`;
 
-  @media ${DEVICE.laptop} {
-    margin: 0;
-    padding-top: 32px;
-  }
+const StyledStatus = styled(Status)`
+  /* padding-right: 63px; */
 `;
 
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 24px;
   width: 100%;
 
   @media ${DEVICE.laptop} {
     padding-top: 0;
     flex-direction: row;
-    margin-left: 48px;
   }
 `;
 
@@ -125,14 +118,14 @@ const ContentItem = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-
-  @media ${DEVICE.laptop} {
-  }
 `;
 
 const LicenseItem = styled(ContentItem)`
+  margin-bottom: 24px;
+
   @media ${DEVICE.laptop} {
     max-width: 296px;
+    margin-right: 28px;
   }
 `;
 
@@ -145,6 +138,7 @@ const Title = styled.h2`
 
 const Code = styled.div`
   position: relative;
+  max-width: 620px;
 `;
 
 const CopyButton = styled.button`
@@ -152,6 +146,16 @@ const CopyButton = styled.button`
   top: 18px;
   right: 24px;
   cursor: pointer;
+
+  &:hover {
+    path {
+      stroke: ${COLORS.secondaryRed};
+    }
+  }
+
+  &:focus {
+    box-shadow: 0px 0px 10px 0px ${COLORS.primary};
+  }
 `;
 
 const LicenseInput = styled(Input)`
@@ -165,12 +169,11 @@ const LicenseInput = styled(Input)`
 `;
 
 const DomainItem = styled(ContentItem)`
-  margin-top: 24px;
   width: 100%;
   max-width: 620px;
 
   @media ${DEVICE.laptop} {
-    margin: 0 0 0 28px;
+    margin-right: 56px;
   }
 `;
 
@@ -184,11 +187,6 @@ const DomainInput = styled(Input)`
   width: 100%;
 `;
 
-const StatusItem = styled.div`
-  margin-left: 56px;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
+const StatusText = styled.p`
+  padding-bottom: 32px;
 `;
-
-const StatusText = styled.p``;

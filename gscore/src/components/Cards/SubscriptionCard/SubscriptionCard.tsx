@@ -3,13 +3,12 @@ import { FC } from "react";
 import dayjs from "dayjs";
 import styled from "styled-components";
 
-import { COLORS } from "assets";
-import { DEVICE } from "constant";
-import { ICard } from "utils/mock";
+import { COLORS, DEVICE } from "assets";
+import { ICard } from "types";
 
-import { Button } from "../../Button";
-import { Status } from "../../Status";
-import { StatusVariables } from "../../Status";
+import { Button } from "../../ui/Button";
+import { Status } from "../../ui/Status";
+import { StatusVariables } from "../../ui/Status";
 
 interface SubscriptionCardProps {
   card: ICard;
@@ -29,7 +28,7 @@ export const SubscriptionCard: FC<SubscriptionCardProps> = ({ card }) => {
         <Description>
           <License>
             <LicenseName>{card?.licenseItem}</LicenseName>
-            <Price>{card?.price}</Price>
+            {card?.price}
           </License>
 
           <ValidEndDate>valid until {validEndDate}</ValidEndDate>
@@ -42,20 +41,20 @@ export const SubscriptionCard: FC<SubscriptionCardProps> = ({ card }) => {
 };
 
 const Root = styled.div`
-  min-width: 318px;
-  max-width: 620px;
-  width: calc(100% - 25px);
-  min-height: 268px;
-  max-height: 334px;
+  max-width: 318px;
+  width: 100%;
   box-shadow: 0px 24px 65px rgba(0, 0, 0, 0.12);
   border-radius: 12px;
   background: ${COLORS.neutral700};
   padding: 32px 0;
 
   @media ${DEVICE.laptop} {
+    max-width: 400px;
     padding: 48px 0;
-    height: 334px;
-    width: 100%;
+  }
+
+  @media ${DEVICE.laptopL} {
+    max-width: 620px;
   }
 `;
 
@@ -82,12 +81,12 @@ const SubscriptionName = styled.h2`
 const Content = styled.div`
   width: 100%;
   height: 100%;
-  padding: 24px 0 0 16px;
+  padding: 24px 50px 0 16px;
   display: flex;
   flex-direction: column;
 
   @media ${DEVICE.laptop} {
-    padding: 32px 0 0 32px;
+    padding: 32px 81px 0 32px;
   }
 `;
 
@@ -98,35 +97,28 @@ const Description = styled.div`
   font-weight: 500;
   font-size: 18px;
   line-height: 30px;
+  padding-bottom: 24px;
 
   @media ${DEVICE.laptop} {
     font-size: 24px;
     line-height: 26px;
+    padding-bottom: 32px;
   }
 `;
 
 const License = styled.div`
-  height: 30px;
   display: flex;
+  justify-content: space-between;
   color: ${COLORS.neutral100};
+  padding-bottom: 4px;
+
+  @media ${DEVICE.laptop} {
+    padding-bottom: 12px;
+  }
 `;
 
 const LicenseName = styled.span`
-  max-width: 212px;
   width: 100%;
-
-  @media ${DEVICE.laptop} {
-    max-width: 428px;
-  }
-`;
-
-const Price = styled.span`
-  /* padding-right: 50px; */
-  padding-left: 8px;
-
-  @media ${DEVICE.laptop} {
-    padding-left: 32px;
-  }
 `;
 
 const ValidEndDate = styled.span`
@@ -134,14 +126,8 @@ const ValidEndDate = styled.span`
   font-size: 16px;
   line-height: 18px;
   color: ${COLORS.neutral500};
-  padding-top: 4px;
 `;
 
 const StyledButton = styled(Button)`
   width: 120px;
-  margin-top: 24px;
-
-  @media ${DEVICE.laptop} {
-    margin-top: 32px;
-  }
 `;

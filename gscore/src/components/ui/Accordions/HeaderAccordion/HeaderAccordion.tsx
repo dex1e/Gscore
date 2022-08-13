@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 
 import {
   Accordion,
@@ -9,11 +9,10 @@ import {
 } from "react-accessible-accordion";
 import styled from "styled-components";
 
-import { COLORS } from "assets";
+import { COLORS, DEVICE } from "assets";
 import { ChevronRightIcon, LogoutIcon, SettingsIcon } from "components/icons";
-import { DEVICE } from "constant";
 
-const HeaderAccordion = () => {
+export const HeaderAccordion = () => {
   return (
     <Root allowZeroExpanded>
       <StyledAccordionItem>
@@ -27,13 +26,13 @@ const HeaderAccordion = () => {
         <StyledAccordionItemPanel>
           <Wrapper>
             <Settings href="#">
-              <Text>Settings</Text>
               <StyledSettingsIcon />
+              Settings
             </Settings>
 
             <Logout>
-              <Text>Logout</Text>
               <StyledLogoutIcon />
+              Logout
             </Logout>
           </Wrapper>
         </StyledAccordionItemPanel>
@@ -44,8 +43,9 @@ const HeaderAccordion = () => {
 
 const Root = styled(Accordion)`
   width: 100%;
+  color: ${COLORS.neutral100};
 
-  @media ${DEVICE.laptop} {
+  @media ${DEVICE.tablet} {
     padding-left: 32px;
   }
 `;
@@ -55,16 +55,13 @@ const StyledAccordionItem = styled(AccordionItem)`
   font-size: 16px;
   line-height: 18px;
 
-  @media ${DEVICE.laptop} {
+  @media ${DEVICE.tablet} {
     position: relative;
-    /* display: flex;
-    flex-direction: column; */
-    /* width: 118px; */
   }
 `;
 
 const StyledAccordionItemHeading = styled(AccordionItemHeading)`
-  @media ${DEVICE.laptop} {
+  @media ${DEVICE.tablet} {
     max-width: 70px;
   }
 `;
@@ -72,7 +69,6 @@ const StyledAccordionItemHeading = styled(AccordionItemHeading)`
 const StyledAccordionItemButton = styled(AccordionItemButton)`
   width: 100%;
   position: relative;
-  color: ${COLORS.neutral100};
 
   &[aria-expanded="true"] {
     svg {
@@ -88,17 +84,17 @@ const StyledChevronBottomIcon = styled(ChevronRightIcon)`
   top: calc(50% - 10px);
   transform: rotate(90deg);
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 
-  @media ${DEVICE.laptop} {
+  @media ${DEVICE.tablet} {
     right: 0;
   }
 `;
 
 const StyledAccordionItemPanel = styled(AccordionItemPanel)`
-  color: ${COLORS.neutral500};
   margin-top: 31px;
 
-  @media ${DEVICE.laptop} {
+  @media ${DEVICE.tablet} {
     position: absolute;
     top: 24px;
     right: 0;
@@ -112,32 +108,23 @@ const StyledAccordionItemPanel = styled(AccordionItemPanel)`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-
-  @media ${DEVICE.laptop} {
-  }
 `;
 
 const Settings = styled.a`
-  margin-bottom: 24px;
-  position: relative;
+  padding-bottom: 24px;
+  display: flex;
+  align-items: center;
 `;
 
 const StyledSettingsIcon = styled(SettingsIcon)`
-  position: absolute;
-  left: 0;
+  margin-right: 8px;
 `;
 
 const Logout = styled.button`
-  position: relative;
-`;
-
-const Text = styled.span`
-  padding-left: 28px;
+  display: flex;
+  align-items: center;
 `;
 
 const StyledLogoutIcon = styled(LogoutIcon)`
-  position: absolute;
-  left: 0;
+  margin-right: 8px;
 `;
-
-export default HeaderAccordion;

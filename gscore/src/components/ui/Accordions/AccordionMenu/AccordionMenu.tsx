@@ -12,7 +12,7 @@ import styled from "styled-components";
 import { COLORS } from "assets";
 import { ChevronRightIcon } from "components/icons";
 
-const AccordionMenu = () => {
+export const AccordionMenu = () => {
   return (
     <Root allowZeroExpanded>
       <StyledAccordionItem
@@ -25,6 +25,7 @@ const AccordionMenu = () => {
             <StyledChevronRightIcon />
           </StyledAccordionItemButton>
         </AccordionItemHeading>
+
         <StyledAccordionItemPanel>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit id venenatis
           pretium risus euismod dictum egestas orci netus feugiat ut egestas ut
@@ -42,7 +43,6 @@ const Root = styled(Accordion)`
   .accordion__item {
     display: flex;
     flex-direction: column;
-    gap: 16px;
     border-radius: 12px;
     background: ${COLORS.secondaryGray};
     padding: 48px 60px;
@@ -58,7 +58,6 @@ const Root = styled(Accordion)`
 const StyledAccordionItem = styled(AccordionItem)`
   display: flex;
   flex-direction: column;
-  gap: 16px;
   border-radius: 12px;
 `;
 
@@ -88,6 +87,5 @@ const StyledAccordionItemPanel = styled(AccordionItemPanel)`
   font-size: 18px;
   line-height: 30px;
   color: ${COLORS.neutral300};
+  padding-top: 16px;
 `;
-
-export default AccordionMenu;

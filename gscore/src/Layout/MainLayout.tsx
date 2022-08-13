@@ -2,8 +2,7 @@ import { FC, ReactNode } from "react";
 
 import styled from "styled-components";
 
-import { Footer } from "components/Footer";
-import { Header } from "components/Header";
+import { Footer, Header } from "components";
 
 interface MainLayotProps {
   children: ReactNode;

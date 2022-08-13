@@ -2,10 +2,8 @@ import React from "react";
 
 import styled from "styled-components";
 
-import { COLORS } from "assets";
-import HeaderAccordion from "components/ui/HeaderAccordion";
-import { DEVICE } from "constant";
-import { Divider } from "utils";
+import { COLORS, DEVICE } from "assets";
+import { Divider, HeaderAccordion } from "components/ui";
 
 export const MenuList = () => {
   return (
@@ -20,11 +18,11 @@ export const MenuList = () => {
 
 const Root = styled.div`
   width: 100%;
-  margin: 48px 0 0 0;
+  padding: 48px 0 0 0;
 
-  @media ${DEVICE.laptop} {
+  @media ${DEVICE.tablet} {
     display: flex;
-    margin: 0;
+    padding: 0;
   }
 `;
 
@@ -34,7 +32,15 @@ const MySubscriptions = styled.a`
   font-size: 16px;
   line-height: 18px;
 
-  @media ${DEVICE.laptop} {
+  &:hover {
+    color: ${COLORS.secondaryRed};
+  }
+
+  &:focus {
+    box-shadow: 0px 0px 10px 0px ${COLORS.primary};
+  }
+
+  @media ${DEVICE.tablet} {
     width: 153px;
     height: fit-content;
     white-space: nowrap;
@@ -48,13 +54,7 @@ const StyledDivider = styled(Divider)`
     margin-bottom: 0;
   }
 
-  @media ${DEVICE.laptop} {
+  @media ${DEVICE.tablet} {
     display: none;
   }
 `;
-
-// const StyledHeaderAccordion = styled(HeaderAccordion)`
-//   @media ${DEVICE.laptop} {
-//     padding-left: 32px;
-//   }
-// `;
