@@ -20,7 +20,7 @@ export const SubscriptionCard: FC<SubscriptionCardProps> = ({ card }) => {
     <Root>
       <Header>
         <SubscriptionName>{card?.title}</SubscriptionName>
-        <Status status={EStatus.ACTIVE} />
+        <Status status={EStatus?.ACTIVE} />
       </Header>
 
       <Content>
