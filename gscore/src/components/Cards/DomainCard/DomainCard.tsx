@@ -20,13 +20,18 @@ export const DomainCard: FC<domainCardProps> = ({ domainCard }) => {
 
   const status = StatusVariables.INACTIVE;
 
+  const isStatusInactive = domainCard.status === StatusVariables.INACTIVE;
+
   return (
     <Root>
       <Header>
         <StyledCheckbox />
 
         <StyledMediaMobileS between={["mobileS", "laptop"]}>
-          <StyledStatus status={StatusVariables.ACTIVE} />
+          <StyledStatus
+            status={domainCard.status}
+            $isStatusInactive={isStatusInactive}
+          />
 
           {/* {status && <Button text="Activate" variant="secondary" />} */}
         </StyledMediaMobileS>
@@ -50,7 +55,7 @@ export const DomainCard: FC<domainCardProps> = ({ domainCard }) => {
 
         <Media greaterThanOrEqual="laptop">
           <StatusText>Status</StatusText>
-          <Status status={StatusVariables.ACTIVE} />
+          <Status status={domainCard.status} />
         </Media>
       </Content>
     </Root>
@@ -99,7 +104,7 @@ const StyledMediaMobileS = styled(Media)`
   /* display: flex; */
 `;
 
-const StyledStatus = styled(Status)`
+const StyledStatus = styled(Status)<{ $isStatusInactive?: boolean }>`
   /* padding-right: 63px; */
 `;
 

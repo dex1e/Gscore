@@ -1,3 +1,4 @@
+import { StatusVariables } from "components/ui/Status";
 import { ICard, IDomainCard } from "types";
 
 export const card: ICard = {
@@ -12,4 +13,5 @@ export const domainCard: IDomainCard = {
   domainTitle: "Domain",
   licenseUrl: "sl=ru&tl=en&texte=%D0sfsfsfsf%D0sfsfsfsf%D0sfsfsfsfsfs",
   domainUrl: "https://translate.google.com/?=SAASSAASAS",
+  status: StatusVariables.INACTIVE,
 };

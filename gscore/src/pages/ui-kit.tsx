@@ -45,21 +45,21 @@ const UiKitPage = () => {
       <GapTabs>
         <SettingsTabs />
         <RegisterTabs />
-      </GapTabs>
+      </GapTabs> */}
 
       <GapCards>
-        <SubscriptionCard card={card} />
+        {/* <SubscriptionCard card={card} /> */}
         <DomainCard domainCard={domainCard} />
       </GapCards>
 
-      <GapPlan>
+      {/* <GapPlan>
         <PlanCard />
         <PlanCard isActive />
-      </GapPlan> */}
+      </GapPlan>
 
       <Wrapper>
         <AccordionMenu />
-      </Wrapper>
+      </Wrapper> */}
     </Root>
   );
 };
