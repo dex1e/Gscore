@@ -8,11 +8,12 @@ import { Button } from "components/ui";
 
 interface PlanCardProps {
   isActive?: boolean;
+  className?: string;
 }
 
-export const PlanCard: FC<PlanCardProps> = ({ isActive }) => {
+export const PlanCard: FC<PlanCardProps> = ({ isActive, className }) => {
   return (
-    <Root $isActive={isActive}>
+    <Root $isActive={isActive} className={className}>
       <Info $isActive={isActive}>
         <Price>$77</Price>
         <LicenseName>Single site license</LicenseName>

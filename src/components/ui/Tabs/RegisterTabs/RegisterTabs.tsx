@@ -1,12 +1,18 @@
+import { FC } from "react";
+
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 
 import { COLORS } from "assets";
 
-export const RegisterTabs = () => {
+interface RegisterTabsProps {
+  className?: string;
+}
+
+export const RegisterTabs: FC<RegisterTabsProps> = ({ className }) => {
   return (
-    <StyledTabs selectedTabClassName="is-tab-selected">
+    <StyledTabs selectedTabClassName="is-tab-selected" className={className}>
       <StyledTabList>
         <StyledTab>Create account</StyledTab>
         <StyledTab>Log in</StyledTab>
