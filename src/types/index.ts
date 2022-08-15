@@ -24,3 +24,5 @@ export interface IStatuses {
   label: string;
   color: string;
 }
+
+export type EventOnClickOutside = MouseEvent | TouchEvent;

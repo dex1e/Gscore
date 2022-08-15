@@ -7,14 +7,12 @@ import {
   LinkedinIcon,
   TwitterIcon,
 } from "components/icons";
-import { Divider } from "components/ui";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
     <Root>
-      <Divider />
       <div className="container">
         <Inner>
           <Content>
@@ -24,13 +22,12 @@ export const Footer = () => {
             </Text>
           </Content>
 
-          <Divider />
-
           <Copyright>
             <CopyrightText>
-              Copyright &copy; {currentYear} GScore | All Rights Reserved
-              |&nbsp;
-              <Info href="#">Cookies</Info>&nbsp;|&nbsp;
+              Copyright &copy; {currentYear} GScore | All Rights Reserved |
+              <> </>
+              <Info href="#">Cookies</Info>
+              <> </>|<> </>
               <Info href="#">Privacy Policy</Info>
             </CopyrightText>
 
@@ -57,6 +54,7 @@ export const Footer = () => {
 const Root = styled.div`
   position: relative;
   padding-bottom: 24px;
+  border-top: 1px solid ${COLORS.neutral700};
 
   @media ${DEVICE.laptop} {
     padding-bottom: 42px;
@@ -69,8 +67,10 @@ const Inner = styled.div`
   font-size: 18px;
   line-height: 30px;
 `;
+
 const Content = styled.div`
   padding: 40px 0;
+  border-bottom: 1px solid ${COLORS.neutral700};
 `;
 
 const StyledGscoreLogoIcon = styled(GscoreLogoIcon)`

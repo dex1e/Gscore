@@ -37,7 +37,7 @@ const Root = styled.label`
 
 const CheckboxInput = styled.input`
   position: absolute;
-  appearance: none;
+  visibility: hidden;
 `;
 
 const Check = styled.span<{ $isDisabled?: boolean; $isChecked?: boolean }>`

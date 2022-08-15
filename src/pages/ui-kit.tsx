@@ -15,7 +15,7 @@ import { card, domainCard } from "utils";
 const UiKitPage = () => {
   return (
     <Root>
-      <Gap>
+      {/* <Gap>
         <Button variant="primary" text="Default" />
         <Button variant="primary" text="Default" isDisabled />
         <Button variant="secondary" text="Default" />
@@ -27,21 +27,21 @@ const UiKitPage = () => {
           <Button variant="secondary" isLoading />
           <Button variant="text" isLoading />
         </Gap>
-      </Gap>
+      </Gap> */}
 
-      <Gap>
+      {/* <Gap>
         <Input placeholder="Placeholder" />
         <Input placeholder="Placeholder" isDisabled />
         <Input placeholder="Placeholder" isSuccess />
         <Input placeholder="Placeholder" error="Error text" />
-      </Gap>
+      </Gap> */}
 
-      <Gap>
+      {/* <Gap>
         <Checkbox />
         <Checkbox isDisabled />
-      </Gap>
+      </Gap> */}
 
-      <GapTabs>
+      {/* <GapTabs>
         <SettingsTabs />
         <RegisterTabs />
       </GapTabs>
@@ -49,16 +49,16 @@ const UiKitPage = () => {
       <GapCards>
         <SubscriptionCard card={card} />
         <DomainCard domainCard={domainCard} />
-      </GapCards>
+      </GapCards> */}
 
       <GapPlan>
         <PlanCard />
-        <PlanCard isActive />
+        {/* <PlanCard isActive /> */}
       </GapPlan>
 
-      <Wrapper>
+      {/* <Wrapper>
         <AccordionMenu />
-      </Wrapper>
+      </Wrapper> */}
     </Root>
   );
 };

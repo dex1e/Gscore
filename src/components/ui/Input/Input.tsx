@@ -95,7 +95,8 @@ const StyledInput = styled.input<{
 
 const StyledSuccessIcon = styled(CheckIcon)`
   position: absolute;
-  top: calc(50% - 10px);
+  top: 50%;
+  transform: translateY(-50%);
   right: 25px;
 
   path {

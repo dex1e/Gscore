@@ -31,6 +31,7 @@ export const Header = () => {
               <BurgerButton onClick={handleOpenMenu}>
                 <MenuIcon />
               </BurgerButton>
+              <Menu isMenuOpen={isMenuOpen} onCloseMenu={handleCloseMenu} />
             </Media>
 
             <Media greaterThanOrEqual="tablet">
@@ -38,7 +39,6 @@ export const Header = () => {
             </Media>
           </Nav>
         </Inner>
-        <Menu isMenuOpen={isMenuOpen} onCloseMenu={handleCloseMenu} />
       </div>
     </Root>
   );

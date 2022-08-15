@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC, useRef, useState } from "react";
 
 import {
   Accordion,
@@ -10,49 +10,62 @@ import {
 import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
-import {
-  ChevronDownIcon,
-  ChevronRightIcon,
-  LogoutIcon,
-  SettingsIcon,
-} from "components/icons";
+import { ChevronDownIcon, LogoutIcon, SettingsIcon } from "components/icons";
+import { useOnClickOutside } from "hooks";
 
-export const HeaderAccordion = () => {
+interface HeaderAccordionProps {
+  className?: string;
+}
+
+export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
+  const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
+
+  const handleAreaExpanded = () => {
+    setIsAccordionExpanded(false);
+  };
+
+  const handleCLoseAccordion = () => {
+    setIsAccordionExpanded((prevState) => !prevState);
+  };
+
+  const clickOutsideRef = useRef<HTMLDivElement>(null);
+
+  useOnClickOutside(clickOutsideRef, handleAreaExpanded);
+
   return (
-    <Root allowZeroExpanded>
-      <StyledAccordionItem>
-        <StyledAccordionItemHeading>
-          <StyledAccordionItemButton>
-            Alex
-            <StyledChevronDownIcon />
-          </StyledAccordionItemButton>
-        </StyledAccordionItemHeading>
+    <Root ref={clickOutsideRef} onClick={handleCLoseAccordion}>
+      <Accordion className={className}>
+        <StyledAccordionItem dangerouslySetExpanded={isAccordionExpanded}>
+          <AccordionItemHeading>
+            <StyledAccordionItemButton>
+              <Username>Alex</Username>
+              <StyledChevronDownIcon />
+            </StyledAccordionItemButton>
+          </AccordionItemHeading>
 
-        <StyledAccordionItemPanel>
-          <Wrapper>
-            <Settings href="#">
-              <StyledSettingsIcon />
-              Settings
-            </Settings>
+          <StyledAccordionItemPanel>
+            <Wrapper>
+              <Settings href="#">
+                <StyledSettingsIcon />
+                Settings
+              </Settings>
 
-            <Logout>
-              <StyledLogoutIcon />
-              Logout
-            </Logout>
-          </Wrapper>
-        </StyledAccordionItemPanel>
-      </StyledAccordionItem>
+              <Logout>
+                <StyledLogoutIcon />
+                Logout
+              </Logout>
+            </Wrapper>
+          </StyledAccordionItemPanel>
+        </StyledAccordionItem>
+      </Accordion>
     </Root>
   );
 };
 
-const Root = styled(Accordion)`
+const Root = styled.div`
   width: 100%;
   color: ${COLORS.neutral100};
-
-  @media ${DEVICE.tablet} {
-    padding-left: 32px;
-  }
+  cursor: pointer;
 `;
 
 const StyledAccordionItem = styled(AccordionItem)`
@@ -65,30 +78,30 @@ const StyledAccordionItem = styled(AccordionItem)`
   }
 `;
 
-const StyledAccordionItemHeading = styled(AccordionItemHeading)`
-  @media ${DEVICE.tablet} {
-    max-width: 70px;
-  }
-`;
-
 const StyledAccordionItemButton = styled(AccordionItemButton)`
   width: 100%;
-  position: relative;
+  display: flex;
+  justify-content: space-between;
 
   &[aria-expanded="true"] {
     svg {
       transform: rotate(180deg);
       transition: all 0.3s ease-in-out;
-      /* transform: translateY(50%); */
     }
+  }
+
+  @media ${DEVICE.tablet} {
+    display: block;
+  }
+`;
+
+const Username = styled.span`
+  @media ${DEVICE.tablet} {
+    padding-right: 7px;
   }
 `;
 
 const StyledChevronDownIcon = styled(ChevronDownIcon)`
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 

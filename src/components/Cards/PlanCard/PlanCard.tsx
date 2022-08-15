@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
 import { ListCheckIcon } from "components/icons";
-import { Button, Divider } from "components/ui";
+import { Button } from "components/ui";
 
 interface PlanCardProps {
   isActive?: boolean;
@@ -13,7 +13,7 @@ interface PlanCardProps {
 export const PlanCard: FC<PlanCardProps> = ({ isActive }) => {
   return (
     <Root $isActive={isActive}>
-      <Info>
+      <Info $isActive={isActive}>
         <Price>$77</Price>
         <LicenseName>Single site license</LicenseName>
         <Description $isActive={isActive}>
@@ -21,8 +21,6 @@ export const PlanCard: FC<PlanCardProps> = ({ isActive }) => {
           keywords at one low annual price
         </Description>
       </Info>
-
-      <StyledDivider $isActive={isActive} />
 
       <FeaturesList>
         <ListItem>
@@ -82,14 +80,23 @@ const Root = styled.div<{ $isActive?: boolean }>`
   }
 `;
 
-const Info = styled.div`
+const Info = styled.div<{ $isActive?: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   font-weight: 600;
+  border-bottom: 1px solid ${COLORS.neutral500};
+  margin-bottom: 20px;
+
+  ${({ $isActive }) =>
+    $isActive &&
+    css`
+      border-bottom: 1px solid ${COLORS.neutral100};
+    `}
 
   @media ${DEVICE.laptop} {
     font-weight: 700;
+    margin-bottom: 38px;
   }
 `;
 
@@ -131,21 +138,6 @@ const Description = styled.p<{ $isActive?: boolean }>`
     font-size: 18px;
     line-height: 30px;
     padding-bottom: 40px;
-  }
-`;
-
-const StyledDivider = styled(Divider)<{ $isActive?: boolean }>`
-  margin-bottom: 18px;
-  background: ${COLORS.neutral500};
-
-  ${({ $isActive }) =>
-    $isActive &&
-    css`
-      background: ${COLORS.neutral100};
-    `}
-
-  @media ${DEVICE.laptop} {
-    margin-bottom: 38px;
   }
 `;
 

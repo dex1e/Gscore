@@ -38,7 +38,7 @@ const Root = styled.div<{ $isMenuOpen: boolean }>`
   width: 260px;
   min-height: calc(100% + 20px);
   position: fixed;
-  top: -20px;
+  top: 0;
   right: -260px;
   background: ${COLORS.secondaryGray};
   transform: translateX(0);

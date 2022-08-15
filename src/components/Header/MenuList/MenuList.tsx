@@ -3,15 +3,16 @@ import React from "react";
 import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
-import { Divider, HeaderAccordion } from "components/ui";
+import { HeaderAccordion } from "components/ui";
 
 export const MenuList = () => {
   return (
     <Root>
-      <MySubscriptions href="#">My subscriptions</MySubscriptions>
-      <StyledDivider />
-      <HeaderAccordion />
-      <StyledDivider />
+      <MySubscriptionsWrapper>
+        <MySubscriptions href="#">My subscriptions</MySubscriptions>
+      </MySubscriptionsWrapper>
+
+      <StyledHeaderAccordion />
     </Root>
   );
 };
@@ -23,6 +24,17 @@ const Root = styled.div`
   @media ${DEVICE.tablet} {
     display: flex;
     padding: 0;
+  }
+`;
+
+const MySubscriptionsWrapper = styled.div`
+  padding-bottom: 20px;
+  border-bottom: 1px solid ${COLORS.neutral700};
+
+  @media ${DEVICE.tablet} {
+    border: none;
+    padding: 0;
+    padding-right: 32px;
   }
 `;
 
@@ -47,14 +59,12 @@ const MySubscriptions = styled.a`
   }
 `;
 
-const StyledDivider = styled(Divider)`
-  margin: 20px 0;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
+const StyledHeaderAccordion = styled(HeaderAccordion)`
+  border-bottom: 1px solid ${COLORS.neutral700};
+  padding: 20px 0;
 
   @media ${DEVICE.tablet} {
-    display: none;
+    border: none;
+    padding: 0;
   }
 `;

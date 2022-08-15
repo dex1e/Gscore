@@ -1,5 +1,4 @@
 export { HeaderAccordion, AccordionMenu } from "./Accordions";
-export { Divider } from "./Divider";
 export { Checkbox } from "./Checkbox";
 export { Input } from "./Input";
 export { Button } from "./Button";
