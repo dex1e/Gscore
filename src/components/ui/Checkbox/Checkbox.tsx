@@ -7,14 +7,19 @@ import { CheckIcon } from "components/icons";
 
 interface CheckboxProps {
   className?: string;
+  text?: string;
   isDisabled?: boolean;
 }
 
-export const Checkbox: FC<CheckboxProps> = ({ className, isDisabled }) => {
+export const Checkbox: FC<CheckboxProps> = ({
+  className,
+  isDisabled,
+  text,
+}) => {
   const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <Root className={className}>
+    <Root className={className} $isDisabled={isDisabled}>
       <CheckboxInput
         type="checkbox"
         disabled={isDisabled}
@@ -22,17 +27,29 @@ export const Checkbox: FC<CheckboxProps> = ({ className, isDisabled }) => {
           setIsChecked((prevState) => !prevState);
         }}
       />
-
       <Check $isDisabled={isDisabled} $isChecked={isChecked}>
         {isChecked && <StyledCheckIcon />}
       </Check>
+
+      {text && <Text>{text}</Text>}
     </Root>
   );
 };
 
-const Root = styled.label`
-  width: 28px;
-  height: 28px;
+const Root = styled.label<{ $isDisabled?: boolean }>`
+  display: flex;
+  align-items: center;
+  max-width: fit-content;
+
+  &:hover {
+    cursor: pointer;
+
+    ${({ $isDisabled }) =>
+      $isDisabled &&
+      css`
+        cursor: default;
+      `}
+  }
 `;
 
 const CheckboxInput = styled.input`
@@ -99,4 +116,12 @@ const Check = styled.span<{ $isDisabled?: boolean; $isChecked?: boolean }>`
 const StyledCheckIcon = styled(CheckIcon)`
   width: 16px;
   height: 12px;
+`;
+
+const Text = styled.span`
+  color: ${COLORS.neutral100};
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  padding-left: 10px;
 `;

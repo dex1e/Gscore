@@ -6,7 +6,7 @@ import { COLORS } from "assets";
 
 export const RegisterTabs = () => {
   return (
-    <StyledTabs selectedTabClassName=" is-tab-selected">
+    <StyledTabs selectedTabClassName="is-tab-selected">
       <StyledTabList>
         <StyledTab>Create account</StyledTab>
         <StyledTab>Log in</StyledTab>
@@ -36,6 +36,7 @@ const StyledTab = styled(Tab)`
   cursor: pointer;
   position: relative;
   margin-right: 16px;
+  padding-bottom: 20px;
 
   &:last-child {
     margin-right: 0;
@@ -44,7 +45,7 @@ const StyledTab = styled(Tab)`
   &::after {
     content: "";
     position: absolute;
-    bottom: -20px;
+    bottom: 0;
     left: 0;
     width: 100%;
     border-bottom: 8px solid ${COLORS.neutral600};
@@ -55,7 +56,7 @@ const StyledTab = styled(Tab)`
     &::after {
       content: "";
       position: absolute;
-      bottom: -20px;
+      bottom: 0;
       left: 0;
       width: 100%;
       border-bottom: 8px solid ${COLORS.primary};

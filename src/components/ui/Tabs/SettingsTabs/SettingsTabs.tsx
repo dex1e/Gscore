@@ -32,7 +32,7 @@ const StyledTabs = styled(Tabs)`
   &::after {
     content: "";
     position: absolute;
-    bottom: -12px;
+    bottom: 0;
     left: 0;
     width: 100%;
     border-bottom: 2px solid ${COLORS.neutral700};
@@ -48,7 +48,7 @@ const StyledTab = styled(Tab)`
   cursor: pointer;
   position: relative;
   text-align: center;
-  padding: 0 24px;
+  padding: 0 24px 12px;
 
   &.isSelected {
     color: ${COLORS.primary};
@@ -56,7 +56,7 @@ const StyledTab = styled(Tab)`
     &::after {
       content: "";
       position: absolute;
-      bottom: -12px;
+      bottom: 0;
       left: 0;
       width: 100%;
       border-bottom: 2px solid ${COLORS.primary};

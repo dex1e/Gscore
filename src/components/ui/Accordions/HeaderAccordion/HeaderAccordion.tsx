@@ -20,20 +20,20 @@ interface HeaderAccordionProps {
 export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
   const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
 
-  const handleAreaExpanded = () => {
+  const handleAccordionExpanded = () => {
     setIsAccordionExpanded(false);
   };
 
-  const handleCLoseAccordion = () => {
+  const handleAccordionClick = () => {
     setIsAccordionExpanded((prevState) => !prevState);
   };
 
   const clickOutsideRef = useRef<HTMLDivElement>(null);
 
-  useOnClickOutside(clickOutsideRef, handleAreaExpanded);
+  useOnClickOutside(clickOutsideRef, handleAccordionExpanded);
 
   return (
-    <Root ref={clickOutsideRef} onClick={handleCLoseAccordion}>
+    <Root ref={clickOutsideRef} onClick={handleAccordionClick}>
       <Accordion className={className}>
         <StyledAccordionItem dangerouslySetExpanded={isAccordionExpanded}>
           <AccordionItemHeading>
@@ -83,6 +83,17 @@ const StyledAccordionItemButton = styled(AccordionItemButton)`
   display: flex;
   justify-content: space-between;
 
+  &:hover {
+    path {
+      stroke: ${COLORS.secondaryRed};
+    }
+    color: ${COLORS.secondaryRed};
+  }
+
+  &:focus {
+    box-shadow: 0px 0px 10px 0px ${COLORS.primary};
+  }
+
   &[aria-expanded="true"] {
     svg {
       transform: rotate(180deg);
@@ -130,9 +141,20 @@ const Wrapper = styled.div`
 `;
 
 const Settings = styled.a`
-  padding-bottom: 24px;
+  margin-bottom: 24px;
   display: flex;
   align-items: center;
+
+  &:hover {
+    path {
+      stroke: ${COLORS.secondaryRed};
+    }
+    color: ${COLORS.secondaryRed};
+  }
+
+  &:focus {
+    box-shadow: 0px 0px 10px 0px ${COLORS.primary};
+  }
 `;
 
 const StyledSettingsIcon = styled(SettingsIcon)`
@@ -142,6 +164,17 @@ const StyledSettingsIcon = styled(SettingsIcon)`
 const Logout = styled.button`
   display: flex;
   align-items: center;
+
+  &:hover {
+    path {
+      stroke: ${COLORS.secondaryRed};
+    }
+    color: ${COLORS.secondaryRed};
+  }
+
+  &:focus {
+    box-shadow: 0px 0px 10px 0px ${COLORS.primary};
+  }
 `;
 
 const StyledLogoutIcon = styled(LogoutIcon)`
