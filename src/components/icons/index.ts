@@ -1,3 +1,4 @@
+export { ShopBasketIcon } from "./ShopBasketIcon";
 export { ChevronDownIcon } from "./ChevronDownIcon";
 export { LogoutIcon } from "./LogoutIcon";
 export { SettingsIcon } from "./SettingsIcon";
