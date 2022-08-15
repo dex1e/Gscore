@@ -22,7 +22,7 @@ export const Input: FC<InputProps> = ({
   const hasError = Boolean(error);
 
   return (
-    <Root>
+    <Root className={className}>
       <StyledInput
         className={className}
         disabled={isDisabled}
