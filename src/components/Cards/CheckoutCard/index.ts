@@ -1,1 +1,0 @@
-export { CheckoutCard } from "./CheckoutCard";

@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { DEVICE } from "assets";
-import { CheckoutCard } from "components";
+import { PackageCard } from "components";
 import { Button, RegisterTabs } from "components/ui";
 import { ContentLayout, MainLayout } from "Layout";
 
@@ -14,7 +14,7 @@ const CheckoutPage = () => {
         <StyledRegisterTabs />
         <Title>Checkout</Title>
 
-        <StyledCheckoutCard />
+        <StyledPackageCard />
 
         <Total>
           <Text>Total:</Text>
@@ -52,7 +52,7 @@ const Title = styled.h1`
   }
 `;
 
-const StyledCheckoutCard = styled(CheckoutCard)`
+const StyledPackageCard = styled(PackageCard)`
   @media ${DEVICE.laptop} {
     margin-bottom: 24px;
   }

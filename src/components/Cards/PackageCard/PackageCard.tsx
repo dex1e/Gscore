@@ -9,7 +9,7 @@ interface CheckoutCardProps {
   className?: string;
 }
 
-export const CheckoutCard: FC<CheckoutCardProps> = ({ className }) => {
+export const PackageCard: FC<CheckoutCardProps> = ({ className }) => {
   return (
     <Root className={className}>
       <Header>
