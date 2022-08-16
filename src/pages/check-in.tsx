@@ -40,20 +40,20 @@ const Root = styled(MainLayout)`
 `;
 
 const Container = styled(ContentLayout)`
-  @media ${DEVICE.laptop} {
+  @media ${DEVICE.tablet} {
     padding-bottom: 228px;
   }
 `;
 
 const StyledRegisterTabs = styled(RegisterTabs)`
-  @media ${DEVICE.laptop} {
+  @media ${DEVICE.tablet} {
     padding-bottom: 64px;
     text-align: start;
   }
 `;
 
 const Title = styled.h1`
-  @media ${DEVICE.laptop} {
+  @media ${DEVICE.tablet} {
     font-weight: 700;
     font-size: 44px;
     line-height: 54px;
@@ -62,7 +62,7 @@ const Title = styled.h1`
 `;
 
 const Text = styled.p`
-  @media ${DEVICE.laptop} {
+  @media ${DEVICE.tablet} {
     padding-bottom: 32px;
     font-weight: 400;
     font-size: 14px;
@@ -71,13 +71,13 @@ const Text = styled.p`
 `;
 
 const InputWrapper = styled.div`
-  @media ${DEVICE.laptop} {
+  @media ${DEVICE.tablet} {
     padding-bottom: 48px;
   }
 `;
 
 const StyledInput = styled(Input)`
-  @media ${DEVICE.laptop} {
+  @media ${DEVICE.tablet} {
     margin-bottom: 24px;
 
     &:last-child {
@@ -87,7 +87,7 @@ const StyledInput = styled(Input)`
 `;
 
 const StyledButton = styled(Button)`
-  @media ${DEVICE.laptop} {
+  @media ${DEVICE.tablet} {
     max-width: 200px;
     width: 100%;
     margin-bottom: 48px;
@@ -95,7 +95,7 @@ const StyledButton = styled(Button)`
 `;
 
 const Login = styled.div`
-  @media ${DEVICE.laptop} {
+  @media ${DEVICE.tablet} {
     display: flex;
     font-weight: 400;
     font-size: 16px;
@@ -104,7 +104,7 @@ const Login = styled.div`
 `;
 
 const LoginText = styled.p`
-  @media ${DEVICE.laptop} {
+  @media ${DEVICE.tablet} {
     font-weight: 400;
     font-size: 16px;
     line-height: 18px;
@@ -113,7 +113,7 @@ const LoginText = styled.p`
 `;
 
 const NextStep = styled.a`
-  @media ${DEVICE.laptop} {
+  @media ${DEVICE.tablet} {
     color: ${COLORS.primary};
   }
 `;
