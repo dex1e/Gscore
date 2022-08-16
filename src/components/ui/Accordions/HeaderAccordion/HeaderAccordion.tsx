@@ -39,6 +39,7 @@ export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
           <AccordionItemHeading>
             <StyledAccordionItemButton>
               <Username>Alex</Username>
+
               <StyledChevronDownIcon />
             </StyledAccordionItemButton>
           </AccordionItemHeading>
@@ -109,6 +110,8 @@ const StyledAccordionItemButton = styled(AccordionItemButton)`
 const Username = styled.span`
   @media ${DEVICE.tablet} {
     padding-right: 7px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 `;
 
