@@ -36,10 +36,10 @@ const UiKitPage = () => {
         <Input placeholder="Placeholder" error="Error text" />
       </Gap> */}
 
-      {/* <Gap>
+      <Gap>
         <Checkbox />
         <Checkbox isDisabled />
-      </Gap> */}
+      </Gap>
 
       {/* <GapTabs>
         <SettingsTabs />

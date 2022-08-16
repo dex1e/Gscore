@@ -33,18 +33,19 @@ export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
   useOnClickOutside(clickOutsideRef, handleAccordionExpanded);
 
   return (
-    <Root ref={clickOutsideRef} onClick={handleAccordionClick}>
+    <Root onClick={handleAccordionClick}>
       <Accordion className={className}>
         <StyledAccordionItem dangerouslySetExpanded={isAccordionExpanded}>
           <AccordionItemHeading>
             <StyledAccordionItemButton>
               <Username>Alex</Username>
+
               <StyledChevronDownIcon />
             </StyledAccordionItemButton>
           </AccordionItemHeading>
 
           <StyledAccordionItemPanel>
-            <Wrapper>
+            <Wrapper ref={clickOutsideRef}>
               <Settings href="#">
                 <StyledSettingsIcon />
                 Settings
