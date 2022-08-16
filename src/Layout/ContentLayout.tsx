@@ -20,6 +20,8 @@ const Root = styled.div`
   overflow: hidden;
   height: 100%;
   max-width: 620px;
-  margin: 72px 315.5px 0;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 72px;
   color: ${COLORS.neutral100};
 `;

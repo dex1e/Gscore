@@ -41,7 +41,7 @@ const Root = styled(MainLayout)`
 
 const Container = styled(ContentLayout)`
   @media ${DEVICE.laptop} {
-    margin-bottom: 228px;
+    padding-bottom: 228px;
   }
 `;
 
