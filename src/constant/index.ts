@@ -1,1 +1,1 @@
-export { Z_INDEX } from "./z_Index";
+export { Z_INDEX } from "./z-index";

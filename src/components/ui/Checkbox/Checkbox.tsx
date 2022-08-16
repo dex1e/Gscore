@@ -73,8 +73,7 @@ const Check = styled.span<{ $isDisabled?: boolean; $isChecked?: boolean }>`
   }
 
   &:focus {
-    /* outline: 4px solid rgba(199, 199, 199, 0.3); */
-    box-shadow: 0px 0px 15px rgba(199, 199, 199, 0.3);
+    box-shadow: 0px 0px 0px 4px rgba(199, 199, 199, 0.3);
   }
 
   ${({ $isChecked }) =>
@@ -88,7 +87,7 @@ const Check = styled.span<{ $isDisabled?: boolean; $isChecked?: boolean }>`
       }
 
       &:focus {
-        outline: 4px solid rgba(252, 88, 66, 0.3);
+        box-shadow: 0px 0px 0px 4px rgba(252, 88, 66, 0.3);
       }
     `}
 

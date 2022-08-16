@@ -33,7 +33,7 @@ export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
   useOnClickOutside(clickOutsideRef, handleAccordionExpanded);
 
   return (
-    <Root onClick={handleAccordionClick}>
+    <Root ref={clickOutsideRef} onClick={handleAccordionClick}>
       <Accordion className={className}>
         <StyledAccordionItem dangerouslySetExpanded={isAccordionExpanded}>
           <AccordionItemHeading>
@@ -45,7 +45,7 @@ export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
           </AccordionItemHeading>
 
           <StyledAccordionItemPanel>
-            <Wrapper ref={clickOutsideRef}>
+            <Wrapper>
               <Settings href="#">
                 <StyledSettingsIcon />
                 Settings
@@ -110,6 +110,8 @@ const StyledAccordionItemButton = styled(AccordionItemButton)`
 const Username = styled.span`
   @media ${DEVICE.tablet} {
     padding-right: 7px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 `;
 
