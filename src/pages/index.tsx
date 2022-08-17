@@ -4,15 +4,20 @@ import styled from "styled-components";
 import { COLORS, DEVICE } from "assets";
 import { PlanCard } from "components";
 import { MainLayout } from "Layout";
+import apiService from "services";
 
-const Home: NextPage = () => {
+const Home: NextPage = ({ data }: any) => {
   return (
     <Root>
       <Title>Get started with Gscore today</Title>
       <PlanCards>
-        <StyledPlanCard />
+        {/* <StyledPlanCard />
         <StyledPlanCard isActive />
-        <StyledPlanCard />
+        <StyledPlanCard /> */}
+
+        {data.map((product: any) => (
+          <StyledPlanCard key={product.id} product={product} />
+        ))}
       </PlanCards>
 
       <Offer>
@@ -22,6 +27,19 @@ const Home: NextPage = () => {
     </Root>
   );
 };
+
+export async function getStaticProps() {
+  const res = await apiService.getProducts();
+
+  const data = res.data;
+
+  return {
+    props: {
+      data,
+    },
+  };
+}
+
 const Root = styled(MainLayout)`
   position: relative;
 `;

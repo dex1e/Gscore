@@ -1,12 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 
 import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
 import { Button, Input, RegisterTabs } from "components/ui";
 import { ContentLayout, MainLayout } from "Layout";
+import { instance } from "services/apiService";
+
+const registerUser = async (email: any, username: any, password: any) => {
+  const parameters = { email, username, password };
+
+  return instance
+    .post("https://gscore-back.herokuapp.com/api/users/sign-up", parameters, {
+      headers: { "Content-type": "application/json; charset=UTF-8" },
+    })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
 
 const CheckInPage = () => {
+  const [name, setName] = useState("");
+
+  const [email, setEmail] = useState("");
+
+  const [password, setPassword] = useState("");
+
+  const handleChangeName = (event: any) => {
+    let name = event.target.value;
+    setName(name);
+  };
+
+  const handleChangeEmail = (event: any) => {
+    let email = event.target.value;
+    setEmail(email);
+  };
+
+  const handleChangePassword = (event: any) => {
+    let password = event.target.value;
+    setPassword(password);
+  };
+
+  const handleOnClick = (name: any, email: any, password: any) => {
+    registerUser(email, name, password);
+  };
+
   return (
     <Root>
       <Container>
@@ -19,12 +60,30 @@ const CheckInPage = () => {
         </Text>
 
         <InputWrapper>
-          <StyledInput placeholder="Username" />
-          <StyledInput placeholder="Email" />
-          <StyledInput placeholder="Password" />
+          <StyledInput
+            placeholder="Username"
+            value={name}
+            onChange={handleChangeName}
+          />
+
+          <StyledInput
+            placeholder="Email"
+            value={email}
+            onChange={handleChangeEmail}
+          />
+
+          <StyledInput
+            placeholder="Password"
+            value={password}
+            onChange={handleChangePassword}
+          />
         </InputWrapper>
 
-        <StyledButton text="Send password" />
+        <StyledButton
+          text="Send password"
+          type="submit"
+          onClick={() => handleOnClick(email, name, password)}
+        />
 
         <Login>
           <LoginText>Have an account? </LoginText>

@@ -9,15 +9,20 @@ import { Button } from "components/ui";
 interface PlanCardProps {
   isActive?: boolean;
   className?: string;
+  product?: any;
 }
 
-export const PlanCard: FC<PlanCardProps> = ({ isActive, className }) => {
+export const PlanCard: FC<PlanCardProps> = ({
+  isActive,
+  className,
+  product,
+}) => {
   return (
-    <Root $isActive={isActive} className={className}>
-      <Info $isActive={isActive}>
-        <Price>$77</Price>
-        <LicenseName>Single site license</LicenseName>
-        <Description $isActive={isActive}>
+    <Root $isActive={product.prices[0].isActive} className={className}>
+      <Info $isActive={product.prices[0].isActive}>
+        <Price>${product.prices[0].price}</Price>
+        <LicenseName>{product.name}</LicenseName>
+        <Description $isActive={product.prices[0].isActive}>
           Get the advanced WordPress plugin that optimizes content with GSC
           keywords at one low annual price
         </Description>
@@ -26,7 +31,9 @@ export const PlanCard: FC<PlanCardProps> = ({ isActive, className }) => {
       <FeaturesList>
         <ListItem>
           <StyledListCheckIcon />
-          Single site license
+          {product.sitesCount === 1
+            ? "Single site license"
+            : `All features for ${product.sitesCount} sites`}
         </ListItem>
 
         <ListItem>
