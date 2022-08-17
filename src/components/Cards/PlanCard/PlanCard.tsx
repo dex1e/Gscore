@@ -1,10 +1,12 @@
 import React, { FC } from "react";
 
+import Link from "next/link";
 import styled, { css } from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
 import { ListCheckIcon } from "components/icons";
 import { Button } from "components/ui";
+import { LocalStorageService } from "services";
 
 interface PlanCardProps {
   isActive?: boolean;
@@ -17,6 +19,8 @@ export const PlanCard: FC<PlanCardProps> = ({
   className,
   product,
 }) => {
+  const user = LocalStorageService.getData("user");
+
   return (
     <Root $isActive={product.prices[0].isActive} className={className}>
       <Info $isActive={product.prices[0].isActive}>
@@ -31,6 +35,7 @@ export const PlanCard: FC<PlanCardProps> = ({
       <FeaturesList>
         <ListItem>
           <StyledListCheckIcon />
+
           {product.sitesCount === 1
             ? "Single site license"
             : `All features for ${product.sitesCount} sites`}
@@ -52,10 +57,26 @@ export const PlanCard: FC<PlanCardProps> = ({
         </ListItem>
       </FeaturesList>
 
-      <StyledButton text="Get Gscore" variant="secondary" />
+      {user ? (
+        <Link
+          href={`/checkout?id=${product.prices[0].id}&name=${product.name}&price=${product.prices[0].price}`}
+        >
+          <GoNextPage>
+            <StyledButton text="Get Gscore" variant="secondary" />
+          </GoNextPage>
+        </Link>
+      ) : (
+        <Link href="/check-in">
+          <GoNextPage>
+            <StyledButton text="Get Gscore" variant="secondary"></StyledButton>
+          </GoNextPage>
+        </Link>
+      )}
     </Root>
   );
 };
+
+const GoNextPage = styled.a``;
 
 const Root = styled.div<{ $isActive?: boolean }>`
   width: 100%;
@@ -190,6 +211,7 @@ const StyledButton = styled(Button)`
   color: ${COLORS.secondaryBlack};
   font-size: 16px;
   line-height: 20px;
+  width: 100%;
 
   @media ${DEVICE.laptop} {
     font-size: 18px;

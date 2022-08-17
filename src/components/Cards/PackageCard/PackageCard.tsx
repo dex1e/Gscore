@@ -7,9 +7,15 @@ import { ShopBasketIcon } from "components/icons";
 
 interface CheckoutCardProps {
   className?: string;
+  priceCost?: any;
+  packageName?: any;
 }
 
-export const PackageCard: FC<CheckoutCardProps> = ({ className }) => {
+export const PackageCard: FC<CheckoutCardProps> = ({
+  className,
+  priceCost,
+  packageName,
+}) => {
   return (
     <Root className={className}>
       <Header>
@@ -18,9 +24,13 @@ export const PackageCard: FC<CheckoutCardProps> = ({ className }) => {
       </Header>
 
       <Content>
-        <PackageName>Single site license</PackageName>
+        <PackageName>
+          {packageName === "One cite"
+            ? "Single site license"
+            : `${packageName}  license`}
+        </PackageName>
         <Price>
-          <PriceCost>$1000</PriceCost>
+          <PriceCost>${priceCost}</PriceCost>
           <StyledShopBasketIcon />
         </Price>
       </Content>

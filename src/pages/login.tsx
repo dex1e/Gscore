@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
 
-import { COLORS, DEVICE } from "assets";
+import { DEVICE } from "assets";
 import { Button, Input, RegisterTabs } from "components/ui";
 import { ContentLayout, MainLayout } from "Layout";
+import { loginUser } from "services";
 
 const LoginPage = () => {
+  const [email, setEmail] = useState("");
+
+  const [password, setPassword] = useState("");
+
+  const handleChangeEmail = (event: any) => {
+    let email = event.target.value;
+    setEmail(email);
+  };
+
+  const handleChangePassword = (event: any) => {
+    let password = event.target.value;
+    setPassword(password);
+  };
+
+  const handleOnClick = (email: any, password: any) => {
+    loginUser(email, password);
+  };
+
   return (
     <Root>
       <Container>
@@ -14,11 +33,22 @@ const LoginPage = () => {
         <Title>Log in</Title>
 
         <InputWrapper>
-          <StyledInput placeholder="Email" />
-          <StyledInput placeholder="Password" />
+          <StyledInput
+            placeholder="Email"
+            value={email}
+            onChange={handleChangeEmail}
+          />
+          <StyledInput
+            placeholder="Password"
+            value={password}
+            onChange={handleChangePassword}
+          />
         </InputWrapper>
 
-        <StyledButton text="Log in" />
+        <StyledButton
+          text="Log in"
+          onClick={() => handleOnClick(email, password)}
+        />
       </Container>
     </Root>
   );

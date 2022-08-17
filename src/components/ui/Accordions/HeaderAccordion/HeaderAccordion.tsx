@@ -1,5 +1,6 @@
 import React, { FC, useRef, useState } from "react";
 
+import Link from "next/link";
 import {
   Accordion,
   AccordionItem,
@@ -11,7 +12,9 @@ import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
 import { ChevronDownIcon, LogoutIcon, SettingsIcon } from "components/icons";
+import { Z_INDEX } from "constant";
 import { useOnClickOutside } from "hooks";
+import { LocalStorageService } from "services";
 
 interface HeaderAccordionProps {
   className?: string;
@@ -32,6 +35,11 @@ export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
 
   useOnClickOutside(clickOutsideRef, handleAccordionExpanded);
 
+  const handleLogOut = () => {
+    LocalStorageService.removeData("token");
+    LocalStorageService.removeData("user");
+  };
+
   return (
     <Root ref={clickOutsideRef} onClick={handleAccordionClick}>
       <Accordion className={className}>
@@ -51,10 +59,12 @@ export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
                 Settings
               </Settings>
 
-              <Logout>
-                <StyledLogoutIcon />
-                Logout
-              </Logout>
+              <Link href={"/"}>
+                <Logout onClick={() => handleLogOut()}>
+                  <StyledLogoutIcon />
+                  Logout
+                </Logout>
+              </Link>
             </Wrapper>
           </StyledAccordionItemPanel>
         </StyledAccordionItem>
@@ -126,6 +136,7 @@ const StyledChevronDownIcon = styled(ChevronDownIcon)`
 
 const StyledAccordionItemPanel = styled(AccordionItemPanel)`
   margin-top: 31px;
+  z-index: ${Z_INDEX.primary};
 
   @media ${DEVICE.tablet} {
     position: absolute;

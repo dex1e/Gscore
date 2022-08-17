@@ -1,12 +1,25 @@
+import { useEffect } from "react";
+
 import type { NextPage } from "next";
 import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
 import { PlanCard } from "components";
 import { MainLayout } from "Layout";
-import apiService from "services";
+import { getMe, LocalStorageService, productsApiService } from "services";
 
-const Home: NextPage = ({ data }: any) => {
+const Home: NextPage = ({ products }: any) => {
+  const getUser = async () => {
+    if (LocalStorageService.getData("token")) {
+      const me = await getMe();
+      LocalStorageService.setData("user", me);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   return (
     <Root>
       <Title>Get started with Gscore today</Title>
@@ -15,7 +28,7 @@ const Home: NextPage = ({ data }: any) => {
         <StyledPlanCard isActive />
         <StyledPlanCard /> */}
 
-        {data.map((product: any) => (
+        {products.map((product: any) => (
           <StyledPlanCard key={product.id} product={product} />
         ))}
       </PlanCards>
@@ -29,13 +42,13 @@ const Home: NextPage = ({ data }: any) => {
 };
 
 export async function getStaticProps() {
-  const res = await apiService.getProducts();
+  const response = await productsApiService.getProducts();
 
-  const data = res.data;
+  const products = response.data;
 
   return {
     props: {
-      data,
+      products,
     },
   };
 }

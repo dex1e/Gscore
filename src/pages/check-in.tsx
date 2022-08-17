@@ -1,26 +1,12 @@
 import React, { useState } from "react";
 
+import Link from "next/link";
 import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
 import { Button, Input, RegisterTabs } from "components/ui";
 import { ContentLayout, MainLayout } from "Layout";
-import { instance } from "services/apiService";
-
-const registerUser = async (email: any, username: any, password: any) => {
-  const parameters = { email, username, password };
-
-  return instance
-    .post("https://gscore-back.herokuapp.com/api/users/sign-up", parameters, {
-      headers: { "Content-type": "application/json; charset=UTF-8" },
-    })
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-};
+import { registerUser } from "services";
 
 const CheckInPage = () => {
   const [name, setName] = useState("");
@@ -44,7 +30,7 @@ const CheckInPage = () => {
     setPassword(password);
   };
 
-  const handleOnClick = (name: any, email: any, password: any) => {
+  const handleOnClick = (email: any, name: any, password: any) => {
     registerUser(email, name, password);
   };
 
@@ -87,7 +73,10 @@ const CheckInPage = () => {
 
         <Login>
           <LoginText>Have an account? </LoginText>
-          <NextStep>Go to the next step</NextStep>
+
+          <Link href={"/login"}>
+            <NextStep>Go to the next step</NextStep>
+          </Link>
         </Login>
       </Container>
     </Root>
@@ -172,6 +161,10 @@ const LoginText = styled.p`
 `;
 
 const NextStep = styled.a`
+  &:hover {
+    color: ${COLORS.neutral100};
+  }
+
   @media ${DEVICE.tablet} {
     color: ${COLORS.primary};
   }

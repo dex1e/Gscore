@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
+import Link from "next/link";
 import styled from "styled-components";
 
 import { COLORS } from "assets";
 import { GscoreLogoIcon, MenuIcon } from "components/icons";
 import { Media } from "media";
+import { LocalStorageService } from "services";
 
 import { Menu } from "./Menu";
 import { MenuList } from "./MenuList";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const [hasWindow, setHasWindow] = useState(false);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setHasWindow(true);
+    }
+  }, []);
+
+  const user = LocalStorageService.getData("user");
 
   const handleOpenMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -24,20 +35,26 @@ export const Header = () => {
     <Root>
       <div className="container">
         <Inner>
-          <StyledGscoreLogoIcon />
+          <Link href="/">
+            <Home>
+              <StyledGscoreLogoIcon />
+            </Home>
+          </Link>
 
-          <Nav>
-            <Media at="mobileS">
-              <BurgerButton onClick={handleOpenMenu}>
-                <MenuIcon />
-              </BurgerButton>
-              <Menu isMenuOpen={isMenuOpen} onCloseMenu={handleCloseMenu} />
-            </Media>
+          {hasWindow && user && (
+            <Nav>
+              <Media at="mobileS">
+                <BurgerButton onClick={handleOpenMenu}>
+                  <MenuIcon />
+                </BurgerButton>
+                <Menu isMenuOpen={isMenuOpen} onCloseMenu={handleCloseMenu} />
+              </Media>
 
-            <Media greaterThanOrEqual="tablet">
-              <MenuList />
-            </Media>
-          </Nav>
+              <Media greaterThanOrEqual="tablet">
+                <MenuList />
+              </Media>
+            </Nav>
+          )}
         </Inner>
       </div>
     </Root>
@@ -55,6 +72,10 @@ const Inner = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const Home = styled.a`
+  width: fit-content;
 `;
 
 const StyledGscoreLogoIcon = styled(GscoreLogoIcon)`

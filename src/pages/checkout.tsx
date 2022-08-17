@@ -6,25 +6,41 @@ import { DEVICE } from "assets";
 import { PackageCard } from "components";
 import { Button, RegisterTabs } from "components/ui";
 import { ContentLayout, MainLayout } from "Layout";
+import { buySubscription } from "services";
 
-const CheckoutPage = () => {
+const CheckoutPage = ({ priceId, priceCost, packageName }: any) => {
+  const handleBuySubscription = (priceId: any) => {
+    buySubscription(priceId);
+  };
+
   return (
     <Root>
       <Container>
         <StyledRegisterTabs />
         <Title>Checkout</Title>
 
-        <StyledPackageCard />
+        <StyledPackageCard packageName={packageName} priceCost={priceCost} />
 
         <Total>
           <Text>Total:</Text>
-          <Cost>$77</Cost>
+          <Cost>${priceCost}</Cost>
         </Total>
 
-        <StyledButton text="Purchase" />
+        <StyledButton
+          text="Purchase"
+          onClick={() => handleBuySubscription(Number(priceId))}
+        />
       </Container>
     </Root>
   );
+};
+
+CheckoutPage.getInitialProps = ({ query }: any) => {
+  return {
+    priceId: query.id,
+    priceCost: query.price,
+    packageName: query.name,
+  };
 };
 
 const Root = styled(MainLayout)`
