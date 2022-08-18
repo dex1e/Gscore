@@ -4,7 +4,9 @@ import Link from "next/link";
 import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
-import { Button, Input, RegisterTabs } from "components/ui";
+import { RegisterTabs } from "components";
+import { Button, Input } from "components/ui";
+import { ROUTES } from "constant";
 import { ContentLayout, MainLayout } from "Layout";
 import { registerUser } from "services";
 
@@ -74,7 +76,7 @@ const CheckInPage = () => {
         <Login>
           <LoginText>Have an account? </LoginText>
 
-          <Link href={"/login"}>
+          <Link href={ROUTES.LOGIN}>
             <NextStep>Go to the next step</NextStep>
           </Link>
         </Login>

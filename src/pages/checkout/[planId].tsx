@@ -1,10 +1,11 @@
 import React from "react";
 
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 import { DEVICE } from "assets";
-import { PackageCard } from "components";
-import { Button, RegisterTabs } from "components/ui";
+import { PackageCard, RegisterTabs } from "components";
+import { Button } from "components/ui";
 import { ContentLayout, MainLayout } from "Layout";
 import { buySubscription } from "services";
 
@@ -12,6 +13,12 @@ const CheckoutPage = ({ priceId, priceCost, packageName }: any) => {
   const handleBuySubscription = (priceId: any) => {
     buySubscription(priceId);
   };
+
+  const router = useRouter();
+
+  const { planId } = router.query;
+
+  console.log(planId, "planId");
 
   return (
     <Root>

@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { DEVICE } from "assets";
-import { Button, Input, RegisterTabs } from "components/ui";
+import { RegisterTabs } from "components";
+import { Button, Input } from "components/ui";
 import { ContentLayout, MainLayout } from "Layout";
-import { loginUser } from "services";
+import { LocalStorageService, loginUser } from "services";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -23,7 +24,14 @@ const LoginPage = () => {
   };
 
   const handleOnClick = (email: any, password: any) => {
-    loginUser(email, password);
+    loginUser(email, password)
+      .then((response: any) => {
+        LocalStorageService.setData("token", response.data.token);
+      })
+
+      .catch(function (error: any) {
+        console.log(error);
+      });
   };
 
   return (
