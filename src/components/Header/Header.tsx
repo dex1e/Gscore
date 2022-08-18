@@ -15,6 +15,7 @@ export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const [hasWindow, setHasWindow] = useState(false);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       setHasWindow(true);
