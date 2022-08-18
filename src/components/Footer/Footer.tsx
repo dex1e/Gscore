@@ -25,9 +25,9 @@ export const Footer = () => {
           <Copyright>
             <CopyrightText>
               Copyright &copy; {currentYear} GScore | All Rights Reserved |
-              <> </>
+              <Indent> </Indent>
               <Info href="#">Cookies</Info>
-              <> </>|<> </>
+              <Indent> | </Indent>
               <Info href="#">Privacy Policy</Info>
             </CopyrightText>
 
@@ -103,6 +103,10 @@ const CopyrightText = styled.p`
   @media ${DEVICE.laptop} {
     text-align: start;
   }
+`;
+
+const Indent = styled.span`
+  width: fit-content;
 `;
 
 const Info = styled.a`
