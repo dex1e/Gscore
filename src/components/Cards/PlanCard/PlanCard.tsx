@@ -5,7 +5,8 @@ import styled, { css } from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
 import { ListCheckIcon } from "components/icons";
-import { Button } from "components/ui";
+import { Button, LinkButton } from "components/ui";
+import { ROUTES } from "constant";
 import { LocalStorageService } from "services";
 
 interface PlanCardProps {
@@ -22,11 +23,11 @@ export const PlanCard: FC<PlanCardProps> = ({
   const user = LocalStorageService.getData("user");
 
   return (
-    <Root $isActive={product.prices[0].isActive} className={className}>
-      <Info $isActive={product.prices[0].isActive}>
+    <Root $isActive={isActive} className={className}>
+      <Info $isActive={isActive}>
         <Price>${product.prices[0].price}</Price>
         <LicenseName>{product.name}</LicenseName>
-        <Description $isActive={product.prices[0].isActive}>
+        <Description $isActive={isActive}>
           Get the advanced WordPress plugin that optimizes content with GSC
           keywords at one low annual price
         </Description>
@@ -57,26 +58,18 @@ export const PlanCard: FC<PlanCardProps> = ({
         </ListItem>
       </FeaturesList>
 
-      {user ? (
-        <Link
-          href={`/checkout?id=${product.prices[0].id}&name=${product.name}&price=${product.prices[0].price}`}
-        >
-          <GoNextPage>
-            <StyledButton text="Get Gscore" variant="secondary" />
-          </GoNextPage>
-        </Link>
-      ) : (
-        <Link href="/check-in">
-          <GoNextPage>
-            <StyledButton text="Get Gscore" variant="secondary"></StyledButton>
-          </GoNextPage>
-        </Link>
-      )}
+      <StyledLinkButton
+        text="Get Gscore"
+        variant="secondary"
+        href={
+          user
+            ? ROUTES.CHECKOUT_ID(`${product.prices[0].id}`)
+            : ROUTES.REGISTRATION
+        }
+      />
     </Root>
   );
 };
-
-const GoNextPage = styled.a``;
 
 const Root = styled.div<{ $isActive?: boolean }>`
   width: 100%;
@@ -207,7 +200,7 @@ const StyledListCheckIcon = styled(ListCheckIcon)`
   }
 `;
 
-const StyledButton = styled(Button)`
+const StyledLinkButton = styled(LinkButton)`
   color: ${COLORS.secondaryBlack};
   font-size: 16px;
   line-height: 20px;
