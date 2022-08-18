@@ -1,14 +1,13 @@
 import styled from "styled-components";
 
-import { DomainCard, PlanCard, SubscriptionCard } from "components";
 import {
-  AccordionMenu,
-  Button,
-  Checkbox,
-  Input,
-  SettingsTabs,
+  DomainCard,
+  PlanCard,
   RegisterTabs,
-} from "components/ui";
+  SettingsTabs,
+  SubscriptionCard,
+} from "components";
+import { AccordionMenu, Button, Checkbox, Input } from "components/ui";
 import { MainLayout } from "Layout";
 import { card, domainCard } from "utils";
 

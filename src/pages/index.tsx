@@ -1,18 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import type { NextPage } from "next";
 import styled from "styled-components";
 
-import { COLORS, DEVICE } from "assets";
-import { PlanCard } from "components";
 import { MainLayout } from "Layout";
-import { getMe, LocalStorageService, productsApiService } from "services";
+import { Home } from "pageComponents";
+import { getMe, getProducts, LocalStorageService } from "services";
 
-const Home: NextPage = ({ products }: any) => {
+const HomePage: NextPage = ({ products }: any) => {
+  const [user, setUser] = useState(null);
+
   const getUser = async () => {
     if (LocalStorageService.getData("token")) {
-      const me = await getMe();
+      const me = await getMe()
+        .then((response: any) => response.data)
+
+        .catch(function (error: any) {
+          console.log(error);
+        });
+
       LocalStorageService.setData("user", me);
+
+      if (me) setUser(me);
     }
   };
 
@@ -21,30 +30,19 @@ const Home: NextPage = ({ products }: any) => {
   }, []);
 
   return (
-    <Root>
-      <Title>Get started with Gscore today</Title>
-      <PlanCards>
-        {/* <StyledPlanCard />
-        <StyledPlanCard isActive />
-        <StyledPlanCard /> */}
-
-        {products.map((product: any) => (
-          <StyledPlanCard key={product.id} product={product} />
-        ))}
-      </PlanCards>
-
-      <Offer>
-        <Text>Have more than 10 sites?</Text>
-        <Contact>Contact us</Contact>
-      </Offer>
+    <Root user={user}>
+      <Home products={products} />
     </Root>
   );
 };
 
 export async function getStaticProps() {
-  const response = await productsApiService.getProducts();
+  const products = await getProducts()
+    .then((response) => response.data)
 
-  const products = response.data;
+    .catch(function (error: any) {
+      console.log(error);
+    });
 
   return {
     props: {
@@ -57,62 +55,4 @@ const Root = styled(MainLayout)`
   position: relative;
 `;
 
-const Title = styled.h1`
-  @media ${DEVICE.laptop} {
-    font-weight: 700;
-    font-size: 44px;
-    line-height: 54px;
-    color: ${COLORS.neutral100};
-    padding: 56px 0 98px;
-    text-align: center;
-  }
-`;
-
-const PlanCards = styled.div`
-  display: flex;
-
-  @media ${DEVICE.laptop} {
-    padding-bottom: 33px;
-  }
-`;
-
-const StyledPlanCard = styled(PlanCard)`
-  @media ${DEVICE.laptop} {
-    margin-right: 27.5px;
-  }
-`;
-
-const Offer = styled.div`
-  @media ${DEVICE.laptop} {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 30px;
-    color: ${COLORS.neutral100};
-    text-align: center;
-    padding-bottom: 42px;
-  }
-`;
-
-const Text = styled.p`
-  @media ${DEVICE.laptop} {
-    width: 100%;
-  }
-`;
-
-const Contact = styled.a`
-  @media ${DEVICE.laptop} {
-    color: ${COLORS.primary};
-    text-decoration: underline;
-
-    &:hover {
-      color: ${COLORS.neutral100};
-      text-decoration: none;
-    }
-
-    &:focus {
-      box-shadow: 0px 0px 10px 0px ${COLORS.neutral100};
-    }
-  }
-`;
-
-export default Home;
+export default HomePage;

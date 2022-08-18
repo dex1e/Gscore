@@ -1,4 +1,4 @@
-import { instance } from "./instance";
+import { instance } from "./ApiService";
 
 export const buySubscription = async (priceId: any) => {
   const json = JSON.stringify({ priceId });

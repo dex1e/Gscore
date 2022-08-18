@@ -1,5 +1,5 @@
+export { getProducts } from "./products";
 export { buySubscription } from "./subscriptionService";
-export { getMe } from "./authService";
-export { productsApiService } from "./apiService";
+export { getMe } from "./auth";
 export { LocalStorageService } from "./localStorageService";
-export { registerUser, loginUser } from "./authService";
+export { registerUser, loginUser } from "./auth";

@@ -5,24 +5,23 @@ import styled from "styled-components";
 
 import { COLORS } from "assets";
 import { GscoreLogoIcon, MenuIcon } from "components/icons";
+import { ROUTES } from "constant";
 import { Media } from "media";
 import { LocalStorageService } from "services";
 
 import { Menu } from "./Menu";
 import { MenuList } from "./MenuList";
 
-export const Header = () => {
+export const Header = ({ user }: any) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const [hasWindow, setHasWindow] = useState(false);
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const user = LocalStorageService.getData("user");
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setHasWindow(true);
-    }
-  }, []);
-
-  const user = LocalStorageService.getData("user");
+  //     console.log(user);
+  //   }
+  // }, []);
 
   const handleOpenMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -36,13 +35,13 @@ export const Header = () => {
     <Root>
       <div className="container">
         <Inner>
-          <Link href="/">
+          <Link href={ROUTES.ROOT}>
             <Home>
-              <StyledGscoreLogoIcon />
+              <GscoreLogoIcon />
             </Home>
           </Link>
 
-          {hasWindow && user && (
+          {user && (
             <Nav>
               <Media at="mobileS">
                 <BurgerButton onClick={handleOpenMenu}>
@@ -77,10 +76,15 @@ const Inner = styled.div`
 
 const Home = styled.a`
   width: fit-content;
-`;
 
-const StyledGscoreLogoIcon = styled(GscoreLogoIcon)`
-  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+    transform-origin: 0 0;
+
+    path {
+      fill: ${COLORS.primary};
+    }
+  }
 `;
 
 const Nav = styled.nav`
