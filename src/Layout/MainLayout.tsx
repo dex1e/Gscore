@@ -6,13 +6,12 @@ import { Footer, Header } from "components";
 
 interface MainLayotProps {
   children: ReactNode;
-  user?: any;
 }
 
-export const MainLayout: FC<MainLayotProps> = ({ children, user }) => {
+export const MainLayout: FC<MainLayotProps> = ({ children }) => {
   return (
     <Root>
-      <Header user={user} />
+      <Header />
       <main className="main">
         <div className="container">{children}</div>
       </main>

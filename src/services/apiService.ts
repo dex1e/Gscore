@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { store } from "store";
+
 import { LocalStorageService } from "./localStorageService";
 
 export const instance = axios.create({
@@ -8,9 +10,7 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use((config: any) => {
-  config.headers.Authorization = `Bearer ${LocalStorageService.getData(
-    "token"
-  )}`;
+  config.headers.Authorization = `Bearer ${store.getState().auth.auth.token}`;
 
   return config;
 });

@@ -25,4 +25,25 @@ export interface IStatuses {
   color: string;
 }
 
+export interface IUser {
+  id: number;
+  email: string;
+  username: string;
+}
+
+export interface IPlan {
+  id: number;
+  sitesCount: number;
+  name: string;
+
+  prices: [
+    {
+      id: number;
+      isActive: boolean;
+      productId: number;
+      price: string;
+    }
+  ];
+}
+
 export type EventOnClickOutside = MouseEvent | TouchEvent;

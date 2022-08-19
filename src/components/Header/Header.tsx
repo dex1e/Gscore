@@ -7,22 +7,37 @@ import { COLORS } from "assets";
 import { GscoreLogoIcon, MenuIcon } from "components/icons";
 import { ROUTES } from "constant";
 import { Media } from "media";
-import { LocalStorageService } from "services";
+import { getMe } from "services";
+import { setUser } from "store/features/auth";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 
 import { Menu } from "./Menu";
 import { MenuList } from "./MenuList";
 
-export const Header = ({ user }: any) => {
+export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     const user = LocalStorageService.getData("user");
+  const token = useAppSelector((state) => state.auth.auth.token);
+  const dispatch = useAppDispatch();
 
-  //     console.log(user);
-  //   }
-  // }, []);
+  const user = useAppSelector((state) => state.auth.auth.user);
 
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  const getUser = async () => {
+    if (token) {
+      const me = await getMe()
+        .then((response) => response.data)
+
+        .catch(function (error: any) {
+          console.log(error);
+        });
+
+      dispatch(setUser(me));
+    }
+  };
   const handleOpenMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -41,7 +56,7 @@ export const Header = ({ user }: any) => {
             </Home>
           </Link>
 
-          {user && (
+          {user && user.id !== 0 && (
             <Nav>
               <Media at="mobileS">
                 <BurgerButton onClick={handleOpenMenu}>
@@ -60,6 +75,25 @@ export const Header = ({ user }: any) => {
     </Root>
   );
 };
+
+// () {
+// if (token) {
+//   const me = await getMe()
+//     .then((response) => response.data)
+
+//     .catch(function (error: any) {
+//       console.log(error);
+//     });
+
+//   // if (me) dispatch(setUser(me));
+//   // }
+
+//   return {
+//     props: {
+//       me,
+//     },
+//   };
+// }
 
 const Root = styled.div`
   position: relative;

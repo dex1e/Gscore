@@ -1,13 +1,9 @@
 import React, { FC } from "react";
-import { useEffect } from "react";
 
-import type { NextPage } from "next";
 import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
 import { PlanCard } from "components";
-import { MainLayout } from "Layout";
-import { getMe, LocalStorageService } from "services";
 
 interface HomeProps {
   products?: any;
@@ -18,10 +14,6 @@ export const Home: FC<HomeProps> = ({ products }) => {
     <div>
       <Title>Get started with Gscore today</Title>
       <PlanCards>
-        {/* <StyledPlanCard />
-        <StyledPlanCard isActive />
-        <StyledPlanCard /> */}
-
         {products.map((product: any, index: number) => (
           <StyledPlanCard
             key={product.id}

@@ -1,40 +1,60 @@
-import { useEffect, useState } from "react";
-
 import type { NextPage } from "next";
 import styled from "styled-components";
 
 import { MainLayout } from "Layout";
 import { Home } from "pageComponents";
-import { getMe, getProducts, LocalStorageService } from "services";
+import { getMe, getProducts } from "services";
+import { wrapper } from "store";
+import { setUser } from "store/features/auth";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 
-const HomePage: NextPage = ({ products }: any) => {
-  const [user, setUser] = useState(null);
-
-  const getUser = async () => {
-    if (LocalStorageService.getData("token")) {
-      const me = await getMe()
-        .then((response: any) => response.data)
-
-        .catch(function (error: any) {
-          console.log(error);
-        });
-
-      LocalStorageService.setData("user", me);
-
-      if (me) setUser(me);
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
+const HomePage: NextPage = ({ products, me }: any) => {
   return (
-    <Root user={user}>
+    <Root>
       <Home products={products} />
     </Root>
   );
 };
+
+// export const getServerSideProps = wrapper.getServerSideProps(
+//   (store) => async (ctx) => {
+//     console.log(store);
+//     const products = await getProducts()
+//       .then((response) => response.data)
+
+//       .catch(function (error: any) {
+//         console.log(error);
+//       });
+//     console.log(products);
+
+//     const state = store.getState();
+
+//     const token = state.auth.auth.token;
+
+//     let me = "";
+
+//     if (token) {
+//       me = await getMe()
+//         .then((response) => response.data)
+
+//         .catch(function (error: any) {
+//           console.log(error);
+//         });
+
+//       store.dispatch(setUser(me));
+//     }
+//     console.log("token", token);
+
+//     console.log("me", me);
+
+//     return {
+//       props: {
+//         products,
+//         me,
+//       },
+//     };
+//   }
+// );
 
 export async function getStaticProps() {
   const products = await getProducts()

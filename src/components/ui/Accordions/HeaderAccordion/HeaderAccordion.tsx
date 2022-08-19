@@ -12,7 +12,7 @@ import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
 import { ChevronDownIcon, LogoutIcon, SettingsIcon } from "components/icons";
-import { Z_INDEX } from "constant";
+import { ROUTES, Z_INDEX } from "constant";
 import { useOnClickOutside } from "hooks";
 import { LocalStorageService } from "services";
 
@@ -35,10 +35,10 @@ export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
 
   useOnClickOutside(clickOutsideRef, handleAccordionExpanded);
 
-  const handleLogOut = () => {
-    LocalStorageService.removeData("token");
-    LocalStorageService.removeData("user");
-  };
+  // const handleLogOut = () => {
+  //   LocalStorageService.removeData("token");
+  //   LocalStorageService.removeData("user");
+  // };
 
   return (
     <Root ref={clickOutsideRef} onClick={handleAccordionClick}>
@@ -59,8 +59,8 @@ export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
                 Settings
               </Settings>
 
-              <Link href={"/"}>
-                <Logout onClick={() => handleLogOut()}>
+              <Link href={ROUTES.ROOT}>
+                <Logout>
                   <StyledLogoutIcon />
                   Logout
                 </Logout>

@@ -1,6 +1,5 @@
 import React from "react";
 
-import { useRouter } from "next/router";
 import styled from "styled-components";
 
 import { DEVICE } from "assets";
@@ -8,17 +7,14 @@ import { PackageCard, RegisterTabs } from "components";
 import { Button } from "components/ui";
 import { ContentLayout, MainLayout } from "Layout";
 import { buySubscription } from "services";
+import { useAppSelector } from "store/hooks";
 
-const CheckoutPage = ({ priceId, priceCost, packageName }: any) => {
+const CheckoutPage = () => {
+  const plan = useAppSelector((state) => state.plan.plan);
+
   const handleBuySubscription = (priceId: any) => {
     buySubscription(priceId);
   };
-
-  const router = useRouter();
-
-  const { planId } = router.query;
-
-  console.log(planId, "planId");
 
   return (
     <Root>
@@ -26,28 +22,30 @@ const CheckoutPage = ({ priceId, priceCost, packageName }: any) => {
         <StyledRegisterTabs />
         <Title>Checkout</Title>
 
-        <StyledPackageCard packageName={packageName} priceCost={priceCost} />
+        {plan.id !== 0 &&
+          plan.prices.map((priceId) => {
+            return (
+              <div key={priceId.id}>
+                <StyledPackageCard
+                  packageName={plan.name}
+                  priceCost={priceId.price}
+                />
 
-        <Total>
-          <Text>Total:</Text>
-          <Cost>${priceCost}</Cost>
-        </Total>
+                <Total>
+                  <Text>Total:</Text>
+                  <Cost>${priceId.price}</Cost>
+                </Total>
 
-        <StyledButton
-          text="Purchase"
-          onClick={() => handleBuySubscription(Number(priceId))}
-        />
+                <StyledButton
+                  text="Purchase"
+                  onClick={() => handleBuySubscription(Number(plan.id))}
+                />
+              </div>
+            );
+          })}
       </Container>
     </Root>
   );
-};
-
-CheckoutPage.getInitialProps = ({ query }: any) => {
-  return {
-    priceId: query.id,
-    priceCost: query.price,
-    packageName: query.name,
-  };
 };
 
 const Root = styled(MainLayout)`

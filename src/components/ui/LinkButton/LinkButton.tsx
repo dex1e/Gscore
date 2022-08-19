@@ -14,6 +14,7 @@ interface LinkButtonProps {
   className?: string;
   variant?: Variant;
   href?: any;
+  onClick?: () => void;
 }
 
 type Variant = "primary" | "secondary" | "text";
@@ -23,12 +24,17 @@ export const LinkButton: FC<LinkButtonProps> = ({
   className,
   variant = "primary",
   href,
+  onClick,
 }) => {
   const linkButtonStyles = linkButtonTheme[variant];
 
   return (
     <Link href={href} passHref>
-      <Root className={className} $linkButtonStyles={linkButtonStyles}>
+      <Root
+        className={className}
+        $linkButtonStyles={linkButtonStyles}
+        onClick={onClick}
+      >
         {text}
       </Root>
     </Link>

@@ -9,6 +9,8 @@ import { Button, Input } from "components/ui";
 import { ROUTES } from "constant";
 import { ContentLayout, MainLayout } from "Layout";
 import { registerUser } from "services";
+import { setToken } from "store/features/auth";
+import { useAppDispatch } from "store/hooks";
 
 const CheckInPage = () => {
   const [name, setName] = useState("");
@@ -16,6 +18,8 @@ const CheckInPage = () => {
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
+
+  const dispatch = useAppDispatch();
 
   const handleChangeName = (event: any) => {
     let name = event.target.value;
@@ -33,7 +37,15 @@ const CheckInPage = () => {
   };
 
   const handleOnClick = (email: any, name: any, password: any) => {
-    registerUser(email, name, password);
+    registerUser(email, name, password)
+      .then((response: any) => {
+        response.data.token !== "";
+        dispatch(setToken(response.data.token));
+      })
+
+      .catch(function (error: any) {
+        console.log(error);
+      });
   };
 
   return (

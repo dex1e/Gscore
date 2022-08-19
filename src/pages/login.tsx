@@ -1,17 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 import { DEVICE } from "assets";
 import { RegisterTabs } from "components";
 import { Button, Input } from "components/ui";
+import { ROUTES } from "constant";
 import { ContentLayout, MainLayout } from "Layout";
-import { LocalStorageService, loginUser } from "services";
+import { loginUser } from "services";
+import { setToken, setUser } from "store/features/auth";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
+
+  const planId = useAppSelector((state) => state.plan.plan.id);
+
+  const dispatch = useAppDispatch();
+
+  const router = useRouter();
 
   const handleChangeEmail = (event: any) => {
     let email = event.target.value;
@@ -26,7 +36,10 @@ const LoginPage = () => {
   const handleOnClick = (email: any, password: any) => {
     loginUser(email, password)
       .then((response: any) => {
-        LocalStorageService.setData("token", response.data.token);
+        dispatch(setToken(response.data.token));
+        dispatch(setUser(response.data.user));
+
+        router.push(ROUTES.CHECKOUT_ID(String(planId)));
       })
 
       .catch(function (error: any) {

@@ -10,16 +10,7 @@ export const registerUser = async (
 ) => {
   const json = JSON.stringify({ email, username, password });
 
-  return instance
-    .post(APIURL.POSTSIGNUP, json)
-
-    .then((response: any) => {
-      LocalStorageService.setData("token", response.data.token);
-    })
-
-    .catch(function (error: any) {
-      console.log(error);
-    });
+  return instance.post(APIURL.POSTSIGNUP, json);
 };
 
 export const loginUser = async (email: any, password: any) => {

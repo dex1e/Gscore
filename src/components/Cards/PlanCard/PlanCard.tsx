@@ -1,13 +1,13 @@
 import React, { FC } from "react";
 
-import Link from "next/link";
 import styled, { css } from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
 import { ListCheckIcon } from "components/icons";
-import { Button, LinkButton } from "components/ui";
+import { LinkButton } from "components/ui";
 import { ROUTES } from "constant";
-import { LocalStorageService } from "services";
+import { setPlanProduct } from "store/features/plan";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 
 interface PlanCardProps {
   isActive?: boolean;
@@ -20,7 +20,12 @@ export const PlanCard: FC<PlanCardProps> = ({
   className,
   product,
 }) => {
-  const user = LocalStorageService.getData("user");
+  const user = useAppSelector((state) => state.auth.auth.user);
+  const dispatch = useAppDispatch();
+
+  const handleSetPlanProduct = () => {
+    dispatch(setPlanProduct(product));
+  };
 
   return (
     <Root $isActive={isActive} className={className}>
@@ -62,10 +67,11 @@ export const PlanCard: FC<PlanCardProps> = ({
         text="Get Gscore"
         variant="secondary"
         href={
-          user
+          user && user.id !== 0
             ? ROUTES.CHECKOUT_ID(`${product.prices[0].id}`)
             : ROUTES.REGISTRATION
         }
+        onClick={() => handleSetPlanProduct()}
       />
     </Root>
   );
