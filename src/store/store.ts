@@ -10,10 +10,12 @@ import storage from "redux-persist/lib/storage";
 
 import authReducer from "./features/auth";
 import planReducer from "./features/plan";
+import subscriptionReducer from "./features/subscription";
 
 const reducers = combineReducers({
   auth: authReducer,
   plan: planReducer,
+  subscriotion: subscriptionReducer,
 });
 
 const persistConfig = {

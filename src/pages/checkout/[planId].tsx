@@ -1,19 +1,34 @@
 import React from "react";
 
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 import { DEVICE } from "assets";
 import { PackageCard, RegisterTabs } from "components";
 import { Button } from "components/ui";
+import { ROUTES } from "constant";
 import { ContentLayout, MainLayout } from "Layout";
 import { buySubscription } from "services";
-import { useAppSelector } from "store/hooks";
+import { setSubscription } from "store/features/subscription";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 
 const CheckoutPage = () => {
   const plan = useAppSelector((state) => state.plan.plan);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const { planId } = router.query;
 
   const handleBuySubscription = (priceId: any) => {
-    buySubscription(priceId);
+    buySubscription(priceId)
+      .then((response) => {
+        dispatch(setSubscription(response.data));
+        router.push(ROUTES.STARTSUBSCRIPTION);
+      })
+
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
@@ -38,7 +53,7 @@ const CheckoutPage = () => {
 
                 <StyledButton
                   text="Purchase"
-                  onClick={() => handleBuySubscription(Number(plan.id))}
+                  onClick={() => handleBuySubscription(plan.id)}
                 />
               </div>
             );

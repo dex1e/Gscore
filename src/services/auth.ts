@@ -1,7 +1,6 @@
 import { APIURL } from "constant";
 
 import ApiService, { instance } from "./ApiService";
-import { LocalStorageService } from "./localStorageService";
 
 export const registerUser = async (
   email: any,

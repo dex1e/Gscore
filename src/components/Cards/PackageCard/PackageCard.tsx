@@ -16,6 +16,9 @@ export const PackageCard: FC<CheckoutCardProps> = ({
   priceCost,
   packageName,
 }) => {
+  console.log("packageName", packageName);
+  console.log("priceCost", priceCost);
+
   return (
     <Root className={className}>
       <Header>

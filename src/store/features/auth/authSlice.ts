@@ -4,6 +4,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "types";
 
 import { initialState } from "./initialState";
+import { IAuthInitialState } from "./types";
 
 export const authSlice = createSlice({
   name: "auth",

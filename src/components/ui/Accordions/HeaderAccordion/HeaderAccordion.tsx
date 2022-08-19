@@ -1,6 +1,7 @@
 import React, { FC, useRef, useState } from "react";
 
 import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   Accordion,
   AccordionItem,
@@ -15,6 +16,8 @@ import { ChevronDownIcon, LogoutIcon, SettingsIcon } from "components/icons";
 import { ROUTES, Z_INDEX } from "constant";
 import { useOnClickOutside } from "hooks";
 import { LocalStorageService } from "services";
+import { setToken, setUser } from "store/features/auth";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 
 interface HeaderAccordionProps {
   className?: string;
@@ -22,6 +25,9 @@ interface HeaderAccordionProps {
 
 export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
   const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
+  const user = useAppSelector((state) => state.auth.auth.user);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const handleAccordionExpanded = () => {
     setIsAccordionExpanded(false);
@@ -35,10 +41,10 @@ export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
 
   useOnClickOutside(clickOutsideRef, handleAccordionExpanded);
 
-  // const handleLogOut = () => {
-  //   LocalStorageService.removeData("token");
-  //   LocalStorageService.removeData("user");
-  // };
+  const handleLogOut = () => {
+    dispatch(setToken(""));
+    router.push(ROUTES.ROOT);
+  };
 
   return (
     <Root ref={clickOutsideRef} onClick={handleAccordionClick}>
@@ -46,7 +52,7 @@ export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
         <StyledAccordionItem dangerouslySetExpanded={isAccordionExpanded}>
           <AccordionItemHeading>
             <StyledAccordionItemButton>
-              <Username>Alex</Username>
+              <Username>{user.username}</Username>
 
               <StyledChevronDownIcon />
             </StyledAccordionItemButton>
@@ -59,12 +65,12 @@ export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
                 Settings
               </Settings>
 
-              <Link href={ROUTES.ROOT}>
-                <Logout>
-                  <StyledLogoutIcon />
-                  Logout
-                </Logout>
-              </Link>
+              {/* <Link href={ROUTES.ROOT}> */}
+              <Logout onClick={handleLogOut}>
+                <StyledLogoutIcon />
+                Logout
+              </Logout>
+              {/* </Link> */}
             </Wrapper>
           </StyledAccordionItemPanel>
         </StyledAccordionItem>

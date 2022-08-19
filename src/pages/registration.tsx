@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
@@ -10,7 +11,7 @@ import { ROUTES } from "constant";
 import { ContentLayout, MainLayout } from "Layout";
 import { registerUser } from "services";
 import { setToken } from "store/features/auth";
-import { useAppDispatch } from "store/hooks";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 
 const CheckInPage = () => {
   const [name, setName] = useState("");
@@ -19,7 +20,11 @@ const CheckInPage = () => {
 
   const [password, setPassword] = useState("");
 
+  const planId = useAppSelector((state) => state.plan.plan.id);
+
   const dispatch = useAppDispatch();
+
+  const router = useRouter();
 
   const handleChangeName = (event: any) => {
     let name = event.target.value;
@@ -36,11 +41,11 @@ const CheckInPage = () => {
     setPassword(password);
   };
 
-  const handleOnClick = (email: any, name: any, password: any) => {
+  const handleRegisterUser = (email: any, name: any, password: any) => {
     registerUser(email, name, password)
       .then((response: any) => {
-        response.data.token !== "";
         dispatch(setToken(response.data.token));
+        router.push(ROUTES.CHECKOUT_ID(String(planId)));
       })
 
       .catch(function (error: any) {
@@ -82,7 +87,7 @@ const CheckInPage = () => {
         <StyledButton
           text="Send password"
           type="submit"
-          onClick={() => handleOnClick(email, name, password)}
+          onClick={() => handleRegisterUser(email, name, password)}
         />
 
         <Login>
