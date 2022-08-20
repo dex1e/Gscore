@@ -1,6 +1,5 @@
 import React, { FC, useRef, useState } from "react";
 
-import Link from "next/link";
 import { useRouter } from "next/router";
 import {
   Accordion,
@@ -15,8 +14,7 @@ import { COLORS, DEVICE } from "assets";
 import { ChevronDownIcon, LogoutIcon, SettingsIcon } from "components/icons";
 import { ROUTES, Z_INDEX } from "constant";
 import { useOnClickOutside } from "hooks";
-import { LocalStorageService } from "services";
-import { setToken, setUser } from "store/features/auth";
+import { resetUser } from "store/features/auth";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
 interface HeaderAccordionProps {
@@ -25,7 +23,7 @@ interface HeaderAccordionProps {
 
 export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
   const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
-  const user = useAppSelector((state) => state.auth.auth.user);
+  const user = useAppSelector((state: any) => state.auth.auth.user);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -42,7 +40,7 @@ export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
   useOnClickOutside(clickOutsideRef, handleAccordionExpanded);
 
   const handleLogOut = () => {
-    dispatch(setToken(""));
+    dispatch(resetUser());
     router.push(ROUTES.ROOT);
   };
 

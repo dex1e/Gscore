@@ -7,7 +7,7 @@ import { COLORS } from "assets";
 import { GscoreLogoIcon, MenuIcon } from "components/icons";
 import { ROUTES } from "constant";
 import { Media } from "media";
-import { getMe } from "services";
+import { GET_ME } from "services";
 import { setUser } from "store/features/auth";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
@@ -17,10 +17,10 @@ import { MenuList } from "./MenuList";
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const token = useAppSelector((state) => state.auth.auth.token);
+  const token = useAppSelector((state) => state.auth.token);
   const dispatch = useAppDispatch();
 
-  const user = useAppSelector((state) => state.auth.auth.user);
+  const user = useAppSelector((state) => state.auth.user);
 
   useEffect(() => {
     getUser();
@@ -28,7 +28,7 @@ export const Header = () => {
 
   const getUser = async () => {
     if (token) {
-      const me = await getMe()
+      const me = await GET_ME()
         .then((response) => response.data)
 
         .catch(function (error: any) {
@@ -38,6 +38,7 @@ export const Header = () => {
       dispatch(setUser(me));
     }
   };
+
   const handleOpenMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -56,7 +57,7 @@ export const Header = () => {
             </Home>
           </Link>
 
-          {user && user.id !== 0 && (
+          {user?.id && (
             <Nav>
               <Media at="mobileS">
                 <BurgerButton onClick={handleOpenMenu}>
@@ -78,7 +79,7 @@ export const Header = () => {
 
 // () {
 // if (token) {
-//   const me = await getMe()
+//   const me = await GET_ME()
 //     .then((response) => response.data)
 
 //     .catch(function (error: any) {

@@ -7,17 +7,13 @@ export const registerUser = async (
   username: any,
   password: any
 ) => {
-  const json = JSON.stringify({ email, username, password });
-
-  return instance.post(APIURL.POSTSIGNUP, json);
+  return instance.post(APIURL.POST_SIGN_UP, { email, username, password });
 };
 
 export const loginUser = async (email: any, password: any) => {
-  const json = JSON.stringify({ email, password });
-
-  return ApiService.POST(APIURL.POSTSIGNIN, json);
+  return ApiService.POST(APIURL.POST_SIGN_IN, { email, password });
 };
 
-export const getMe = async () => {
-  return ApiService.GET(APIURL.GETME);
+export const GET_ME = async () => {
+  return ApiService.GET(APIURL.GET_ME);
 };

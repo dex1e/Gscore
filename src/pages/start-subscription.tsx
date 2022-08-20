@@ -7,7 +7,7 @@ import { PackageCard } from "components";
 import { Button } from "components/ui";
 import { ContentLayout, MainLayout } from "Layout";
 
-const StartSubscriptionPage = () => {
+const START_SUBSCRIPTIONPage = () => {
   return (
     <Root>
       <Container>
@@ -64,4 +64,4 @@ const StyledButton = styled(Button)`
   }
 `;
 
-export default StartSubscriptionPage;
+export default START_SUBSCRIPTIONPage;

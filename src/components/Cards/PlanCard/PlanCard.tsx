@@ -20,7 +20,7 @@ export const PlanCard: FC<PlanCardProps> = ({
   className,
   product,
 }) => {
-  const user = useAppSelector((state) => state.auth.auth.user);
+  const user = useAppSelector((state: any) => state.auth.auth.user);
   const dispatch = useAppDispatch();
 
   const handleSetPlanProduct = () => {
@@ -67,7 +67,7 @@ export const PlanCard: FC<PlanCardProps> = ({
         text="Get Gscore"
         variant="secondary"
         href={
-          user && user.id !== 0
+          user?.id
             ? ROUTES.CHECKOUT_ID(`${product.prices[0].id}`)
             : ROUTES.REGISTRATION
         }

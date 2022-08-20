@@ -3,5 +3,5 @@ export const ROUTES = {
   LOGIN: "/login",
   REGISTRATION: "/registration",
   CHECKOUT_ID: (id = ":id"): string => `checkout/${id}`,
-  STARTSUBSCRIPTION: "/startSubscription",
+  START_SUBSCRIPTION: "/start-subscription",
 };

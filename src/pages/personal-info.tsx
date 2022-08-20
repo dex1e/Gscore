@@ -3,7 +3,8 @@ import React from "react";
 import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
-import { Button, Input, SettingsTabs } from "components/ui";
+import { SettingsTabs } from "components";
+import { Button, Input } from "components/ui";
 import { MainLayout } from "Layout";
 
 const SettingsPage = () => {

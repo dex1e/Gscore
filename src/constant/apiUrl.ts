@@ -1,7 +1,8 @@
 export const APIURL = {
-  GETPRODUCTS: "api/products",
-  POSTSIGNUP: "api/users/sign-up",
-  POSTSIGNIN: "api/users/sign-in",
-  GETME: "api/users/me",
-  BUYSUBSCRIBE: "api/payments/buy",
+  GET_PRODUCTS: "api/products",
+  POST_SIGN_UP: "api/users/sign-up",
+  POST_SIGN_IN: "api/users/sign-in",
+  GET_ME: "api/users/me",
+  BUY_SUBSCRIBE: "api/payments/buy",
+  PATCH_UPDATE_PERSONAL_INFO: "/api/users",
 };

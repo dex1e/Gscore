@@ -23,7 +23,7 @@ const CheckoutPage = () => {
     buySubscription(priceId)
       .then((response) => {
         dispatch(setSubscription(response.data));
-        router.push(ROUTES.STARTSUBSCRIPTION);
+        router.push(ROUTES.START_SUBSCRIPTION);
       })
 
       .catch(function (error) {

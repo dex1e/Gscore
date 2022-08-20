@@ -47,12 +47,10 @@ export interface IPlan {
 }
 
 export interface ISubscription {
-  subscribe: {
-    id: number;
-    userId: number;
-    currentPeriodStart: number;
-    currentPeriodEnd: number;
-  };
+  id: number;
+  userId: number;
+  currentPeriodStart: number;
+  currentPeriodEnd: number;
 }
 
 export type EventOnClickOutside = MouseEvent | TouchEvent;

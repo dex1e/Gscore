@@ -1,11 +1,9 @@
 export interface IAuthInitialState {
-  auth: {
-    token: string;
+  token: string;
 
-    user: {
-      id: number;
-      email: string;
-      username: string;
-    };
+  user: {
+    id: number | null;
+    email: string;
+    username: string;
   };
 }

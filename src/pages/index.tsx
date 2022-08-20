@@ -3,12 +3,12 @@ import styled from "styled-components";
 
 import { MainLayout } from "Layout";
 import { Home } from "pageComponents";
-import { getMe, getProducts } from "services";
+import { GET_ME, GET_PRODUCTS } from "services";
 import { wrapper } from "store";
 import { setUser } from "store/features/auth";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
-const HomePage: NextPage = ({ products, me }: any) => {
+const HomePage: NextPage = ({ products }: any) => {
   return (
     <Root>
       <Home products={products} />
@@ -19,7 +19,7 @@ const HomePage: NextPage = ({ products, me }: any) => {
 // export const getServerSideProps = wrapper.getServerSideProps(
 //   (store) => async (ctx) => {
 //     console.log(store);
-//     const products = await getProducts()
+//     const products = await GET_PRODUCTS()
 //       .then((response) => response.data)
 
 //       .catch(function (error: any) {
@@ -34,7 +34,7 @@ const HomePage: NextPage = ({ products, me }: any) => {
 //     let me = "";
 
 //     if (token) {
-//       me = await getMe()
+//       me = await GET_ME()
 //         .then((response) => response.data)
 
 //         .catch(function (error: any) {
@@ -57,7 +57,7 @@ const HomePage: NextPage = ({ products, me }: any) => {
 // );
 
 export async function getStaticProps() {
-  const products = await getProducts()
+  const products = await GET_PRODUCTS()
     .then((response) => response.data)
 
     .catch(function (error: any) {

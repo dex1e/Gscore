@@ -1,16 +1,19 @@
 import axios from "axios";
 
+import { BASE_URL } from "constant";
 import { store } from "store";
 
-import { LocalStorageService } from "./localStorageService";
-
 export const instance = axios.create({
-  baseURL: "https://gscore-back.herokuapp.com/",
+  baseURL: BASE_URL,
   headers: { "Content-type": "application/json; charset=UTF-8" },
 });
 
 instance.interceptors.request.use((config: any) => {
-  config.headers.Authorization = `Bearer ${store.getState().auth.auth.token}`;
+  const token = store.getState().auth.token;
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
 
   return config;
 });
