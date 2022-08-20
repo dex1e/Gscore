@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 
 import { useRouter } from "next/router";
 import styled from "styled-components";
@@ -23,12 +23,12 @@ const LoginPage = () => {
 
   const router = useRouter();
 
-  const handleChangeEmail = (event: any) => {
+  const handleChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     let email = event.target.value;
     setEmail(email);
   };
 
-  const handleChangePassword = (event: any) => {
+  const handleChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     let password = event.target.value;
     setPassword(password);
   };

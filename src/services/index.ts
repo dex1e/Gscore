@@ -1,3 +1,4 @@
+export { updatePersonalInfo } from "./userInfo";
 export { GET_PRODUCTS } from "./products";
 export { buySubscription } from "./buySubscription";
 export { GET_ME } from "./auth";

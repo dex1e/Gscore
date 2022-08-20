@@ -20,7 +20,7 @@ export const PlanCard: FC<PlanCardProps> = ({
   className,
   product,
 }) => {
-  const user = useAppSelector((state: any) => state.auth.auth.user);
+  const user = useAppSelector((state: any) => state.auth.user);
   const dispatch = useAppDispatch();
 
   const handleSetPlanProduct = () => {

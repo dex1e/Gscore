@@ -16,11 +16,9 @@ export const SettingsTabs: FC<SettingsTabsProps> = ({ className }) => {
     <StyledTabs selectedTabClassName="isSelected" className={className}>
       <StyledTabList>
         <StyledTab>Profile</StyledTab>
-        <StyledTab>Subscriptions</StyledTab>
         <StyledTab>Change password</StyledTab>
       </StyledTabList>
 
-      <TabPanel></TabPanel>
       <TabPanel></TabPanel>
       <TabPanel></TabPanel>
     </StyledTabs>

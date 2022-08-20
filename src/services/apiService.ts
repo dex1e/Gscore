@@ -19,12 +19,15 @@ instance.interceptors.request.use((config: any) => {
 });
 
 class ApiService {
-  GET(url: string) {
+  get(url: string) {
     return instance.get(url);
   }
 
-  POST(url: string, data: any) {
+  post(url: string, data: any) {
     return instance.post(url, data);
+  }
+  patch(url: string, data: any) {
+    return instance.patch(url, data);
   }
 }
 

@@ -1,5 +1,6 @@
 import React, { FC, useRef, useState } from "react";
 
+import Link from "next/link";
 import { useRouter } from "next/router";
 import {
   Accordion,
@@ -23,7 +24,7 @@ interface HeaderAccordionProps {
 
 export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
   const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
-  const user = useAppSelector((state: any) => state.auth.auth.user);
+  const user = useAppSelector((state: any) => state.auth.user);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -58,17 +59,17 @@ export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
 
           <StyledAccordionItemPanel>
             <Wrapper>
-              <Settings href="#">
-                <StyledSettingsIcon />
-                Settings
-              </Settings>
+              <Link href={ROUTES.PERSONAL_INFO}>
+                <Settings>
+                  <StyledSettingsIcon />
+                  Settings
+                </Settings>
+              </Link>
 
-              {/* <Link href={ROUTES.ROOT}> */}
               <Logout onClick={handleLogOut}>
                 <StyledLogoutIcon />
                 Logout
               </Logout>
-              {/* </Link> */}
             </Wrapper>
           </StyledAccordionItemPanel>
         </StyledAccordionItem>

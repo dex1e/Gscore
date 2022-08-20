@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 
 import styled from "styled-components";
 
@@ -6,8 +6,40 @@ import { COLORS, DEVICE } from "assets";
 import { SettingsTabs } from "components";
 import { Button, Input } from "components/ui";
 import { MainLayout } from "Layout";
+import { updatePersonalInfo } from "services";
+import { setUser } from "store/features/auth";
+import { useAppDispatch } from "store/hooks";
 
 const SettingsPage = () => {
+  const [username, setUsername] = useState("");
+
+  const [email, setEmail] = useState("");
+
+  const dispatch = useAppDispatch();
+
+  const handleChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
+    let email = event?.target?.value;
+
+    setEmail(email);
+  };
+
+  const handleChangeUsername = (event: ChangeEvent<HTMLInputElement>) => {
+    let username = event?.target?.value;
+
+    setUsername(username);
+  };
+
+  const handleUpdateInfo = (email: string, username: string) => {
+    updatePersonalInfo(email, username)
+      .then((response: any) => {
+        dispatch(setUser(response.data));
+      })
+
+      .catch(function (error: any) {
+        console.log(error);
+      });
+  };
+
   return (
     <Root>
       <Container>
@@ -17,11 +49,23 @@ const SettingsPage = () => {
 
         <Wrapper>
           <Subtitle>Personal Info</Subtitle>
-          <StyledInput placeholder="Username" />
-          <StyledInput placeholder="Email" />
+          <StyledInput
+            placeholder="Username"
+            value={username}
+            onChange={handleChangeUsername}
+          />
+          <StyledInput
+            placeholder="Email"
+            value={email}
+            onChange={handleChangeEmail}
+          />
         </Wrapper>
 
-        <StyledButton text="Save" />
+        <StyledButton
+          text="Save"
+          type="submit"
+          onClick={() => handleUpdateInfo(email, username)}
+        />
       </Container>
     </Root>
   );
