@@ -6,8 +6,11 @@ import { DEVICE } from "assets";
 import { PackageCard } from "components";
 import { Button } from "components/ui";
 import { ContentLayout, MainLayout } from "Layout";
+import { useAppSelector } from "store/hooks";
 
-const START_SUBSCRIPTIONPage = () => {
+const StartSubscriptionPage = () => {
+  const plan = useAppSelector((state) => state.plan.plan);
+
   return (
     <Root>
       <Container>
@@ -18,7 +21,16 @@ const START_SUBSCRIPTIONPage = () => {
           the plugin with a license key.
         </Text>
 
-        <StyledPackageCard />
+        {plan.id !== 0 &&
+          plan.prices.map((priceId) => {
+            return (
+              <StyledPackageCard
+                key={priceId.id}
+                packageName={plan.name}
+                priceCost={priceId.price}
+              />
+            );
+          })}
         <StyledButton text="Go to my subscriptions" />
       </Container>
     </Root>
@@ -64,4 +76,4 @@ const StyledButton = styled(Button)`
   }
 `;
 
-export default START_SUBSCRIPTIONPage;
+export default StartSubscriptionPage;

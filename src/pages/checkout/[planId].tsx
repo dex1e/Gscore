@@ -17,7 +17,7 @@ const CheckoutPage = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const { planId } = router.query;
+  // const { planId } = router.query;
 
   const handleBuySubscription = (priceId: any) => {
     buySubscription(priceId)
