@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
@@ -5,9 +7,13 @@ import styled from "styled-components";
 import { COLORS } from "assets";
 import { Z_INDEX } from "constant";
 
-export const SettingsTabs = () => {
+interface SettingsTabsProps {
+  className?: string;
+}
+
+export const SettingsTabs: FC<SettingsTabsProps> = ({ className }) => {
   return (
-    <StyledTabs selectedTabClassName="isSelected">
+    <StyledTabs selectedTabClassName="isSelected" className={className}>
       <StyledTabList>
         <StyledTab>Profile</StyledTab>
         <StyledTab>Subscriptions</StyledTab>
