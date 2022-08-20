@@ -19,9 +19,17 @@ const CheckInPage = () => {
         </Text>
 
         <InputWrapper>
-          <StyledInput placeholder="Username" />
-          <StyledInput placeholder="Email" />
-          <StyledInput placeholder="Password" />
+          <InputItem>
+            <StyledInput placeholder="Username" />
+          </InputItem>
+
+          <InputItem>
+            <StyledInput placeholder="Email" />
+          </InputItem>
+
+          <InputItem>
+            <StyledInput placeholder="Password" />
+          </InputItem>
         </InputWrapper>
 
         <StyledButton text="Send password" />
@@ -73,6 +81,16 @@ const Text = styled.p`
 const InputWrapper = styled.div`
   @media ${DEVICE.tablet} {
     padding-bottom: 48px;
+  }
+`;
+
+const InputItem = styled.div`
+  @media ${DEVICE.tablet} {
+    padding-bottom: 24px;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
   }
 `;
 

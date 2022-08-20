@@ -16,8 +16,13 @@ const SettingsPage = () => {
 
         <Wrapper>
           <Subtitle>Personal Info</Subtitle>
-          <StyledInput placeholder="Username" />
-          <StyledInput placeholder="Email" />
+          <InputItem>
+            <StyledInput placeholder="Username" />
+          </InputItem>
+
+          <InputItem>
+            <StyledInput placeholder="Email" />
+          </InputItem>
         </Wrapper>
 
         <StyledButton text="Save" />
@@ -67,6 +72,16 @@ const Subtitle = styled.h2`
     font-size: 28px;
     line-height: 40px;
     padding-bottom: 24px;
+  }
+`;
+
+const InputItem = styled.div`
+  @media ${DEVICE.laptop} {
+    padding-bottom: 24px;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
   }
 `;
 

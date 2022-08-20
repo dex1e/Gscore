@@ -1,3 +1,5 @@
+export { ArrowLeftIcon } from "./ArrowLeftIcon";
+export { ArrowRightIcon } from "./ArrowRightIcon";
 export { ShopBasketIcon } from "./ShopBasketIcon";
 export { ChevronDownIcon } from "./ChevronDownIcon";
 export { LogoutIcon } from "./LogoutIcon";

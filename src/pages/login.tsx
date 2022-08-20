@@ -14,8 +14,13 @@ const LoginPage = () => {
         <Title>Log in</Title>
 
         <InputWrapper>
-          <StyledInput placeholder="Email" />
-          <StyledInput placeholder="Password" />
+          <InputItem>
+            <StyledInput placeholder="Email" />
+          </InputItem>
+
+          <InputItem>
+            <StyledInput placeholder="Password" />
+          </InputItem>
         </InputWrapper>
 
         <StyledButton text="Log in" />
@@ -53,6 +58,16 @@ const Title = styled.h1`
 const InputWrapper = styled.div`
   @media ${DEVICE.laptop} {
     padding-bottom: 48px;
+  }
+`;
+
+const InputItem = styled.div`
+  @media ${DEVICE.laptop} {
+    padding-bottom: 24px;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
   }
 `;
 
