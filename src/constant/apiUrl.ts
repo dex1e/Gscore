@@ -5,4 +5,5 @@ export const APIURL = {
   GET_ME: "api/users/me",
   BUY_SUBSCRIBE: "api/payments/buy",
   PATCH_UPDATE_PERSONAL_INFO: "/api/users",
+  GET_MY_SUBSCRIPTIONS: "api/subscribe/self",
 };

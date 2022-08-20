@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
 
@@ -7,9 +7,25 @@ import { DomainCard, SubscriptionCard } from "components";
 import { ArrowLeftIcon, ArrowRightIcon } from "components/icons";
 import { Button } from "components/ui";
 import { MainLayout } from "Layout";
+import { getMySubscriptions } from "services";
 import { card, domainCard } from "utils";
 
 const MySubscriptionsPage = () => {
+  const [mySubscriptions, setMySubscriptions] = useState([]);
+
+  useEffect(() => {
+    getSubscriptions();
+  }, []);
+
+  const getSubscriptions = async () => {
+    await getMySubscriptions()
+      .then((response) => {
+        setMySubscriptions(response.data);
+      })
+      .catch(function (error: any) {
+        console.log(error);
+      });
+  };
   return (
     <Root>
       <Container>

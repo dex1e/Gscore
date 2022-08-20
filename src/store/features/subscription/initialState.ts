@@ -2,9 +2,9 @@ import { ISubscriptionInitialState } from "./types";
 
 export const initialState: ISubscriptionInitialState = {
   subscribe: {
-    id: 0,
-    userId: 0,
-    currentPeriodStart: 0,
-    currentPeriodEnd: 0,
+    id: null,
+    userId: null,
+    currentPeriodStart: null,
+    currentPeriodEnd: null,
   },
 };
