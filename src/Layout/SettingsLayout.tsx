@@ -20,6 +20,5 @@ const Root = styled.div`
   overflow: hidden;
   height: 100%;
   max-width: 1226px;
-  margin-top: 64px;
-  color: ${COLORS.neutral100};
+  /* margin-top: 64px; */
 `;
