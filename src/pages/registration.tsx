@@ -65,23 +65,29 @@ const CheckInPage = () => {
         </Text>
 
         <InputWrapper>
-          <StyledInput
-            placeholder="Username"
-            value={name}
-            onChange={handleChangeName}
-          />
+          <InputItem>
+            <StyledInput
+              placeholder="Username"
+              value={name}
+              onChange={handleChangeName}
+            />
+          </InputItem>
 
-          <StyledInput
-            placeholder="Email"
-            value={email}
-            onChange={handleChangeEmail}
-          />
+          <InputItem>
+            <StyledInput
+              placeholder="Email"
+              value={email}
+              onChange={handleChangeEmail}
+            />
+          </InputItem>
 
-          <StyledInput
-            placeholder="Password"
-            value={password}
-            onChange={handleChangePassword}
-          />
+          <InputItem>
+            <StyledInput
+              placeholder="Password"
+              value={password}
+              onChange={handleChangePassword}
+            />
+          </InputItem>
         </InputWrapper>
 
         <StyledButton
@@ -140,6 +146,16 @@ const Text = styled.p`
 const InputWrapper = styled.div`
   @media ${DEVICE.tablet} {
     padding-bottom: 48px;
+  }
+`;
+
+const InputItem = styled.div`
+  @media ${DEVICE.tablet} {
+    padding-bottom: 24px;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
   }
 `;
 

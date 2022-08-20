@@ -9,9 +9,10 @@ import { CodeStatus, IDomainCard } from "types";
 
 interface domainCardProps {
   domainCard: IDomainCard;
+  className?: string;
 }
 
-export const DomainCard: FC<domainCardProps> = ({ domainCard }) => {
+export const DomainCard: FC<domainCardProps> = ({ domainCard, className }) => {
   const handleCopyToClipboard = () => {
     navigator?.clipboard?.writeText(domainCard?.licenseUrl);
   };
@@ -23,7 +24,7 @@ export const DomainCard: FC<domainCardProps> = ({ domainCard }) => {
     domainCard?.status === CodeStatus?.HOLD;
 
   return (
-    <Root $isStatusInactive={isStatusInactive}>
+    <Root $isStatusInactive={isStatusInactive} className={className}>
       <StyledCheckbox $isStatusInactive={isStatusInactive} />
 
       <StatusGridWrapper $isStatusInactive={isStatusInactive}>

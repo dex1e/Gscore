@@ -54,16 +54,21 @@ const LoginPage = () => {
         <Title>Log in</Title>
 
         <InputWrapper>
-          <StyledInput
-            placeholder="Email"
-            value={email}
-            onChange={handleChangeEmail}
-          />
-          <StyledInput
-            placeholder="Password"
-            value={password}
-            onChange={handleChangePassword}
-          />
+          <InputItem>
+            <StyledInput
+              placeholder="Email"
+              value={email}
+              onChange={handleChangeEmail}
+            />
+          </InputItem>
+
+          <InputItem>
+            <StyledInput
+              placeholder="Password"
+              value={password}
+              onChange={handleChangePassword}
+            />
+          </InputItem>
         </InputWrapper>
 
         <StyledButton
@@ -104,6 +109,16 @@ const Title = styled.h1`
 const InputWrapper = styled.div`
   @media ${DEVICE.laptop} {
     padding-bottom: 48px;
+  }
+`;
+
+const InputItem = styled.div`
+  @media ${DEVICE.laptop} {
+    padding-bottom: 24px;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
   }
 `;
 

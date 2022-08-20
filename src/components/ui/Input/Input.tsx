@@ -22,7 +22,7 @@ export const Input: FC<InputProps> = ({
   const hasError = Boolean(error);
 
   return (
-    <Root className={className}>
+    <Root>
       <StyledInput
         className={className}
         disabled={isDisabled}
@@ -32,6 +32,7 @@ export const Input: FC<InputProps> = ({
       />
 
       {isSuccess && !hasError && <StyledSuccessIcon />}
+
       {hasError && (
         <>
           <StyledErrorIcon />

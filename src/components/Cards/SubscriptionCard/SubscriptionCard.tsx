@@ -9,13 +9,17 @@ import { ICard } from "types";
 
 interface SubscriptionCardProps {
   card: ICard;
+  className?: string;
 }
 
-export const SubscriptionCard: FC<SubscriptionCardProps> = ({ card }) => {
+export const SubscriptionCard: FC<SubscriptionCardProps> = ({
+  card,
+  className,
+}) => {
   const validEndDate = dayjs.unix(card?.currentPeriodEnd).format("DD.MM.YYYY");
 
   return (
-    <Root>
+    <Root className={className}>
       <Header>
         <SubscriptionName>{card?.title}</SubscriptionName>
         <Status status={card?.status} />

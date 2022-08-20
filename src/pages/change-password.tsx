@@ -17,8 +17,13 @@ const SettingsPage = () => {
 
         <Wrapper>
           <Subtitle>Change Password</Subtitle>
-          <StyledInput placeholder="Current Password" />
-          <StyledInput placeholder="New Password" />
+          <InputItem>
+            <StyledInput placeholder="Current Password" />
+          </InputItem>
+
+          <InputItem>
+            <StyledInput placeholder="New Password" />
+          </InputItem>
         </Wrapper>
 
         <StyledButton text="Save" />
@@ -68,6 +73,16 @@ const Subtitle = styled.h2`
     font-size: 28px;
     line-height: 40px;
     padding-bottom: 24px;
+  }
+`;
+
+const InputItem = styled.div`
+  @media ${DEVICE.laptop} {
+    padding-bottom: 24px;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
   }
 `;
 

@@ -49,16 +49,21 @@ const SettingsPage = () => {
 
         <Wrapper>
           <Subtitle>Personal Info</Subtitle>
-          <StyledInput
-            placeholder="Username"
-            value={username}
-            onChange={handleChangeUsername}
-          />
-          <StyledInput
-            placeholder="Email"
-            value={email}
-            onChange={handleChangeEmail}
-          />
+          <InputItem>
+            <StyledInput
+              placeholder="Username"
+              value={username}
+              onChange={handleChangeUsername}
+            />
+          </InputItem>
+
+          <InputItem>
+            <StyledInput
+              placeholder="Email"
+              value={email}
+              onChange={handleChangeEmail}
+            />
+          </InputItem>
         </Wrapper>
 
         <StyledButton
@@ -112,6 +117,16 @@ const Subtitle = styled.h2`
     font-size: 28px;
     line-height: 40px;
     padding-bottom: 24px;
+  }
+`;
+
+const InputItem = styled.div`
+  @media ${DEVICE.laptop} {
+    padding-bottom: 24px;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
   }
 `;
 
