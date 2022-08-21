@@ -8,27 +8,30 @@ import {
   AccordionItemPanel,
 } from "react-accessible-accordion";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 
 import { COLORS } from "assets";
 import { ChevronRightIcon } from "components/icons";
-import { accordion } from "utils";
-
+import { accordions } from "utils";
 export const AccordionMenu = () => {
   return (
     <Root allowZeroExpanded>
-      <StyledAccordionItem
-        activeClassName="active accordion__item"
-        className="accordion__item"
-      >
-        <AccordionItemHeading>
-          <StyledAccordionItemButton>
-            Open me
-            <StyledChevronRightIcon />
-          </StyledAccordionItemButton>
-        </AccordionItemHeading>
+      {accordions.map((accordion) => (
+        <StyledAccordionItem
+          activeClassName="active accordion__item"
+          className="accordion__item"
+          key={uuidv4()}
+        >
+          <AccordionItemHeading>
+            <StyledAccordionItemButton>
+              {accordion?.heading}
+              <StyledChevronRightIcon />
+            </StyledAccordionItemButton>
+          </AccordionItemHeading>
 
-        <StyledAccordionItemPanel>{accordion?.text}</StyledAccordionItemPanel>
-      </StyledAccordionItem>
+          <StyledAccordionItemPanel>{accordion?.text}</StyledAccordionItemPanel>
+        </StyledAccordionItem>
+      ))}
     </Root>
   );
 };

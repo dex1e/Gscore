@@ -16,6 +16,9 @@ export const domainCard: IDomainCard = {
   status: CodeStatus.INACTIVE,
 };
 
-export const accordion = {
-  text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit id venenatis pretium risus euismod dictum egestas orci netus feugiat ut egestas ut sagittis tincidunt phasellus elit etiam cursus orci in. Id sed montes.",
-};
+export const accordions = [
+  {
+    heading: "Open me",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit id venenatis pretium risus euismod dictum egestas orci netus feugiat ut egestas ut sagittis tincidunt phasellus elit etiam cursus orci in. Id sed montes.",
+  },
+];

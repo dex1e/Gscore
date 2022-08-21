@@ -24,10 +24,11 @@ export const Footer = () => {
 
           <Copyright>
             <CopyrightText>
-              Copyright &copy; {currentYear} GScore | All Rights Reserved |
-              <> </>
+              <CopyrightItem>
+                Copyright &copy; {currentYear} GScore
+              </CopyrightItem>
+              <CopyrightItem>All Rights Reserved</CopyrightItem>
               <Info href="#">Cookies</Info>
-              <> </>|<> </>
               <Info href="#">Privacy Policy</Info>
             </CopyrightText>
 
@@ -105,9 +106,19 @@ const CopyrightText = styled.p`
   }
 `;
 
+const CopyrightItem = styled.span`
+  width: fit-content;
+  margin-left: 5px;
+
+  &::after {
+    content: " |";
+  }
+`;
+
 const Info = styled.a`
   color: ${COLORS.neutral100};
   text-decoration: underline;
+  margin-left: 5px;
 
   &:hover {
     text-decoration: none;
@@ -116,6 +127,16 @@ const Info = styled.a`
 
   &:focus {
     box-shadow: 0px 0px 10px 0px ${COLORS.primary};
+  }
+
+  &::after {
+    content: " |";
+  }
+
+  &:last-child {
+    &::after {
+      content: "";
+    }
   }
 `;
 
