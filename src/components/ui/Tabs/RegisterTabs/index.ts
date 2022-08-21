@@ -1,0 +1,1 @@
+export { RegisterTabs } from "./RegisterTabs";

@@ -1,0 +1,1 @@
+export { LinkedinIcon } from "./LinkedinIcon";

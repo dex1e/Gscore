@@ -1,0 +1,1 @@
+export { LessIcon } from "./LessIcon";
