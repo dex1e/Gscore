@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { MainLayout } from "Layout";
 import { Home } from "pageComponents";
-import { GET_ME, GET_PRODUCTS } from "services";
+import { getProducts } from "services";
 import { wrapper } from "store";
 import { setUser } from "store/features/auth";
 import { useAppDispatch, useAppSelector } from "store/hooks";
@@ -57,7 +57,7 @@ const HomePage: NextPage = ({ products }: any) => {
 // );
 
 export async function getStaticProps() {
-  const products = await GET_PRODUCTS()
+  const products = await getProducts()
     .then((response) => response.data)
 
     .catch(function (error: any) {

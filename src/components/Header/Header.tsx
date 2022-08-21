@@ -7,7 +7,7 @@ import { COLORS } from "assets";
 import { GscoreLogoIcon, MenuIcon } from "components/icons";
 import { ROUTES } from "constant";
 import { Media } from "media";
-import { GET_ME } from "services";
+import { getMe } from "services/auth";
 import { setUser } from "store/features/auth";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
@@ -28,7 +28,7 @@ export const Header = () => {
 
   const getUser = async () => {
     if (token) {
-      const me = await GET_ME()
+      const me = await getMe()
         .then((response) => response.data)
 
         .catch(function (error: any) {

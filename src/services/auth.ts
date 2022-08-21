@@ -14,6 +14,6 @@ export const loginUser = async (email: any, password: any) => {
   return ApiService.post(APIURL.POST_SIGN_IN, { email, password });
 };
 
-export const GET_ME = async () => {
+export const getMe = async () => {
   return ApiService.get(APIURL.GET_ME);
 };
