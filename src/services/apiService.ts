@@ -23,8 +23,8 @@ class ApiService {
     return instance.get(url);
   }
 
-  post(url: string, data: any) {
-    return instance.post(url, data);
+  post(url: string, data: any, parameters?: any) {
+    return instance.post(url, data, parameters);
   }
   patch(url: string, data: any) {
     return instance.patch(url, data);

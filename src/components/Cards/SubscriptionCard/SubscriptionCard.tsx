@@ -1,35 +1,37 @@
 import { FC } from "react";
 
 import dayjs from "dayjs";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
 import { Button, Status } from "components/ui";
 import { ICard } from "types";
 
 interface SubscriptionCardProps {
-  card: ICard;
+  card: any;
   className?: string;
+  isInactive?: boolean;
 }
 
 export const SubscriptionCard: FC<SubscriptionCardProps> = ({
   card,
   className,
+  isInactive,
 }) => {
   const validEndDate = dayjs.unix(card?.currentPeriodEnd).format("DD.MM.YYYY");
 
   return (
-    <Root className={className}>
+    <Root className={className} $isInactive={isInactive}>
       <Header>
-        <SubscriptionName>{card?.title}</SubscriptionName>
+        <SubscriptionName>Gscore</SubscriptionName>
         <Status status={card?.status} />
       </Header>
 
       <Content>
         <Description>
           <License>
-            <LicenseName>{card?.licenseItem}</LicenseName>
-            {card?.price}
+            <LicenseName>{card?.product?.name}</LicenseName>$
+            {card?.product?.prices[0]?.price}
           </License>
 
           <ValidEndDate>valid until {validEndDate}</ValidEndDate>
@@ -41,13 +43,19 @@ export const SubscriptionCard: FC<SubscriptionCardProps> = ({
   );
 };
 
-const Root = styled.div`
+const Root = styled.div<{ $isInactive?: boolean }>`
   max-width: 318px;
   width: 100%;
   box-shadow: 0px 24px 65px rgba(0, 0, 0, 0.12);
   border-radius: 12px;
   background: ${COLORS.neutral700};
   padding: 32px 0;
+
+  ${({ $isInactive }) =>
+    $isInactive &&
+    css`
+      opacity: 0.3;
+    `}
 
   @media ${DEVICE.laptop} {
     max-width: 400px;

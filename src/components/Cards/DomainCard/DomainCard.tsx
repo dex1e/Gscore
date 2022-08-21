@@ -1,18 +1,33 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
 import styled, { css } from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
 import { CopyIcon } from "components/icons";
 import { Button, Checkbox, Input, Status } from "components/ui";
+import { activateLicenseCode } from "services";
 import { CodeStatus, IDomainCard } from "types";
 
 interface domainCardProps {
-  domainCard: IDomainCard;
+  domainCard: any;
   className?: string;
 }
 
 export const DomainCard: FC<domainCardProps> = ({ domainCard, className }) => {
+  const [domain, setDomain] = useState("");
+
+  const handleChangeDomain = (event: any) => {
+    const domainInputValue = event.target.value;
+
+    setDomain(domainInputValue);
+  };
+
+  const handleActivateDomain = async () => {
+    await activateLicenseCode(domain, domainCard?.code)
+      .then((response) => console.log(response.data))
+      .catch((error) => console.log(error));
+  };
+
   const handleCopyToClipboard = () => {
     navigator?.clipboard?.writeText(domainCard?.licenseUrl);
   };
@@ -38,15 +53,16 @@ export const DomainCard: FC<domainCardProps> = ({ domainCard, className }) => {
             text="Activate"
             variant="secondary"
             $isStatusInactive={isStatusInactive}
+            onClick={handleActivateDomain}
           />
         )}
       </StatusGridWrapper>
 
       <Content>
         <LicenseGridWrapper>
-          <Title>{domainCard?.licenseTitle}</Title>
+          <Title>License code</Title>
           <Code>
-            <LicenseInput value={domainCard?.licenseUrl} readOnly />
+            <LicenseInput defaultValue={domainCard?.code || ""} readOnly />
             <CopyButton onClick={handleCopyToClipboard}>
               <CopyIcon />
             </CopyButton>
@@ -54,8 +70,12 @@ export const DomainCard: FC<domainCardProps> = ({ domainCard, className }) => {
         </LicenseGridWrapper>
 
         <DomainGridWrapper>
-          <Title>{domainCard?.domainTitle}</Title>
-          <DomainInput readOnly={readOnlyInput} />
+          <Title>Domain</Title>
+          <DomainInput
+            readOnly={readOnlyInput}
+            value={domainCard?.origin || domain}
+            onChange={handleChangeDomain}
+          />
         </DomainGridWrapper>
       </Content>
     </Root>

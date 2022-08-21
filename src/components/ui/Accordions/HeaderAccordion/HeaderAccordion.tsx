@@ -59,7 +59,7 @@ export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
 
           <StyledAccordionItemPanel>
             <Wrapper>
-              <Link href={ROUTES.PERSONAL_INFO}>
+              <Link href={ROUTES.SETTINGS}>
                 <Settings>
                   <StyledSettingsIcon />
                   Settings

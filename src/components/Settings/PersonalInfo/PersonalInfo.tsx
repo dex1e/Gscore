@@ -1,16 +1,14 @@
-import React, { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 import styled from "styled-components";
 
-import { COLORS, DEVICE } from "assets";
-import { SettingsTabs } from "components";
+import { DEVICE } from "assets";
 import { Button, Input } from "components/ui";
-import { MainLayout } from "Layout";
 import { updatePersonalInfo } from "services";
 import { setUser } from "store/features/auth";
 import { useAppDispatch } from "store/hooks";
 
-const SettingsPage = () => {
+export const PersonalInfo = () => {
   const [username, setUsername] = useState("");
 
   const [email, setEmail] = useState("");
@@ -42,65 +40,36 @@ const SettingsPage = () => {
 
   return (
     <Root>
-      <Container>
-        <Title>Settings</Title>
+      <Wrapper>
+        <Subtitle>Personal Info</Subtitle>
+        <InputItem>
+          <StyledInput
+            placeholder="Username"
+            value={username}
+            onChange={handleChangeUsername}
+          />
+        </InputItem>
 
-        <StyledSettingsTabs />
+        <InputItem>
+          <StyledInput
+            placeholder="Email"
+            value={email}
+            onChange={handleChangeEmail}
+          />
+        </InputItem>
+      </Wrapper>
 
-        <Wrapper>
-          <Subtitle>Personal Info</Subtitle>
-          <InputItem>
-            <StyledInput
-              placeholder="Username"
-              value={username}
-              onChange={handleChangeUsername}
-            />
-          </InputItem>
-
-          <InputItem>
-            <StyledInput
-              placeholder="Email"
-              value={email}
-              onChange={handleChangeEmail}
-            />
-          </InputItem>
-        </Wrapper>
-
-        <StyledButton
-          text="Save"
-          type="submit"
-          onClick={() => handleUpdateInfo(email, username)}
-        />
-      </Container>
+      <StyledButton
+        text="Save"
+        type="submit"
+        onClick={() => handleUpdateInfo(email, username)}
+      />
     </Root>
   );
 };
 
-const Root = styled(MainLayout)`
+const Root = styled.div`
   width: 100%;
-`;
-
-const Container = styled.div`
-  @media ${DEVICE.laptop} {
-    color: ${COLORS.neutral100};
-    padding: 65px 0 444px;
-    overflow: hidden;
-  }
-`;
-
-const Title = styled.h1`
-  @media ${DEVICE.laptop} {
-    font-weight: 700;
-    font-size: 54px;
-    line-height: 64px;
-    padding-bottom: 48px;
-  }
-`;
-
-const StyledSettingsTabs = styled(SettingsTabs)`
-  @media ${DEVICE.laptop} {
-    margin-bottom: 48px;
-  }
 `;
 
 const Wrapper = styled.div`
@@ -146,5 +115,3 @@ const StyledButton = styled(Button)`
     width: 100%;
   }
 `;
-
-export default SettingsPage;

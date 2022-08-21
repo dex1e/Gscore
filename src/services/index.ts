@@ -1,3 +1,4 @@
+export { activateLicenseCode } from "./code";
 export { getMySubscriptions } from "./subscription";
 export { updatePersonalInfo } from "./userInfo";
 export { GET_PRODUCTS } from "./products";

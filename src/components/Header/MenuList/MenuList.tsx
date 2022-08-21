@@ -1,15 +1,19 @@
 import React from "react";
 
+import Link from "next/link";
 import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
 import { HeaderAccordion } from "components/ui";
+import { ROUTES } from "constant";
 
 export const MenuList = () => {
   return (
     <Root>
       <MySubscriptionsWrapper>
-        <MySubscriptions href="#">My subscriptions</MySubscriptions>
+        <Link href={ROUTES.MY_SUBSCRIPTIONS}>
+          <MySubscriptions>My subscriptions</MySubscriptions>
+        </Link>
       </MySubscriptionsWrapper>
 
       <StyledHeaderAccordion />

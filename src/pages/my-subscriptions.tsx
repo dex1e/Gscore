@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
-import styled from "styled-components";
+import useEmblaCarousel from "embla-carousel-react";
+import styled, { css } from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
 import { DomainCard, SubscriptionCard } from "components";
@@ -8,24 +9,53 @@ import { ArrowLeftIcon, ArrowRightIcon } from "components/icons";
 import { Button } from "components/ui";
 import { MainLayout } from "Layout";
 import { getMySubscriptions } from "services";
-import { card, domainCard } from "utils";
 
 const MySubscriptionsPage = () => {
   const [mySubscriptions, setMySubscriptions] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const [emblaRef, emblaApi] = useEmblaCarousel();
+
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
 
   useEffect(() => {
     getSubscriptions();
+
+    return () => {
+      emblaApi?.off("select", onSelect);
+    };
   }, []);
 
   const getSubscriptions = async () => {
+    setLoading(true);
     await getMySubscriptions()
       .then((response) => {
         setMySubscriptions(response.data);
+        setLoading(false);
       })
       .catch(function (error: any) {
         console.log(error);
       });
   };
+
+  if (loading) {
+    return <div>Загрузка</div>;
+  }
+
+  const onSelect = () => {
+    setActiveSlideIndex(emblaApi?.selectedScrollSnap() || 0);
+  };
+
+  emblaApi?.on("select", onSelect);
+
   return (
     <Root>
       <Container>
@@ -35,26 +65,48 @@ const MySubscriptionsPage = () => {
         </Header>
 
         <SubscriptionCardsWrapper>
-          <StyledSubscriptionCard card={card} />
-          <StyledSubscriptionCard card={card} />
+          <div className="embla" ref={emblaRef}>
+            <div className="embla__container">
+              {mySubscriptions.map((subscription: any, index) => (
+                <div className="embla__slide" key={subscription.id}>
+                  <StyledSubscriptionCard
+                    card={subscription}
+                    isInactive={index !== activeSlideIndex ? true : false}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </SubscriptionCardsWrapper>
 
         <SwapCard>
-          <Icon>
+          <ButtonIcon
+            className="embla__prev"
+            onClick={scrollPrev}
+            $isDisabled={activeSlideIndex === 0}
+            disabled={activeSlideIndex === 0}
+          >
             <ArrowLeftIcon />
-          </Icon>
+          </ButtonIcon>
 
-          <CounterCards>1/10</CounterCards>
+          <CounterCards>
+            {activeSlideIndex + 1}/{mySubscriptions?.length}
+          </CounterCards>
 
-          <Icon>
+          <ButtonIcon
+            className="embla__next"
+            onClick={scrollNext}
+            $isDisabled={activeSlideIndex === mySubscriptions.length - 1}
+            disabled={activeSlideIndex === mySubscriptions.length - 1}
+          >
             <ArrowRightIcon />
-          </Icon>
+          </ButtonIcon>
         </SwapCard>
 
         <DomainCardsWrapper>
-          <StyledDomainCard domainCard={domainCard} />
-          <StyledDomainCard domainCard={domainCard} />
-          <StyledDomainCard domainCard={domainCard} />
+          {mySubscriptions[activeSlideIndex]?.codes?.map((code: any) => (
+            <StyledDomainCard key={code.id} domainCard={code} />
+          ))}
         </DomainCardsWrapper>
       </Container>
     </Root>
@@ -99,6 +151,24 @@ const StyledButton = styled(Button)`
 `;
 
 const SubscriptionCardsWrapper = styled.div`
+  .embla {
+    display: flex;
+    overflow: hidden;
+  }
+  .embla__container {
+    display: flex;
+    position: relative;
+    left: -648px;
+  }
+  .embla__slide {
+    padding-right: 28px;
+    width: 648px;
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
   @media ${DEVICE.laptop} {
     display: flex;
     padding-bottom: 24px;
@@ -126,7 +196,7 @@ const SwapCard = styled.div`
   }
 `;
 
-const Icon = styled.div`
+const ButtonIcon = styled.button<{ $isDisabled?: boolean }>`
   @media ${DEVICE.laptop} {
     padding: 10px;
     border: 1px solid ${COLORS.neutral500};
@@ -136,6 +206,22 @@ const Icon = styled.div`
     &:last-child {
       margin-right: 0;
     }
+
+    &:hover {
+      path {
+        stroke: ${COLORS.primary};
+      }
+    }
+
+    &:focus {
+      box-shadow: 0px 0px 5px 0px ${COLORS.primary};
+    }
+
+    ${({ $isDisabled }) =>
+      $isDisabled &&
+      css`
+        opacity: 0.3;
+      `}
   }
 `;
 

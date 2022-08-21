@@ -1,3 +1,5 @@
+export { ChangePassword, PersonalInfo } from "./Settings";
+
 export { RegisterTabs, SettingsTabs } from "./Tabs";
 export { Footer } from "./Footer";
 export { Header } from "./Header";

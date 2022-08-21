@@ -18,10 +18,6 @@ export const authSlice = createSlice({
       state.user = action.payload;
     },
 
-    // updateUserInfo: (state, action: PayloadAction<string>) => {
-    //   state.user.
-    // }
-
     resetUser: (state) => {
       state.token = "";
       state.user = { id: null, email: "", username: "" };
