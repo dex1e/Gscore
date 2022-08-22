@@ -26,16 +26,16 @@ export const Header = () => {
     getUser();
   }, []);
 
-  const getUser = async () => {
+  const getUser = () => {
     if (token) {
-      const me = await getMe()
-        .then((response) => response.data)
+      getMe()
+        .then((response) => {
+          dispatch(setUser(response.data));
+        })
 
         .catch(function (error: any) {
           console.log(error);
         });
-
-      dispatch(setUser(me));
     }
   };
 
@@ -76,25 +76,6 @@ export const Header = () => {
     </Root>
   );
 };
-
-// () {
-// if (token) {
-//   const me = await GET_ME()
-//     .then((response) => response.data)
-
-//     .catch(function (error: any) {
-//       console.log(error);
-//     });
-
-//   // if (me) dispatch(setUser(me));
-//   // }
-
-//   return {
-//     props: {
-//       me,
-//     },
-//   };
-// }
 
 const Root = styled.div`
   position: relative;

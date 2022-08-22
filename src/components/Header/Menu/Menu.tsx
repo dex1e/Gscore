@@ -14,15 +14,13 @@ interface MenuProps {
 }
 
 export const Menu: FC<MenuProps> = ({ isMenuOpen, onCloseMenu }) => {
-  const handleStopPropagation = (e: MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-  };
-
   return (
-    <Root $isMenuOpen={isMenuOpen} onClick={onCloseMenu}>
-      {isMenuOpen && <BackgroundBlur $isMenuOpen={isMenuOpen} />}
+    <Root $isMenuOpen={isMenuOpen}>
+      {isMenuOpen && (
+        <BackgroundBlur $isMenuOpen={isMenuOpen} onClick={onCloseMenu} />
+      )}
 
-      <MenuContent onClick={handleStopPropagation} $isMenuOpen={isMenuOpen}>
+      <MenuContent $isMenuOpen={isMenuOpen}>
         <MenuHeader>
           <StyledCloseIcon onClick={onCloseMenu} />
           <StyledHeaderLogoIcon />
