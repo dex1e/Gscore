@@ -1,4 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
 import styled from "styled-components";
 
 import { DEVICE } from "assets";
@@ -20,6 +21,16 @@ export const ChangePassword = () => {
     mode: "onChange",
   });
 
+  const notify = (error: string) => {
+    toast?.error(error, {
+      toastId: "Data fetching error",
+    });
+  };
+
+  const notifySucces = (succesText: string) => {
+    toast.success(succesText, { toastId: "Data fetching succes" });
+  };
+
   const errorCurrentPassword = errors?.currentPassword && "Field is required";
 
   const errorNewPassword = errors?.newPassword && "Field is required";
@@ -32,17 +43,18 @@ export const ChangePassword = () => {
       const response = await updatePassword(currentPassword, newPassword);
       if (response.status === 200) {
         reset();
-        console.log("Notify OK");
+        notifySucces("Password changed");
       } else {
-        console.log("Not 200", response?.data?.message);
+        notify(response?.data?.message);
       }
     } catch (error: any) {
-      console.log("catch error", error?.response?.data?.message);
+      notify(error?.response?.data?.message);
     }
   };
 
   return (
     <Root>
+      <ToastContainer position="top-right" autoClose={2000} />
       <Form onSubmit={handleSubmit(handleUpdatePassword)}>
         <Wrapper>
           <Subtitle>Change Password</Subtitle>

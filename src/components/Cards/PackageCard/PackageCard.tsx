@@ -7,8 +7,8 @@ import { ShopBasketIcon } from "components/icons";
 
 interface CheckoutCardProps {
   className?: string;
-  priceCost?: any;
-  packageName?: any;
+  priceCost?: string;
+  packageName?: string;
 }
 
 export const PackageCard: FC<CheckoutCardProps> = ({

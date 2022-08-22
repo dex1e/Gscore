@@ -1,6 +1,7 @@
 import React from "react";
 
 import { useRouter } from "next/router";
+import { toast, ToastContainer } from "react-toastify";
 import styled from "styled-components";
 
 import { DEVICE } from "assets";
@@ -17,6 +18,11 @@ const CheckoutPage = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
+  const notify = (error: string) =>
+    toast?.error(error, {
+      toastId: "Data fetching error",
+    });
+
   const handleBuySubscription = () => {
     buySubscription(plan?.id)
       .then((response) => {
@@ -25,12 +31,13 @@ const CheckoutPage = () => {
       })
 
       .catch(function (error) {
-        console.log(error);
+        notify(error?.message);
       });
   };
 
   return (
     <Root>
+      <ToastContainer position="top-right" autoClose={2000} />
       <Container>
         <StyledRegisterTabs />
         <Title>Checkout</Title>

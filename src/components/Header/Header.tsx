@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
+import { toast, ToastContainer } from "react-toastify";
 import styled from "styled-components";
 
 import { COLORS } from "assets";
@@ -16,6 +17,11 @@ import { MenuList } from "./MenuList";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const notify = (error: string) =>
+    toast?.error(error, {
+      toastId: "Data fetching error",
+    });
 
   const token = useAppSelector((state) => state.auth.token);
   const dispatch = useAppDispatch();
@@ -34,7 +40,7 @@ export const Header = () => {
         })
 
         .catch(function (error: any) {
-          console.log(error);
+          notify(error?.message);
         });
     }
   };
@@ -49,6 +55,7 @@ export const Header = () => {
 
   return (
     <Root>
+      <ToastContainer position="top-right" autoClose={2000} />
       <div className="container">
         <Inner>
           <Link href={ROUTES.ROOT}>

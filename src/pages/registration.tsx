@@ -1,8 +1,9 @@
-import React, { ChangeEvent, useState } from "react";
+import React from "react";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
 import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
@@ -26,6 +27,11 @@ const CheckInPage = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
+  const notify = (error: string) =>
+    toast?.error(error, {
+      toastId: "Data fetching error",
+    });
+
   const {
     register,
     handleSubmit,
@@ -46,7 +52,7 @@ const CheckInPage = () => {
       })
 
       .catch(function (error: any) {
-        console.log(error);
+        notify(error?.message);
       });
   };
 
@@ -64,6 +70,7 @@ const CheckInPage = () => {
 
   return (
     <Root>
+      <ToastContainer position="top-right" autoClose={2000} />
       <Container>
         <StyledRegisterTabs />
         <Title>Create account</Title>

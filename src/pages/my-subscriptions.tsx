@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 
 import useEmblaCarousel from "embla-carousel-react";
+import { toast, ToastContainer } from "react-toastify";
 import styled, { css } from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
@@ -9,7 +10,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "components/icons";
 import { Button } from "components/ui";
 import { MainLayout } from "Layout";
 import { getMySubscriptions } from "services";
-import { ISubscriptions } from "types";
+import { ICodes, ISubscriptions } from "types";
 
 const MySubscriptionsPage = () => {
   const [mySubscriptions, setMySubscriptions] = useState<ISubscriptions[]>([]);
@@ -17,6 +18,11 @@ const MySubscriptionsPage = () => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
   const [emblaRef, emblaApi] = useEmblaCarousel();
+
+  const notify = (error: string) =>
+    toast?.error(error, {
+      toastId: "Data fetching error",
+    });
 
   const isPrevButtonDisabled = activeSlideIndex === 0;
   const isNextButtonDisabled = activeSlideIndex === mySubscriptions.length - 1;
@@ -46,8 +52,9 @@ const MySubscriptionsPage = () => {
         setMySubscriptions(response.data);
         setIsLoading(false);
       })
+
       .catch(function (error: any) {
-        console.log(error);
+        notify(error?.message);
       });
   };
 
@@ -63,6 +70,7 @@ const MySubscriptionsPage = () => {
 
   return (
     <Root>
+      <ToastContainer position="top-right" autoClose={2000} />
       <Container>
         <Header>
           <Title>My Subscriptions</Title>
@@ -72,11 +80,11 @@ const MySubscriptionsPage = () => {
         <SubscriptionCardsWrapper>
           <div className="embla" ref={emblaRef}>
             <div className="embla__container">
-              {mySubscriptions.map((subscription: any, index) => (
-                <div className="embla__slide" key={subscription.id}>
+              {mySubscriptions?.map((subscription: ISubscriptions, index) => (
+                <div className="embla__slide" key={subscription?.id}>
                   <StyledSubscriptionCard
                     card={subscription}
-                    isInactive={index !== activeSlideIndex ? true : false}
+                    isInactive={index !== activeSlideIndex}
                   />
                 </div>
               ))}
@@ -109,8 +117,8 @@ const MySubscriptionsPage = () => {
         </SwapCard>
 
         <DomainCardsWrapper>
-          {domainCards?.map((code: any) => (
-            <StyledDomainCard key={code.id} domainCard={code} />
+          {domainCards?.map((code: ICodes) => (
+            <StyledDomainCard key={code?.id} domainCard={code} />
           ))}
         </DomainCardsWrapper>
       </Container>

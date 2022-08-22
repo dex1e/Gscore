@@ -1,4 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
 import styled from "styled-components";
 
 import { DEVICE } from "assets";
@@ -16,6 +17,11 @@ type PersonalInfoFormValues = {
 
 export const PersonalInfo = () => {
   const dispatch = useAppDispatch();
+
+  const notify = (error: string) =>
+    toast?.error(error, {
+      toastId: "Data fetching error",
+    });
 
   const {
     register,
@@ -44,12 +50,13 @@ export const PersonalInfo = () => {
       })
 
       .catch(function (error: any) {
-        console.log(error);
+        notify(error?.message);
       });
   };
 
   return (
     <Root>
+      <ToastContainer position="top-right" autoClose={2000} />
       <Form onSubmit={handleSubmit(handleUpdateInfo)}>
         <Wrapper>
           <Subtitle>Personal Info</Subtitle>

@@ -2,6 +2,7 @@ import React from "react";
 
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
 import styled from "styled-components";
 
 import { DEVICE } from "assets";
@@ -23,6 +24,11 @@ const LoginPage = () => {
   const planId = useAppSelector((state) => state?.plan?.plan?.id);
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+  const notify = (error: string) =>
+    toast?.error(error, {
+      toastId: "Data fetching error",
+    });
 
   const {
     register,
@@ -55,12 +61,13 @@ const LoginPage = () => {
       })
 
       .catch(function (error: any) {
-        console.log(error);
+        notify(error?.message);
       });
   };
 
   return (
     <Root>
+      <ToastContainer position="top-right" autoClose={2000} />
       <Container>
         <StyledRegisterTabs />
         <Title>Log in</Title>

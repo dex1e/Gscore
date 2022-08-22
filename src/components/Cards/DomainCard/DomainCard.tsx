@@ -1,5 +1,6 @@
 import React, { FC, useState } from "react";
 
+import { toast, ToastContainer } from "react-toastify";
 import styled, { css } from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
@@ -16,6 +17,11 @@ interface domainCardProps {
 export const DomainCard: FC<domainCardProps> = ({ domainCard, className }) => {
   const [domain, setDomain] = useState("");
 
+  const notify = (error: string) =>
+    toast?.error(error, {
+      toastId: "Data fetching error",
+    });
+
   const handleChangeDomain = (event: any) => {
     const domainInputValue = event.target.value;
 
@@ -25,7 +31,7 @@ export const DomainCard: FC<domainCardProps> = ({ domainCard, className }) => {
   const handleActivateDomain = () => {
     activateLicenseCode(domain, domainCard?.code)
       .then((response) => console.log(response.data))
-      .catch((error) => console.log(error));
+      .catch((error) => notify(error?.message));
   };
 
   const handleCopyToClipboard = () => {
@@ -40,6 +46,7 @@ export const DomainCard: FC<domainCardProps> = ({ domainCard, className }) => {
 
   return (
     <Root $isStatusInactive={isStatusInactive} className={className}>
+      <ToastContainer position="top-right" autoClose={2000} />
       <StyledCheckbox $isStatusInactive={isStatusInactive} />
 
       <StatusGridWrapper $isStatusInactive={isStatusInactive}>

@@ -63,47 +63,38 @@ export interface ISubscriptions {
     email: string;
     username: string;
     subscribes: [];
-    codes: [
-      {
-        id: number | null;
-        code: string;
-        origin: string;
-        status: string;
-        subscribeId: number | null;
-        subscribe: string;
-        userId: number | null;
-        user: string;
-      }
-    ];
+    codes: ICodes[];
   };
   productId: number | null;
-  product: {
-    id: number | null;
-    sitesCount: number | null;
-    name: number | null;
-    prices: [
-      {
-        id: number | null;
-        isActive: true;
-        productId: number | null;
-        product: {};
-        price: string;
-      }
-    ];
-  };
+  product: IProduct;
   currentPeriodStart: string;
   currentPeriodEnd: string;
   status: string;
-  codes: [
+  codes: ICodes[];
+}
+
+export interface IProduct {
+  id: number | null;
+  sitesCount: number | null;
+  name: number | null;
+  prices: [
     {
       id: number | null;
-      code: string;
-      origin: string;
-      status: string;
-      subscribeId: number | null;
-      subscribe: string;
-      userId: number | null;
-      user: string;
+      isActive: true;
+      productId: number | null;
+      product: {};
+      price: string;
     }
   ];
+}
+
+export interface ICodes {
+  id: number | null;
+  code: string;
+  origin: string;
+  status: string;
+  subscribeId: number | null;
+  subscribe: string;
+  userId: number | null;
+  user: string;
 }
