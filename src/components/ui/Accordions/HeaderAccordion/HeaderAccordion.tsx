@@ -24,7 +24,7 @@ interface HeaderAccordionProps {
 
 export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
   const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
-  const user = useAppSelector((state: any) => state.auth.user);
+  const user = useAppSelector((state: any) => state?.auth?.user);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -51,7 +51,7 @@ export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
         <StyledAccordionItem dangerouslySetExpanded={isAccordionExpanded}>
           <AccordionItemHeading>
             <StyledAccordionItemButton>
-              <Username>{user.username}</Username>
+              <Username>{user?.username}</Username>
 
               <StyledChevronDownIcon />
             </StyledAccordionItemButton>
