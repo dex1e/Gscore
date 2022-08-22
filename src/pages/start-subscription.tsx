@@ -4,12 +4,13 @@ import styled from "styled-components";
 
 import { DEVICE } from "assets";
 import { PackageCard } from "components";
-import { Button } from "components/ui";
+import { LinkButton } from "components/ui";
+import { ROUTES } from "constant";
 import { ContentLayout, MainLayout } from "Layout";
 import { useAppSelector } from "store/hooks";
 
 const StartSubscriptionPage = () => {
-  const plan = useAppSelector((state) => state.plan.plan);
+  const plan = useAppSelector((state) => state?.plan?.plan);
 
   return (
     <Root>
@@ -21,17 +22,20 @@ const StartSubscriptionPage = () => {
           the plugin with a license key.
         </Text>
 
-        {plan.id &&
-          plan.prices.map((priceId) => {
+        {plan?.id &&
+          plan?.prices?.map((priceId) => {
             return (
               <StyledPackageCard
-                key={priceId.id}
-                packageName={plan.name}
-                priceCost={priceId.price}
+                key={priceId?.id}
+                packageName={plan?.name}
+                priceCost={priceId?.price}
               />
             );
           })}
-        <StyledButton text="Go to my subscriptions" />
+        <StyledLinkButton
+          text="Go to my subscriptions"
+          href={ROUTES.MY_SUBSCRIPTIONS}
+        />
       </Container>
     </Root>
   );
@@ -69,7 +73,7 @@ const StyledPackageCard = styled(PackageCard)`
   }
 `;
 
-const StyledButton = styled(Button)`
+const StyledLinkButton = styled(LinkButton)`
   @media ${DEVICE.laptop} {
     max-width: 100%;
     width: 100%;

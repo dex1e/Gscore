@@ -50,11 +50,6 @@ const UiKitPage = () => {
         <DomainCard domainCard={domainCard} />
       </GapCards>
 
-      <GapPlan>
-        <PlanCard />
-        <PlanCard isActive />
-      </GapPlan>
-
       <Wrapper>
         <AccordionMenu />
       </Wrapper>
@@ -89,12 +84,6 @@ const GapCards = styled.div`
   flex-direction: column;
   gap: 30px;
   margin-top: 50px;
-`;
-
-const GapPlan = styled.div`
-  display: flex;
-  gap: 30px;
-  margin-top: 80px;
 `;
 
 export default UiKitPage;

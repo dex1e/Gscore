@@ -1,9 +1,11 @@
+import { Url } from "url";
+
 export const ROUTES = {
-  ROOT: "/",
-  LOGIN: "/login",
-  REGISTRATION: "/registration",
-  CHECKOUT_ID: (id = ":id"): string => `checkout/${id}`,
-  START_SUBSCRIPTION: "/start-subscription",
-  SETTINGS: "/settings",
-  MY_SUBSCRIPTIONS: "/my-subscriptions",
+  ROOT: "/" as unknown as Url,
+  LOGIN: "/login" as unknown as Url,
+  REGISTRATION: "/registration" as unknown as Url,
+  CHECKOUT_ID: (id = ":id"): Url => `checkout/${id}` as unknown as Url,
+  START_SUBSCRIPTION: "/start-subscription" as unknown as Url,
+  SETTINGS: "/settings" as unknown as Url,
+  MY_SUBSCRIPTIONS: "/my-subscriptions" as unknown as Url,
 };

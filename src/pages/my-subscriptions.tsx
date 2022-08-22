@@ -9,9 +9,10 @@ import { ArrowLeftIcon, ArrowRightIcon } from "components/icons";
 import { Button } from "components/ui";
 import { MainLayout } from "Layout";
 import { getMySubscriptions } from "services";
+import { ISubscriptions } from "types";
 
 const MySubscriptionsPage = () => {
-  const [mySubscriptions, setMySubscriptions] = useState([]);
+  const [mySubscriptions, setMySubscriptions] = useState<ISubscriptions[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 

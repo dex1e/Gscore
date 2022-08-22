@@ -2,7 +2,7 @@ import { APIURL } from "constant";
 
 import ApiService from "./ApiService";
 
-export const buySubscription = async (priceId: any) => {
+export const buySubscription = async (priceId: number | null) => {
   return ApiService.post(APIURL.BUY_SUBSCRIBE, { priceId });
 };
 

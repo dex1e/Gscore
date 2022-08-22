@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 
-import { ToastContainer } from "react-toastify";
 import styled, { css } from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
@@ -9,11 +8,12 @@ import { LinkButton } from "components/ui";
 import { ROUTES } from "constant";
 import { setPlanProduct } from "store/features/plan";
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import { IPlan } from "types";
 
 interface PlanCardProps {
   isActive?: boolean;
   className?: string;
-  product?: any;
+  product: IPlan;
 }
 
 export const PlanCard: FC<PlanCardProps> = ({
@@ -21,7 +21,7 @@ export const PlanCard: FC<PlanCardProps> = ({
   className,
   product,
 }) => {
-  const user = useAppSelector((state: any) => state.auth.user);
+  const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
 
   const handleSetPlanProduct = () => {
@@ -31,8 +31,8 @@ export const PlanCard: FC<PlanCardProps> = ({
   return (
     <Root $isActive={isActive} className={className}>
       <Info $isActive={isActive}>
-        <Price>${product.prices[0].price}</Price>
-        <LicenseName>{product.name}</LicenseName>
+        <Price>${product?.prices[0]?.price}</Price>
+        <LicenseName>{product?.name}</LicenseName>
         <Description $isActive={isActive}>
           Get the advanced WordPress plugin that optimizes content with GSC
           keywords at one low annual price
@@ -43,9 +43,9 @@ export const PlanCard: FC<PlanCardProps> = ({
         <ListItem>
           <StyledListCheckIcon />
 
-          {product.sitesCount === 1
+          {product?.sitesCount === 1
             ? "Single site license"
-            : `All features for ${product.sitesCount} sites`}
+            : `All features for ${product?.sitesCount} sites`}
         </ListItem>
 
         <ListItem>
@@ -69,7 +69,7 @@ export const PlanCard: FC<PlanCardProps> = ({
         variant="secondary"
         href={
           user?.id
-            ? ROUTES.CHECKOUT_ID(`${product.prices[0].id}`)
+            ? ROUTES.CHECKOUT_ID(`${product?.prices[0]?.id}`)
             : ROUTES.REGISTRATION
         }
         onClick={() => handleSetPlanProduct()}

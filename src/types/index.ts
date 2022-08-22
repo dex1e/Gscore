@@ -4,6 +4,8 @@ export enum CodeStatus {
   INACTIVE = "INACTIVE",
 }
 
+export type EventOnClickOutside = MouseEvent | TouchEvent;
+
 export interface ICard {
   title: string;
   licenseItem: string;
@@ -53,4 +55,55 @@ export interface ISubscription {
   currentPeriodEnd: number | null;
 }
 
-export type EventOnClickOutside = MouseEvent | TouchEvent;
+export interface ISubscriptions {
+  id: number | null;
+  userId: number | null;
+  user: {
+    id: number | null;
+    email: string;
+    username: string;
+    subscribes: [];
+    codes: [
+      {
+        id: number | null;
+        code: string;
+        origin: string;
+        status: string;
+        subscribeId: number | null;
+        subscribe: string;
+        userId: number | null;
+        user: string;
+      }
+    ];
+  };
+  productId: number | null;
+  product: {
+    id: number | null;
+    sitesCount: number | null;
+    name: number | null;
+    prices: [
+      {
+        id: number | null;
+        isActive: true;
+        productId: number | null;
+        product: {};
+        price: string;
+      }
+    ];
+  };
+  currentPeriodStart: string;
+  currentPeriodEnd: string;
+  status: string;
+  codes: [
+    {
+      id: number | null;
+      code: string;
+      origin: string;
+      status: string;
+      subscribeId: number | null;
+      subscribe: string;
+      userId: number | null;
+      user: string;
+    }
+  ];
+}

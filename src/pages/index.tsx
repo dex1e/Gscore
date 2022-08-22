@@ -4,8 +4,13 @@ import styled from "styled-components";
 import { MainLayout } from "Layout";
 import { Home } from "pageComponents";
 import { getProducts } from "services";
+import { IPlan } from "types";
 
-const HomePage: NextPage = ({ products }: any) => {
+interface IProductsProps {
+  products: IPlan[];
+}
+
+const HomePage: NextPage<IProductsProps> = ({ products }) => {
   return (
     <Root>
       <Home products={products} />
@@ -23,8 +28,6 @@ export async function getServerSideProps() {
       },
     };
   } catch (error) {
-    console.log(error);
-
     return {
       props: {
         products: [],

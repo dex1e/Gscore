@@ -4,9 +4,10 @@ import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
 import { PlanCard } from "components";
+import { IPlan } from "types";
 
 interface HomeProps {
-  products?: any;
+  products?: IPlan[];
 }
 
 export const Home: FC<HomeProps> = ({ products }) => {
@@ -14,10 +15,10 @@ export const Home: FC<HomeProps> = ({ products }) => {
     <div>
       <Title>Get started with Gscore today</Title>
       <PlanCards>
-        {products.length &&
-          products.map((product: any, index: number) => (
+        {products?.length &&
+          products?.map((product: IPlan, index: number) => (
             <StyledPlanCard
-              key={product.id}
+              key={product?.id}
               product={product}
               isActive={index === 1}
             />

@@ -22,7 +22,7 @@ type RegistrationFormValues = {
 };
 
 const CheckInPage = () => {
-  const planId = useAppSelector((state) => state.plan.plan.id);
+  const planId = useAppSelector((state) => state?.plan?.plan?.id);
   const dispatch = useAppDispatch();
   const router = useRouter();
 

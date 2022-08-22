@@ -13,14 +13,14 @@ import { setSubscription } from "store/features/subscription";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
 const CheckoutPage = () => {
-  const plan = useAppSelector((state) => state.plan.plan);
+  const plan = useAppSelector((state) => state?.plan?.plan);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const handleBuySubscription = (priceId: any) => {
-    buySubscription(priceId)
+  const handleBuySubscription = () => {
+    buySubscription(plan?.id)
       .then((response) => {
-        dispatch(setSubscription(response.data));
+        dispatch(setSubscription(response?.data));
         router.push(ROUTES.START_SUBSCRIPTION);
       })
 
@@ -35,23 +35,23 @@ const CheckoutPage = () => {
         <StyledRegisterTabs />
         <Title>Checkout</Title>
 
-        {plan.id &&
-          plan.prices.map((priceId) => {
+        {plan?.id &&
+          plan?.prices?.map((priceId) => {
             return (
-              <div key={priceId.id}>
+              <div key={priceId?.id}>
                 <StyledPackageCard
-                  packageName={plan.name}
-                  priceCost={priceId.price}
+                  packageName={plan?.name}
+                  priceCost={priceId?.price}
                 />
 
                 <Total>
                   <Text>Total:</Text>
-                  <Cost>${priceId.price}</Cost>
+                  <Cost>${priceId?.price}</Cost>
                 </Total>
 
                 <StyledButton
                   text="Purchase"
-                  onClick={() => handleBuySubscription(plan.id)}
+                  onClick={() => handleBuySubscription()}
                 />
               </div>
             );

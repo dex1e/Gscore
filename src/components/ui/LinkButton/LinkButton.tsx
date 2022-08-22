@@ -1,3 +1,5 @@
+import { Url } from "url";
+
 import React, { FC } from "react";
 
 import Link from "next/link";
@@ -13,7 +15,7 @@ interface LinkButtonProps {
   text?: string;
   className?: string;
   variant?: Variant;
-  href?: any;
+  href: Url;
   onClick?: () => void;
 }
 
