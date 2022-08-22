@@ -6,10 +6,10 @@ import styled from "styled-components";
 import { COLORS } from "assets";
 import { GscoreLogoIcon, MenuIcon } from "components/icons";
 import { ROUTES } from "constant";
-import { Media } from "media";
 import { getMe } from "services/auth";
 import { setUser } from "store/features/auth";
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import { Media } from "utils";
 
 import { Menu } from "./Menu";
 import { MenuList } from "./MenuList";

@@ -12,16 +12,20 @@ import { getMySubscriptions } from "services";
 
 const MySubscriptionsPage = () => {
   const [mySubscriptions, setMySubscriptions] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
   const [emblaRef, emblaApi] = useEmblaCarousel();
 
-  const scrollPrev = useCallback(() => {
+  const isPrevButtonDisabled = activeSlideIndex === 0;
+  const isNextButtonDisabled = activeSlideIndex === mySubscriptions.length - 1;
+  const domainCards = mySubscriptions[activeSlideIndex]?.codes;
+
+  const scrollToPrevious = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
   }, [emblaApi]);
 
-  const scrollNext = useCallback(() => {
+  const scrollToNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
@@ -34,19 +38,19 @@ const MySubscriptionsPage = () => {
   }, []);
 
   const getSubscriptions = () => {
-    setLoading(true);
+    setIsLoading(true);
 
     getMySubscriptions()
       .then((response) => {
         setMySubscriptions(response.data);
-        setLoading(false);
+        setIsLoading(false);
       })
       .catch(function (error: any) {
         console.log(error);
       });
   };
 
-  if (loading) {
+  if (isLoading) {
     return <div>Загрузка</div>;
   }
 
@@ -82,9 +86,9 @@ const MySubscriptionsPage = () => {
         <SwapCard>
           <ButtonIcon
             className="embla__prev"
-            onClick={scrollPrev}
-            $isDisabled={activeSlideIndex === 0}
-            disabled={activeSlideIndex === 0}
+            onClick={scrollToPrevious}
+            $isDisabled={isPrevButtonDisabled}
+            disabled={isPrevButtonDisabled}
           >
             <ArrowLeftIcon />
           </ButtonIcon>
@@ -95,16 +99,16 @@ const MySubscriptionsPage = () => {
 
           <ButtonIcon
             className="embla__next"
-            onClick={scrollNext}
-            $isDisabled={activeSlideIndex === mySubscriptions.length - 1}
-            disabled={activeSlideIndex === mySubscriptions.length - 1}
+            onClick={scrollToNext}
+            $isDisabled={isNextButtonDisabled}
+            disabled={isNextButtonDisabled}
           >
             <ArrowRightIcon />
           </ButtonIcon>
         </SwapCard>
 
         <DomainCardsWrapper>
-          {mySubscriptions[activeSlideIndex]?.codes?.map((code: any) => (
+          {domainCards?.map((code: any) => (
             <StyledDomainCard key={code.id} domainCard={code} />
           ))}
         </DomainCardsWrapper>

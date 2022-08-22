@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { DEVICE } from "assets";
 import { Button, Input } from "components/ui";
 import { updatePassword } from "services";
-import { useAppDispatch } from "store/hooks";
 
 type PasswordFormValues = {
   currentPassword: string;
@@ -12,8 +11,6 @@ type PasswordFormValues = {
 };
 
 export const ChangePassword = () => {
-  const dispatch = useAppDispatch();
-
   const {
     register,
     handleSubmit,

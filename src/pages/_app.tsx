@@ -4,8 +4,7 @@ import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 
 import { store, wrapper } from "store";
-
-import { MediaContextProvider } from "../media";
+import { MediaContextProvider } from "utils";
 
 import "assets/styles/main.scss";
 

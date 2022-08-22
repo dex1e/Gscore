@@ -2,7 +2,7 @@ import React from "react";
 
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
-import { mediaStyles } from "../media";
+import { mediaStyles } from "utils";
 
 export default class MyDocument extends Document {
   render() {
