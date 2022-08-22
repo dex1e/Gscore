@@ -1,3 +1,5 @@
+export { updatePassword } from "./userInfo";
+
 export { getProducts } from "./products";
 export { getMe } from "./auth";
 export { activateLicenseCode } from "./code";

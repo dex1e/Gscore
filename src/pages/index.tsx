@@ -14,15 +14,23 @@ const HomePage: NextPage = ({ products }: any) => {
 };
 
 export async function getServerSideProps() {
-  const products = await getProducts()
-    .then((response) => response.data)
-    .catch((error) => console.log(error));
+  try {
+    const { data: products } = await getProducts();
 
-  return {
-    props: {
-      products,
-    },
-  };
+    return {
+      props: {
+        products,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+
+    return {
+      props: {
+        products: [],
+      },
+    };
+  }
 }
 
 const Root = styled(MainLayout)`

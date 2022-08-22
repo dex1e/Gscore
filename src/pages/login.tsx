@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 
 import { useRouter } from "next/router";
+import { SubmitHandler, useForm } from "react-hook-form";
 import styled from "styled-components";
 
 import { DEVICE } from "assets";
@@ -11,26 +12,40 @@ import { ContentLayout, MainLayout } from "Layout";
 import { loginUser } from "services";
 import { setToken, setUser } from "store/features/auth";
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import { isValidEmail } from "utils";
+
+type LoginFormValues = {
+  email: string;
+  password: string;
+};
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
   const planId = useAppSelector((state) => state.plan.plan.id);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const handleChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
-    let email = event.target.value;
-    setEmail(email);
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormValues>({
+    mode: "onChange",
+  });
 
-  const handleChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    let password = event.target.value;
-    setPassword(password);
-  };
+  const errorEmail =
+    (errors?.email?.type === "required" && "Field is required") ||
+    (errors?.email?.type === "validate" && "Wrong email") ||
+    "";
 
-  const handleOnClick = (email: string, password: string) => {
+  const errorPassword =
+    (errors?.password?.type === "required" && "Field is required") ||
+    (errors?.password?.type === "minLength" && "Minimal length is 6 symbols") ||
+    "";
+
+  const handleLoginUser: SubmitHandler<LoginFormValues> = ({
+    email,
+    password,
+  }) => {
     loginUser(email, password)
       .then((response: any) => {
         dispatch(setToken(response.data.token));
@@ -50,28 +65,33 @@ const LoginPage = () => {
         <StyledRegisterTabs />
         <Title>Log in</Title>
 
-        <InputWrapper>
-          <InputItem>
-            <StyledInput
-              placeholder="Email"
-              value={email}
-              onChange={handleChangeEmail}
-            />
-          </InputItem>
+        <Form onSubmit={handleSubmit(handleLoginUser)}>
+          <InputWrapper>
+            <InputItem>
+              <StyledInput
+                placeholder="Email"
+                error={errorEmail}
+                {...register("email", {
+                  required: true,
+                  validate: isValidEmail,
+                })}
+              />
+            </InputItem>
 
-          <InputItem>
-            <StyledInput
-              placeholder="Password"
-              value={password}
-              onChange={handleChangePassword}
-            />
-          </InputItem>
-        </InputWrapper>
+            <InputItem>
+              <StyledInput
+                placeholder="Password"
+                error={errorPassword}
+                type="password"
+                {...register("password", {
+                  required: true,
+                })}
+              />
+            </InputItem>
+          </InputWrapper>
 
-        <StyledButton
-          text="Log in"
-          onClick={() => handleOnClick(email, password)}
-        />
+          <StyledButton text="Log in" type="submit" />
+        </Form>
       </Container>
     </Root>
   );
@@ -102,6 +122,8 @@ const Title = styled.h1`
     padding-bottom: 32px;
   }
 `;
+
+const Form = styled.form``;
 
 const InputWrapper = styled.div`
   @media ${DEVICE.laptop} {

@@ -8,3 +8,13 @@ export const updatePersonalInfo = async (email: string, username: string) => {
     username,
   });
 };
+
+export const updatePassword = async (
+  currentPassword: string,
+  newPassword: string
+) => {
+  return ApiService.patch(APIURL.PATCH_UPDATE_PASSWORD, {
+    currentPassword,
+    newPassword,
+  });
+};

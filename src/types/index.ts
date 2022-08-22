@@ -36,14 +36,7 @@ export interface IPlan {
   sitesCount: number | null;
   name: string;
 
-  prices: [
-    {
-      id: number | null;
-      isActive: boolean;
-      productId: number | null;
-      price: string;
-    }
-  ];
+  prices: IPlanPrices[];
 }
 
 export interface IPlanPrices {

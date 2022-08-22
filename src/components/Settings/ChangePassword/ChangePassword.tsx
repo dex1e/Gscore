@@ -1,23 +1,76 @@
+import { SubmitHandler, useForm } from "react-hook-form";
 import styled from "styled-components";
 
-import { COLORS, DEVICE } from "assets";
+import { DEVICE } from "assets";
 import { Button, Input } from "components/ui";
-import { MainLayout } from "Layout";
+import { updatePassword } from "services";
+import { useAppDispatch } from "store/hooks";
+
+type PasswordFormValues = {
+  currentPassword: string;
+  newPassword: string;
+};
 
 export const ChangePassword = () => {
+  const dispatch = useAppDispatch();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<PasswordFormValues>({
+    mode: "onChange",
+  });
+
+  const errorCurrentPassword = errors?.currentPassword && "Field is required";
+
+  const errorNewPassword = errors?.newPassword && "Field is required";
+
+  const handleUpdatePassword: SubmitHandler<PasswordFormValues> = async ({
+    currentPassword,
+    newPassword,
+  }) => {
+    try {
+      const response = await updatePassword(currentPassword, newPassword);
+      if (response.status === 200) {
+        reset();
+        console.log("Notify OK");
+      } else {
+        console.log("Not 200", response?.data?.message);
+      }
+    } catch (error: any) {
+      console.log("catch error", error?.response?.data?.message);
+    }
+  };
+
   return (
     <Root>
-      <Wrapper>
-        <Subtitle>Change Password</Subtitle>
-        <InputItem>
-          <StyledInput placeholder="Current Password" />
-        </InputItem>
+      <Form onSubmit={handleSubmit(handleUpdatePassword)}>
+        <Wrapper>
+          <Subtitle>Change Password</Subtitle>
+          <InputItem>
+            <StyledInput
+              placeholder="Current Password"
+              error={errorCurrentPassword}
+              {...register("currentPassword", {
+                required: true,
+              })}
+            />
+          </InputItem>
 
-        <InputItem>
-          <StyledInput placeholder="New Password" />
-        </InputItem>
-      </Wrapper>
-      <StyledButton text="Save" />
+          <InputItem>
+            <StyledInput
+              placeholder="New Password"
+              error={errorNewPassword}
+              {...register("newPassword", {
+                required: true,
+              })}
+            />
+          </InputItem>
+        </Wrapper>
+        <StyledButton text="Save" type="submit" />
+      </Form>
     </Root>
   );
 };
@@ -25,6 +78,8 @@ export const ChangePassword = () => {
 const Root = styled.div`
   width: 100%;
 `;
+
+const Form = styled.form``;
 
 const Wrapper = styled.div`
   @media ${DEVICE.laptop} {

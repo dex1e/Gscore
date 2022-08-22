@@ -34,8 +34,6 @@ const CheckInPage = () => {
     mode: "onChange",
   });
 
-  console.log(errors);
-
   const handleRegisterUser: SubmitHandler<RegistrationFormValues> = ({
     email,
     username,

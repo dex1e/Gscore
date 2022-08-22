@@ -14,13 +14,14 @@ export const Home: FC<HomeProps> = ({ products }) => {
     <div>
       <Title>Get started with Gscore today</Title>
       <PlanCards>
-        {products.map((product: any, index: number) => (
-          <StyledPlanCard
-            key={product.id}
-            product={product}
-            isActive={index === 1}
-          />
-        ))}
+        {products.length &&
+          products.map((product: any, index: number) => (
+            <StyledPlanCard
+              key={product.id}
+              product={product}
+              isActive={index === 1}
+            />
+          ))}
       </PlanCards>
 
       <Offer>

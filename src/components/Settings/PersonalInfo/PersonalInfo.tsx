@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 
+import { SubmitHandler, useForm } from "react-hook-form";
 import styled from "styled-components";
 
 import { DEVICE } from "assets";
@@ -7,30 +8,41 @@ import { Button, Input } from "components/ui";
 import { updatePersonalInfo } from "services";
 import { setUser } from "store/features/auth";
 import { useAppDispatch } from "store/hooks";
+import { isValidEmail } from "utils";
+
+type PersonalInfoFormValues = {
+  username: string;
+  email: string;
+  password: string;
+};
 
 export const PersonalInfo = () => {
-  const [username, setUsername] = useState("");
-
-  const [email, setEmail] = useState("");
-
   const dispatch = useAppDispatch();
 
-  const handleChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
-    let email = event?.target?.value;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<PersonalInfoFormValues>({
+    mode: "onChange",
+  });
 
-    setEmail(email);
-  };
+  const errorUsername = errors?.username && "Field is required";
 
-  const handleChangeUsername = (event: ChangeEvent<HTMLInputElement>) => {
-    let username = event?.target?.value;
+  const errorEmail =
+    (errors?.email?.type === "required" && "Field is required") ||
+    (errors?.email?.type === "validate" && "Wrong email") ||
+    "";
 
-    setUsername(username);
-  };
-
-  const handleUpdateInfo = (email: string, username: string) => {
+  const handleUpdateInfo: SubmitHandler<PersonalInfoFormValues> = ({
+    email,
+    username,
+  }) => {
     updatePersonalInfo(email, username)
       .then((response: any) => {
         dispatch(setUser(response.data));
+        reset();
       })
 
       .catch(function (error: any) {
@@ -40,30 +52,34 @@ export const PersonalInfo = () => {
 
   return (
     <Root>
-      <Wrapper>
-        <Subtitle>Personal Info</Subtitle>
-        <InputItem>
-          <StyledInput
-            placeholder="Username"
-            value={username}
-            onChange={handleChangeUsername}
-          />
-        </InputItem>
+      <Form onSubmit={handleSubmit(handleUpdateInfo)}>
+        <Wrapper>
+          <Subtitle>Personal Info</Subtitle>
 
-        <InputItem>
-          <StyledInput
-            placeholder="Email"
-            value={email}
-            onChange={handleChangeEmail}
-          />
-        </InputItem>
-      </Wrapper>
+          <InputItem>
+            <StyledInput
+              placeholder="Username"
+              error={errorUsername}
+              {...register("username", {
+                required: true,
+              })}
+            />
+          </InputItem>
 
-      <StyledButton
-        text="Save"
-        type="submit"
-        onClick={() => handleUpdateInfo(email, username)}
-      />
+          <InputItem>
+            <StyledInput
+              placeholder="Email"
+              error={errorEmail}
+              {...register("email", {
+                required: true,
+                validate: isValidEmail,
+              })}
+            />
+          </InputItem>
+        </Wrapper>
+
+        <StyledButton text="Save" type="submit" />
+      </Form>
     </Root>
   );
 };
@@ -88,6 +104,8 @@ const Subtitle = styled.h2`
     padding-bottom: 24px;
   }
 `;
+
+const Form = styled.form``;
 
 const InputItem = styled.div`
   @media ${DEVICE.laptop} {
