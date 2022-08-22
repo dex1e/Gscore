@@ -32,18 +32,25 @@ export interface IUser {
 }
 
 export interface IPlan {
-  id: number;
-  sitesCount: number;
+  id: number | null;
+  sitesCount: number | null;
   name: string;
 
   prices: [
     {
-      id: number;
+      id: number | null;
       isActive: boolean;
-      productId: number;
+      productId: number | null;
       price: string;
     }
   ];
+}
+
+export interface IPlanPrices {
+  id: number | null;
+  isActive: boolean;
+  productId: number | null;
+  price: string;
 }
 
 export interface ISubscription {

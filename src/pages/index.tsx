@@ -16,10 +16,7 @@ const HomePage: NextPage = ({ products }: any) => {
 export async function getServerSideProps() {
   const products = await getProducts()
     .then((response) => response.data)
-
-    .catch(function (error: any) {
-      console.log(error);
-    });
+    .catch((error) => console.log(error));
 
   return {
     props: {

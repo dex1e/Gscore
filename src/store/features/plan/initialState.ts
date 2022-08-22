@@ -2,15 +2,15 @@ import { IPlanInitialState } from "./types";
 
 export const initialState: IPlanInitialState = {
   plan: {
-    id: 0,
-    sitesCount: 0,
+    id: null,
+    sitesCount: null,
     name: "",
 
     prices: [
       {
-        id: 0,
+        id: null,
         isActive: false,
-        productId: 0,
+        productId: null,
         price: "",
       },
     ],

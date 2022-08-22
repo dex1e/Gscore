@@ -3,14 +3,14 @@ import { APIURL } from "constant";
 import ApiService from "./ApiService";
 
 export const registerUser = async (
-  email: any,
-  username: any,
-  password: any
+  email: string,
+  username: string,
+  password: string
 ) => {
   return ApiService.post(APIURL.POST_SIGN_UP, { email, username, password });
 };
 
-export const loginUser = async (email: any, password: any) => {
+export const loginUser = async (email: string, password: string) => {
   return ApiService.post(APIURL.POST_SIGN_IN, { email, password });
 };
 

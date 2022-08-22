@@ -24,15 +24,13 @@
     "react-accessible-accordion": "^5.0.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.34.0",
-    "react-indiana-drag-scroll": "^2.2.0",
     "react-redux": "^8.0.2",
     "react-tabs": "^5.1.0",
-    "react-toastify": "^9.0.7",
+    "react-toastify": "^9.0.8",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "sass": "^1.54.0",
     "styled-components": "^5.3.5",
-    "swiper": "^8.3.2",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

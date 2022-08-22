@@ -14,13 +14,10 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
-
   const [password, setPassword] = useState("");
 
   const planId = useAppSelector((state) => state.plan.plan.id);
-
   const dispatch = useAppDispatch();
-
   const router = useRouter();
 
   const handleChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +30,7 @@ const LoginPage = () => {
     setPassword(password);
   };
 
-  const handleOnClick = (email: any, password: any) => {
+  const handleOnClick = (email: string, password: string) => {
     loginUser(email, password)
       .then((response: any) => {
         dispatch(setToken(response.data.token));

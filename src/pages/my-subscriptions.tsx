@@ -13,10 +13,9 @@ import { getMySubscriptions } from "services";
 const MySubscriptionsPage = () => {
   const [mySubscriptions, setMySubscriptions] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
   const [emblaRef, emblaApi] = useEmblaCarousel();
-
-  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -34,9 +33,10 @@ const MySubscriptionsPage = () => {
     };
   }, []);
 
-  const getSubscriptions = async () => {
+  const getSubscriptions = () => {
     setLoading(true);
-    await getMySubscriptions()
+
+    getMySubscriptions()
       .then((response) => {
         setMySubscriptions(response.data);
         setLoading(false);

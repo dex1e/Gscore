@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 
+import { ToastContainer } from "react-toastify";
 import styled, { css } from "styled-components";
 
 import { COLORS, DEVICE } from "assets";

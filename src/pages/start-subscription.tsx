@@ -21,7 +21,7 @@ const StartSubscriptionPage = () => {
           the plugin with a license key.
         </Text>
 
-        {plan.id !== 0 &&
+        {plan.id &&
           plan.prices.map((priceId) => {
             return (
               <StyledPackageCard

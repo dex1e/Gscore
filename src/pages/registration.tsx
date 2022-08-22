@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { SubmitHandler, useForm } from "react-hook-form";
 import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
@@ -12,37 +13,35 @@ import { ContentLayout, MainLayout } from "Layout";
 import { registerUser } from "services";
 import { setToken } from "store/features/auth";
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import { isValidEmail } from "utils";
+
+type RegistrationFormValues = {
+  username: string;
+  email: string;
+  password: string;
+};
 
 const CheckInPage = () => {
-  const [name, setName] = useState("");
-
-  const [email, setEmail] = useState("");
-
-  const [password, setPassword] = useState("");
-
   const planId = useAppSelector((state) => state.plan.plan.id);
-
   const dispatch = useAppDispatch();
-
   const router = useRouter();
 
-  const handleChangeName = (event: any) => {
-    let name = event.target.value;
-    setName(name);
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegistrationFormValues>({
+    mode: "onChange",
+  });
 
-  const handleChangeEmail = (event: any) => {
-    let email = event.target.value;
-    setEmail(email);
-  };
+  console.log(errors);
 
-  const handleChangePassword = (event: any) => {
-    let password = event.target.value;
-    setPassword(password);
-  };
-
-  const handleRegisterUser = (email: any, name: any, password: any) => {
-    registerUser(email, name, password)
+  const handleRegisterUser: SubmitHandler<RegistrationFormValues> = ({
+    email,
+    username,
+    password,
+  }) => {
+    registerUser(email, username, password)
       .then((response: any) => {
         dispatch(setToken(response.data.token));
         router.push(ROUTES.CHECKOUT_ID(String(planId)));
@@ -52,6 +51,18 @@ const CheckInPage = () => {
         console.log(error);
       });
   };
+
+  const errorUsername = errors.username && "Field is required";
+
+  const errorEmail =
+    (errors?.email?.type === "required" && "Field is required") ||
+    (errors?.email?.type === "validate" && "Wrong email") ||
+    "";
+
+  const errorPassword =
+    (errors?.password?.type === "required" && "Field is required") ||
+    (errors?.password?.type === "minLength" && "Minimal length is 6 symbols") ||
+    "";
 
   return (
     <Root>
@@ -64,37 +75,44 @@ const CheckInPage = () => {
           password by email
         </Text>
 
-        <InputWrapper>
-          <InputItem>
-            <StyledInput
-              placeholder="Username"
-              value={name}
-              onChange={handleChangeName}
-            />
-          </InputItem>
+        <Form onSubmit={handleSubmit(handleRegisterUser)}>
+          <InputWrapper>
+            <InputItem>
+              <StyledInput
+                error={errorUsername}
+                placeholder="Username"
+                {...register("username", {
+                  required: true,
+                })}
+              />
+            </InputItem>
 
-          <InputItem>
-            <StyledInput
-              placeholder="Email"
-              value={email}
-              onChange={handleChangeEmail}
-            />
-          </InputItem>
+            <InputItem>
+              <StyledInput
+                placeholder="Email"
+                error={errorEmail}
+                {...register("email", {
+                  required: true,
+                  validate: isValidEmail,
+                })}
+              />
+            </InputItem>
 
-          <InputItem>
-            <StyledInput
-              placeholder="Password"
-              value={password}
-              onChange={handleChangePassword}
-            />
-          </InputItem>
-        </InputWrapper>
+            <InputItem>
+              <StyledInput
+                placeholder="Password"
+                type="password"
+                error={errorPassword}
+                {...register("password", {
+                  required: true,
+                  minLength: 6,
+                })}
+              />
+            </InputItem>
+          </InputWrapper>
 
-        <StyledButton
-          text="Send password"
-          type="submit"
-          onClick={() => handleRegisterUser(email, name, password)}
-        />
+          <StyledButton text="Send password" type="submit" />
+        </Form>
 
         <Login>
           <LoginText>Have an account? </LoginText>
@@ -142,6 +160,8 @@ const Text = styled.p`
     line-height: 24px;
   }
 `;
+
+const Form = styled.form``;
 
 const InputWrapper = styled.div`
   @media ${DEVICE.tablet} {

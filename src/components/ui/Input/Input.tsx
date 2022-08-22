@@ -1,4 +1,4 @@
-import React, { FC, InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes } from "react";
 
 import styled, { css } from "styled-components";
 
@@ -12,36 +12,33 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 
-export const Input: FC<InputProps> = ({
-  className,
-  isSuccess,
-  error,
-  isDisabled,
-  ...props
-}) => {
-  const hasError = Boolean(error);
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, isSuccess, error, isDisabled, ...props }, ref) => {
+    const hasError = Boolean(error);
 
-  return (
-    <Root>
-      <StyledInput
-        className={className}
-        disabled={isDisabled}
-        $isSuccess={isSuccess}
-        $hasError={hasError}
-        {...props}
-      />
+    return (
+      <Root>
+        <StyledInput
+          className={className}
+          disabled={isDisabled}
+          $isSuccess={isSuccess}
+          $hasError={hasError}
+          ref={ref}
+          {...props}
+        />
+        {isSuccess && !hasError && <StyledSuccessIcon />}
 
-      {isSuccess && !hasError && <StyledSuccessIcon />}
-
-      {hasError && (
-        <>
-          <StyledErrorIcon />
-          <Text>{error}</Text>
-        </>
-      )}
-    </Root>
-  );
-};
+        {hasError && (
+          <>
+            <StyledErrorIcon />
+            <Text>{error}</Text>
+          </>
+        )}
+      </Root>
+    );
+  }
+);
+Input.displayName = "Input";
 
 const Root = styled.div`
   width: 100%;

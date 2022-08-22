@@ -24,11 +24,7 @@ export const PackageCard: FC<CheckoutCardProps> = ({
       </Header>
 
       <Content>
-        <PackageName>
-          {packageName === "One cite"
-            ? "Single site license"
-            : `${packageName}  license`}
-        </PackageName>
+        <PackageName>{packageName}</PackageName>
         <Price>
           <PriceCost>${priceCost}</PriceCost>
           <StyledShopBasketIcon />

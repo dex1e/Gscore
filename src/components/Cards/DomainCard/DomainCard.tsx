@@ -6,7 +6,7 @@ import { COLORS, DEVICE } from "assets";
 import { CopyIcon } from "components/icons";
 import { Button, Checkbox, Input, Status } from "components/ui";
 import { activateLicenseCode } from "services";
-import { CodeStatus, IDomainCard } from "types";
+import { CodeStatus } from "types";
 
 interface domainCardProps {
   domainCard: any;
@@ -22,8 +22,8 @@ export const DomainCard: FC<domainCardProps> = ({ domainCard, className }) => {
     setDomain(domainInputValue);
   };
 
-  const handleActivateDomain = async () => {
-    await activateLicenseCode(domain, domainCard?.code)
+  const handleActivateDomain = () => {
+    activateLicenseCode(domain, domainCard?.code)
       .then((response) => console.log(response.data))
       .catch((error) => console.log(error));
   };

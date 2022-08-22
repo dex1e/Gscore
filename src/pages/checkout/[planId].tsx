@@ -17,8 +17,6 @@ const CheckoutPage = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  // const { planId } = router.query;
-
   const handleBuySubscription = (priceId: any) => {
     buySubscription(priceId)
       .then((response) => {
@@ -37,7 +35,7 @@ const CheckoutPage = () => {
         <StyledRegisterTabs />
         <Title>Checkout</Title>
 
-        {plan.id !== 0 &&
+        {plan.id &&
           plan.prices.map((priceId) => {
             return (
               <div key={priceId.id}>
