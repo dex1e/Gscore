@@ -8,7 +8,7 @@ import { Button, Status } from "components/ui";
 import { ISubscriptions } from "types";
 
 interface SubscriptionCardProps {
-  card: any;
+  card: ISubscriptions;
   className?: string;
   isInactive?: boolean;
 }
@@ -18,7 +18,9 @@ export const SubscriptionCard: FC<SubscriptionCardProps> = ({
   className,
   isInactive,
 }) => {
-  const validEndDate = dayjs.unix(card?.currentPeriodEnd).format("DD.MM.YYYY");
+  const validEndDate = dayjs
+    .unix(Number(card?.currentPeriodEnd))
+    .format("DD.MM.YYYY");
 
   return (
     <Root className={className} $isInactive={isInactive}>

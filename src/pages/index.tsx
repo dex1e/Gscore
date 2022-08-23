@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 
-import useEmblaCarousel from "embla-carousel-react";
 import type { NextPage } from "next";
 import { toast, ToastContainer } from "react-toastify";
 import styled from "styled-components";

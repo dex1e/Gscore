@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 
 import useEmblaCarousel from "embla-carousel-react";
 import styled from "styled-components";
