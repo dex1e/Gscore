@@ -156,26 +156,25 @@ const Title = styled.h1`
 `;
 
 const StyledButton = styled(Button)`
-  @media ${DEVICE.laptop} {
-    max-width: 152px;
-    width: 100%;
-    padding: 26px 38px;
-  }
+  max-width: 152px;
+  width: 100%;
+  padding: 26px 38px;
 `;
 
 const SubscriptionCardsWrapper = styled.div`
   .embla {
-    display: flex;
     overflow: hidden;
   }
+
   .embla__container {
     display: flex;
+    left: -310px;
     position: relative;
-    left: -648px;
   }
+
   .embla__slide {
     padding-right: 28px;
-    width: 648px;
+    flex: 0 0 648px;
 
     &:last-child {
       padding-right: 0;
@@ -183,7 +182,6 @@ const SubscriptionCardsWrapper = styled.div`
   }
 
   @media ${DEVICE.laptop} {
-    display: flex;
     padding-bottom: 24px;
   }
 `;
