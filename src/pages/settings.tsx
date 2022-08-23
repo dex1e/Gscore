@@ -38,16 +38,22 @@ const Root = styled(MainLayout)`
 `;
 
 const Container = styled.div`
+  color: ${COLORS.neutral100};
+  overflow: hidden;
+  padding: 35px 0 54px;
+
   @media ${DEVICE.laptop} {
-    color: ${COLORS.neutral100};
     padding: 65px 0 444px;
-    overflow: hidden;
   }
 `;
 
 const Title = styled.h1`
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 34px;
+  padding-bottom: 38px;
+
   @media ${DEVICE.laptop} {
-    font-weight: 700;
     font-size: 54px;
     line-height: 64px;
     padding-bottom: 48px;

@@ -88,32 +88,41 @@ const Root = styled.div`
   width: 100%;
 `;
 
-const Form = styled.form``;
+const Form = styled.form`
+  width: 100%;
+`;
 
 const Wrapper = styled.div`
+  max-width: 512px;
+  width: 100%;
+  padding-bottom: 24px;
+
   @media ${DEVICE.laptop} {
-    max-width: 512px;
-    width: 100%;
     padding-bottom: 48px;
   }
 `;
 
 const Subtitle = styled.h2`
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 40px;
+  padding-bottom: 12px;
+
   @media ${DEVICE.laptop} {
     font-weight: 700;
     font-size: 28px;
-    line-height: 40px;
     padding-bottom: 24px;
   }
 `;
 
 const InputItem = styled.div`
+  padding-bottom: 24px;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
   @media ${DEVICE.laptop} {
     padding-bottom: 24px;
-
-    &:last-child {
-      padding-bottom: 0;
-    }
   }
 `;
 
@@ -128,8 +137,6 @@ const StyledInput = styled(Input)`
 `;
 
 const StyledButton = styled(Button)`
-  @media ${DEVICE.laptop} {
-    max-width: 160px;
-    width: 100%;
-  }
+  max-width: 160px;
+  width: 100%;
 `;

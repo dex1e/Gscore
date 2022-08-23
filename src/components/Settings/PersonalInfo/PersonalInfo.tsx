@@ -62,7 +62,7 @@ export const PersonalInfo = () => {
           <Subtitle>Personal Info</Subtitle>
 
           <InputItem>
-            <StyledInput
+            <Input
               placeholder="Username"
               error={errorUsername}
               {...register("username", {
@@ -72,7 +72,7 @@ export const PersonalInfo = () => {
           </InputItem>
 
           <InputItem>
-            <StyledInput
+            <Input
               placeholder="Email"
               error={errorEmail}
               {...register("email", {
@@ -94,47 +94,44 @@ const Root = styled.div`
 `;
 
 const Wrapper = styled.div`
+  max-width: 512px;
+  width: 100%;
+  padding-bottom: 24px;
+
   @media ${DEVICE.laptop} {
-    max-width: 512px;
-    width: 100%;
     padding-bottom: 48px;
   }
 `;
 
 const Subtitle = styled.h2`
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 40px;
+  padding-bottom: 12px;
+
   @media ${DEVICE.laptop} {
     font-weight: 700;
     font-size: 28px;
-    line-height: 40px;
     padding-bottom: 24px;
   }
 `;
 
-const Form = styled.form``;
+const Form = styled.form`
+  width: 100%;
+`;
 
 const InputItem = styled.div`
+  padding-bottom: 24px;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
   @media ${DEVICE.laptop} {
     padding-bottom: 24px;
-
-    &:last-child {
-      padding-bottom: 0;
-    }
-  }
-`;
-
-const StyledInput = styled(Input)`
-  @media ${DEVICE.laptop} {
-    margin-bottom: 24px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 `;
 
 const StyledButton = styled(Button)`
-  @media ${DEVICE.laptop} {
-    max-width: 160px;
-    width: 100%;
-  }
+  max-width: 160px;
+  width: 100%;
 `;
