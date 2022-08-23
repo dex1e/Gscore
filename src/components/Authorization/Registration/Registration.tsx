@@ -81,7 +81,7 @@ export const Registration: FC<RegistrationProps> = ({ onSelectLogin }) => {
       <Form onSubmit={handleSubmit(handleRegisterUser)}>
         <InputWrapper>
           <InputItem>
-            <StyledInput
+            <Input
               error={errorUsername}
               placeholder="Username"
               {...register("username", {
@@ -91,7 +91,7 @@ export const Registration: FC<RegistrationProps> = ({ onSelectLogin }) => {
           </InputItem>
 
           <InputItem>
-            <StyledInput
+            <Input
               placeholder="Email"
               error={errorEmail}
               {...register("email", {
@@ -102,7 +102,7 @@ export const Registration: FC<RegistrationProps> = ({ onSelectLogin }) => {
           </InputItem>
 
           <InputItem>
-            <StyledInput
+            <Input
               placeholder="Password"
               type="password"
               error={errorPassword}
@@ -133,6 +133,11 @@ const Root = styled.div`
 `;
 
 const Title = styled.h1`
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 34px;
+  padding-bottom: 16px;
+
   @media ${DEVICE.tablet} {
     font-weight: 700;
     font-size: 44px;
@@ -142,6 +147,11 @@ const Title = styled.h1`
 `;
 
 const Text = styled.p`
+  padding-bottom: 22px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+
   @media ${DEVICE.tablet} {
     padding-bottom: 32px;
     font-weight: 400;
@@ -150,66 +160,58 @@ const Text = styled.p`
   }
 `;
 
-const Form = styled.form``;
+const Form = styled.form`
+  width: 100%;
+`;
 
 const InputWrapper = styled.div`
+  padding-bottom: 24px;
+
   @media ${DEVICE.tablet} {
     padding-bottom: 48px;
   }
 `;
 
 const InputItem = styled.div`
+  padding-bottom: 24px;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
   @media ${DEVICE.tablet} {
     padding-bottom: 24px;
-
-    &:last-child {
-      padding-bottom: 0;
-    }
-  }
-`;
-
-const StyledInput = styled(Input)`
-  @media ${DEVICE.tablet} {
-    margin-bottom: 24px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 `;
 
 const StyledButton = styled(Button)`
+  max-width: 200px;
+  width: 100%;
+  margin-bottom: 24px;
+
   @media ${DEVICE.tablet} {
-    max-width: 200px;
-    width: 100%;
     margin-bottom: 48px;
   }
 `;
 
 const Login = styled.div`
-  @media ${DEVICE.tablet} {
-    display: flex;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 18px;
-  }
+  display: flex;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
 `;
 
 const LoginText = styled.p`
-  @media ${DEVICE.tablet} {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 18px;
-    padding-right: 8px;
-  }
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  padding-right: 8px;
 `;
 
 const NextStep = styled.a`
+  color: ${COLORS.primary};
+
   &:hover {
     color: ${COLORS.neutral100};
-  }
-
-  @media ${DEVICE.tablet} {
-    color: ${COLORS.primary};
   }
 `;

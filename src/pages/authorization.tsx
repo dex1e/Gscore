@@ -44,13 +44,15 @@ const Root = styled(MainLayout)`
 `;
 
 const Container = styled.div`
+  overflow: hidden;
+  max-width: 620px;
+  width: 100%;
+  margin: 0 auto;
+  color: ${COLORS.neutral100};
+  padding: 55px 0 55px;
+
   @media ${DEVICE.tablet} {
-    overflow: hidden;
-    max-width: 620px;
-    width: 100%;
-    margin: 0 auto;
     padding-top: 72px;
-    color: ${COLORS.neutral100};
     padding-bottom: 228px;
   }
 `;
@@ -59,11 +61,11 @@ const StyledTabs = styled(Tabs)`
   font-weight: 600;
   font-size: 20px;
   line-height: 22px;
-  color: ${COLORS.neutral100};
 `;
 
 const StyledTabList = styled(TabList)`
   display: flex;
+  margin-bottom: 34px;
 
   @media ${DEVICE.tablet} {
     margin-bottom: 64px;

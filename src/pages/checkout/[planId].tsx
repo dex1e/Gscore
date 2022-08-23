@@ -5,10 +5,10 @@ import { toast, ToastContainer } from "react-toastify";
 import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
-import { PackageCard, RegisterTabs } from "components";
+import { PackageCard } from "components";
 import { Button } from "components/ui";
 import { ROUTES } from "constant";
-import { ContentLayout, MainLayout } from "Layout";
+import { MainLayout } from "Layout";
 import { buySubscription } from "services";
 import { setSubscription } from "store/features/subscription";
 import { useAppDispatch, useAppSelector } from "store/hooks";

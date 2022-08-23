@@ -71,7 +71,7 @@ export const Login = () => {
       <Form onSubmit={handleSubmit(handleLoginUser)}>
         <InputWrapper>
           <InputItem>
-            <StyledInput
+            <Input
               placeholder="Email"
               error={errorEmail}
               {...register("email", {
@@ -82,7 +82,7 @@ export const Login = () => {
           </InputItem>
 
           <InputItem>
-            <StyledInput
+            <Input
               placeholder="Password"
               error={errorPassword}
               type="password"
@@ -104,6 +104,11 @@ const Root = styled.div`
 `;
 
 const Title = styled.h1`
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 34px;
+  padding-bottom: 16px;
+
   @media ${DEVICE.laptop} {
     font-weight: 700;
     font-size: 44px;
@@ -112,37 +117,31 @@ const Title = styled.h1`
   }
 `;
 
-const Form = styled.form``;
+const Form = styled.form`
+  width: 100%;
+`;
 
 const InputWrapper = styled.div`
+  padding-bottom: 24px;
+
   @media ${DEVICE.laptop} {
     padding-bottom: 48px;
   }
 `;
 
 const InputItem = styled.div`
+  padding-bottom: 24px;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
   @media ${DEVICE.laptop} {
     padding-bottom: 24px;
-
-    &:last-child {
-      padding-bottom: 0;
-    }
-  }
-`;
-
-const StyledInput = styled(Input)`
-  @media ${DEVICE.laptop} {
-    margin-bottom: 24px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 `;
 
 const StyledButton = styled(Button)`
-  @media ${DEVICE.laptop} {
-    max-width: 200px;
-    width: 100%;
-  }
+  max-width: 200px;
+  width: 100%;
 `;
