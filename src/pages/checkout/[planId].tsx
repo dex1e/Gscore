@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { toast, ToastContainer } from "react-toastify";
 import styled from "styled-components";
 
-import { DEVICE } from "assets";
+import { COLORS, DEVICE } from "assets";
 import { PackageCard, RegisterTabs } from "components";
 import { Button } from "components/ui";
 import { ROUTES } from "constant";
@@ -71,42 +71,42 @@ const Root = styled(MainLayout)`
   width: 100%;
 `;
 
-const Container = styled(ContentLayout)`
-  @media ${DEVICE.laptop} {
-    margin-bottom: 290px;
-  }
-`;
+const Container = styled.div`
+  color: ${COLORS.neutral100};
+  overflow: hidden;
+  max-width: 620px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 32px 0 60px;
 
-const StyledRegisterTabs = styled(RegisterTabs)`
   @media ${DEVICE.laptop} {
-    margin-bottom: 64px;
+    padding: 72px 0 290px;
   }
 `;
 
 const Title = styled.h1`
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 30px;
+  padding-bottom: 32px;
+
   @media ${DEVICE.laptop} {
-    font-weight: 700;
     font-size: 44px;
     line-height: 54px;
-    padding-bottom: 32px;
   }
 `;
 
 const StyledPackageCard = styled(PackageCard)`
-  @media ${DEVICE.laptop} {
-    margin-bottom: 24px;
-  }
+  margin-bottom: 24px;
 `;
 
 const Total = styled.div`
-  @media ${DEVICE.laptop} {
-    display: flex;
-    justify-content: space-between;
-    font-weight: 700;
-    font-size: 28px;
-    line-height: 40px;
-    padding-bottom: 48px;
-  }
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 40px;
+  padding-bottom: 48px;
 `;
 
 const Text = styled.span``;
@@ -114,10 +114,8 @@ const Text = styled.span``;
 const Cost = styled.span``;
 
 const StyledButton = styled(Button)`
-  @media ${DEVICE.laptop} {
-    max-width: 200px;
-    width: 100%;
-  }
+  max-width: 200px;
+  width: 100%;
 `;
 
 export default CheckoutPage;

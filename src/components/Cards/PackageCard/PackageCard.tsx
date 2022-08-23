@@ -49,7 +49,9 @@ const Header = styled.header`
   line-height: 34px;
 `;
 
-const PackageNameTitle = styled.span``;
+const PackageNameTitle = styled.span`
+  padding-right: 20px;
+`;
 
 const PriceTitle = styled.span``;
 
