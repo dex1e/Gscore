@@ -1,20 +1,21 @@
-import React from "react";
+import React, { FC } from "react";
 
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import styled from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
-import { RegisterTabs } from "components";
 import { Button, Input } from "components/ui";
 import { ROUTES } from "constant";
-import { ContentLayout, MainLayout } from "Layout";
 import { registerUser } from "services";
 import { setToken } from "store/features/auth";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { isValidEmail } from "utils";
+
+interface RegistrationProps {
+  onSelectLogin: (index: number) => void;
+}
 
 type RegistrationFormValues = {
   username: string;
@@ -22,7 +23,7 @@ type RegistrationFormValues = {
   password: string;
 };
 
-const CheckInPage = () => {
+export const Registration: FC<RegistrationProps> = ({ onSelectLogin }) => {
   const planId = useAppSelector((state) => state?.plan?.plan?.id);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -71,81 +72,64 @@ const CheckInPage = () => {
   return (
     <Root>
       <ToastContainer position="top-right" autoClose={2000} />
-      <Container>
-        <StyledRegisterTabs />
-        <Title>Create account</Title>
+      <Title>Create account</Title>
+      <Text>
+        You need to enter your name and email. We will send you a temporary
+        password by email
+      </Text>
 
-        <Text>
-          You need to enter your name and email. We will send you a temporary
-          password by email
-        </Text>
+      <Form onSubmit={handleSubmit(handleRegisterUser)}>
+        <InputWrapper>
+          <InputItem>
+            <StyledInput
+              error={errorUsername}
+              placeholder="Username"
+              {...register("username", {
+                required: true,
+              })}
+            />
+          </InputItem>
 
-        <Form onSubmit={handleSubmit(handleRegisterUser)}>
-          <InputWrapper>
-            <InputItem>
-              <StyledInput
-                error={errorUsername}
-                placeholder="Username"
-                {...register("username", {
-                  required: true,
-                })}
-              />
-            </InputItem>
+          <InputItem>
+            <StyledInput
+              placeholder="Email"
+              error={errorEmail}
+              {...register("email", {
+                required: true,
+                validate: isValidEmail,
+              })}
+            />
+          </InputItem>
 
-            <InputItem>
-              <StyledInput
-                placeholder="Email"
-                error={errorEmail}
-                {...register("email", {
-                  required: true,
-                  validate: isValidEmail,
-                })}
-              />
-            </InputItem>
+          <InputItem>
+            <StyledInput
+              placeholder="Password"
+              type="password"
+              error={errorPassword}
+              {...register("password", {
+                required: true,
+                minLength: 6,
+              })}
+            />
+          </InputItem>
+        </InputWrapper>
 
-            <InputItem>
-              <StyledInput
-                placeholder="Password"
-                type="password"
-                error={errorPassword}
-                {...register("password", {
-                  required: true,
-                  minLength: 6,
-                })}
-              />
-            </InputItem>
-          </InputWrapper>
+        <StyledButton text="Send password" type="submit" />
+      </Form>
 
-          <StyledButton text="Send password" type="submit" />
-        </Form>
+      <Login>
+        <LoginText>Have an account? </LoginText>
 
-        <Login>
-          <LoginText>Have an account? </LoginText>
-
-          <Link href={ROUTES.LOGIN}>
-            <NextStep>Go to the next step</NextStep>
-          </Link>
-        </Login>
-      </Container>
+        <NextStep onClick={() => onSelectLogin(1)}>
+          Go to the next step
+        </NextStep>
+      </Login>
     </Root>
   );
 };
 
-const Root = styled(MainLayout)`
+const Root = styled.div`
   width: 100%;
-`;
-
-const Container = styled(ContentLayout)`
-  @media ${DEVICE.tablet} {
-    padding-bottom: 228px;
-  }
-`;
-
-const StyledRegisterTabs = styled(RegisterTabs)`
-  @media ${DEVICE.tablet} {
-    padding-bottom: 64px;
-    text-align: start;
-  }
 `;
 
 const Title = styled.h1`
@@ -229,5 +213,3 @@ const NextStep = styled.a`
     color: ${COLORS.primary};
   }
 `;
-
-export default CheckInPage;

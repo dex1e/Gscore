@@ -6,10 +6,8 @@ import { toast, ToastContainer } from "react-toastify";
 import styled from "styled-components";
 
 import { DEVICE } from "assets";
-import { RegisterTabs } from "components";
 import { Button, Input } from "components/ui";
 import { ROUTES } from "constant";
-import { ContentLayout, MainLayout } from "Layout";
 import { loginUser } from "services";
 import { setToken, setUser } from "store/features/auth";
 import { useAppDispatch, useAppSelector } from "store/hooks";
@@ -20,7 +18,7 @@ type LoginFormValues = {
   password: string;
 };
 
-const LoginPage = () => {
+export const Login = () => {
   const planId = useAppSelector((state) => state?.plan?.plan?.id);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -68,57 +66,41 @@ const LoginPage = () => {
   return (
     <Root>
       <ToastContainer position="top-right" autoClose={2000} />
-      <Container>
-        <StyledRegisterTabs />
-        <Title>Log in</Title>
+      <Title>Log in</Title>
 
-        <Form onSubmit={handleSubmit(handleLoginUser)}>
-          <InputWrapper>
-            <InputItem>
-              <StyledInput
-                placeholder="Email"
-                error={errorEmail}
-                {...register("email", {
-                  required: true,
-                  validate: isValidEmail,
-                })}
-              />
-            </InputItem>
+      <Form onSubmit={handleSubmit(handleLoginUser)}>
+        <InputWrapper>
+          <InputItem>
+            <StyledInput
+              placeholder="Email"
+              error={errorEmail}
+              {...register("email", {
+                required: true,
+                validate: isValidEmail,
+              })}
+            />
+          </InputItem>
 
-            <InputItem>
-              <StyledInput
-                placeholder="Password"
-                error={errorPassword}
-                type="password"
-                {...register("password", {
-                  required: true,
-                })}
-              />
-            </InputItem>
-          </InputWrapper>
+          <InputItem>
+            <StyledInput
+              placeholder="Password"
+              error={errorPassword}
+              type="password"
+              {...register("password", {
+                required: true,
+              })}
+            />
+          </InputItem>
+        </InputWrapper>
 
-          <StyledButton text="Log in" type="submit" />
-        </Form>
-      </Container>
+        <StyledButton text="Log in" type="submit" />
+      </Form>
     </Root>
   );
 };
 
-const Root = styled(MainLayout)`
+const Root = styled.div`
   width: 100%;
-`;
-
-const Container = styled(ContentLayout)`
-  @media ${DEVICE.laptop} {
-    margin-bottom: 426px;
-  }
-`;
-
-const StyledRegisterTabs = styled(RegisterTabs)`
-  @media ${DEVICE.laptop} {
-    text-align: start;
-    margin-bottom: 64px;
-  }
 `;
 
 const Title = styled.h1`
@@ -164,5 +146,3 @@ const StyledButton = styled(Button)`
     width: 100%;
   }
 `;
-
-export default LoginPage;

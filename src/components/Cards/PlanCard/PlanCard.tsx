@@ -70,7 +70,7 @@ export const PlanCard: FC<PlanCardProps> = ({
         href={
           user?.id
             ? ROUTES.CHECKOUT_ID(`${product?.prices[0]?.id}`)
-            : ROUTES.REGISTRATION
+            : ROUTES.AUTHORIZATION
         }
         onClick={() => handleSetPlanProduct()}
       />
@@ -80,7 +80,6 @@ export const PlanCard: FC<PlanCardProps> = ({
 
 const Root = styled.div<{ $isActive?: boolean }>`
   width: 100%;
-  /* max-width: 288px; */
   display: flex;
   flex-direction: column;
   color: ${COLORS.neutral100};
