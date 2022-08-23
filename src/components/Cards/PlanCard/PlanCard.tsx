@@ -39,7 +39,7 @@ export const PlanCard: FC<PlanCardProps> = ({
         </Description>
       </Info>
 
-      <FeaturesList>
+      <FeaturesList $isActive={isActive}>
         <ListItem>
           <StyledListCheckIcon />
 
@@ -67,6 +67,7 @@ export const PlanCard: FC<PlanCardProps> = ({
       <StyledLinkButton
         text="Get Gscore"
         variant="secondary"
+        $isActive={isActive}
         href={
           user?.id
             ? ROUTES.CHECKOUT_ID(`${product?.prices[0]?.id}`)
@@ -172,12 +173,16 @@ const Description = styled.p<{ $isActive?: boolean }>`
   }
 `;
 
-const FeaturesList = styled.ul`
+const FeaturesList = styled.ul<{ $isActive?: boolean }>`
   list-style-type: none;
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
   padding-bottom: 25px;
+
+  path {
+    stroke: ${({ $isActive }) => $isActive && COLORS.primary};
+  }
 
   @media ${DEVICE.laptop} {
     font-size: 18px;
@@ -216,7 +221,7 @@ const StyledLinkButton = styled(LinkButton)<{ $isActive?: boolean }>`
   width: 100%;
   align-self: center;
 
-  color: ${({ $isActive }) => $isActive && COLORS.neutral100};
+  color: ${({ $isActive }) => $isActive && COLORS.primary};
 
   @media ${DEVICE.laptop} {
     font-size: 18px;
