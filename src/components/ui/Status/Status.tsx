@@ -1,12 +1,12 @@
 import { FC } from "react";
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { COLORS } from "assets";
 import { CodeStatus, IStatuses } from "types";
 
 interface StatusProps {
-  status: CodeStatus;
+  status: CodeStatus | string;
   className?: string;
 }
 

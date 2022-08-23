@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 
 import { COLORS, DEVICE } from "assets";
 import { Button, Status } from "components/ui";
-import { ICard } from "types";
+import { ISubscriptions } from "types";
 
 interface SubscriptionCardProps {
   card: any;

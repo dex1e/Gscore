@@ -26,6 +26,7 @@ class ApiService {
   post(url: string, data: any, parameters?: any) {
     return instance.post(url, data, parameters);
   }
+
   patch(url: string, data: any) {
     return instance.patch(url, data);
   }

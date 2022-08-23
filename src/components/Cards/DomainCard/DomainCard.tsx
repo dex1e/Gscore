@@ -7,10 +7,10 @@ import { COLORS, DEVICE } from "assets";
 import { CopyIcon } from "components/icons";
 import { Button, Checkbox, Input, Status } from "components/ui";
 import { activateLicenseCode } from "services";
-import { CodeStatus } from "types";
+import { CodeStatus, ICodes } from "types";
 
 interface domainCardProps {
-  domainCard: any;
+  domainCard: ICodes;
   className?: string;
 }
 
@@ -35,7 +35,7 @@ export const DomainCard: FC<domainCardProps> = ({ domainCard, className }) => {
   };
 
   const handleCopyToClipboard = () => {
-    navigator?.clipboard?.writeText(domainCard?.licenseUrl);
+    navigator?.clipboard?.writeText(domainCard?.code);
   };
 
   const isStatusInactive = domainCard?.status === CodeStatus?.INACTIVE;
