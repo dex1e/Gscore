@@ -39,7 +39,6 @@ const CheckoutPage = () => {
     <Root>
       <ToastContainer position="top-right" autoClose={2000} />
       <Container>
-        <StyledRegisterTabs />
         <Title>Checkout</Title>
 
         {plan?.id &&

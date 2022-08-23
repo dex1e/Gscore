@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { ChangeEvent, FC, useState } from "react";
 
 import { toast, ToastContainer } from "react-toastify";
 import styled, { css } from "styled-components";
@@ -22,7 +22,7 @@ export const DomainCard: FC<domainCardProps> = ({ domainCard, className }) => {
       toastId: "Data fetching error",
     });
 
-  const handleChangeDomain = (event: any) => {
+  const handleChangeDomain = (event: ChangeEvent<HTMLInputElement>) => {
     const domainInputValue = event.target.value;
 
     setDomain(domainInputValue);

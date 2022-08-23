@@ -24,7 +24,7 @@ interface HeaderAccordionProps {
 
 export const HeaderAccordion: FC<HeaderAccordionProps> = ({ className }) => {
   const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
-  const user = useAppSelector((state: any) => state?.auth?.user);
+  const user = useAppSelector((state) => state?.auth?.user);
   const dispatch = useAppDispatch();
   const router = useRouter();
 

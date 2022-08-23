@@ -80,7 +80,7 @@ export const PlanCard: FC<PlanCardProps> = ({
 
 const Root = styled.div<{ $isActive?: boolean }>`
   width: 100%;
-  max-width: 303px;
+  /* max-width: 288px; */
   display: flex;
   flex-direction: column;
   color: ${COLORS.neutral100};
@@ -93,8 +93,11 @@ const Root = styled.div<{ $isActive?: boolean }>`
     $isActive &&
     css`
       background: ${COLORS.primary};
-      position: relative;
-      bottom: 20px;
+
+      @media ${DEVICE.laptop} {
+        position: relative;
+        bottom: 20px;
+      }
     `}
 
   @media ${DEVICE.laptop} {
@@ -163,7 +166,7 @@ const Description = styled.p<{ $isActive?: boolean }>`
   color: ${({ $isActive }) => $isActive && COLORS.neutral100};
 
   @media ${DEVICE.laptop} {
-    font-weight: 400;
+    font-weight: 500;
     font-size: 18px;
     line-height: 30px;
     padding-bottom: 40px;
@@ -207,11 +210,14 @@ const StyledListCheckIcon = styled(ListCheckIcon)`
   }
 `;
 
-const StyledLinkButton = styled(LinkButton)`
+const StyledLinkButton = styled(LinkButton)<{ $isActive?: boolean }>`
   color: ${COLORS.secondaryBlack};
   font-size: 16px;
   line-height: 20px;
   width: 100%;
+  align-self: center;
+
+  color: ${({ $isActive }) => $isActive && COLORS.neutral100};
 
   @media ${DEVICE.laptop} {
     font-size: 18px;
